@@ -29,11 +29,11 @@ public class RegisterController {
         model.addAttribute("register",registerUser);
         return "register/register";
     }
-    @InitBinder
-    public void initBinder(WebDataBinder webDataBinder){
-        StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
-        webDataBinder.registerCustomEditor(String.class,stringTrimmerEditor);
-    }
+//    @InitBinder
+//    public void initBinder(WebDataBinder webDataBinder){
+//        StringTrimmerEditor stringTrimmerEditor = new StringTrimmerEditor(true);
+//        webDataBinder.registerCustomEditor(String.class,stringTrimmerEditor);
+//    }
 
     @PostMapping("/process")
     public String process(@Valid @ModelAttribute("register") RegisterUser registerUser, BindingResult result, Model model, HttpSession session){
