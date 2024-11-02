@@ -35,7 +35,7 @@
                     <h3 class="box-title">Quick Example</h3>
                 </div>
 
-                <form role="form" method="post" th:action="@{/admin/category/add}" th:object="${category}">
+                <form role="form" method="post" th:action="@{/admin/category/edit/{id}(id=${category.id})}" th:object="${category}">
                     <div th:if="${message_error}">
                         <span th:text="${message_error}"> </span>
                     </div>

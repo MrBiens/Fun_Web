@@ -1,36 +1,21 @@
-package com.vn.sbit.SpringMVC.entity;
+package com.vn.sbit.SpringMVC.dto.request;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.validation.constraints.NotBlank;
 
-@Entity
-@Table(name = "category")
-public class Category {
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class CategoryRequest {
 
-    @Column(name = "category_name")
+    @NotBlank(message = "Category Name not null")
     private String categoryName;
 
-    @Column(name = "category_status")
     private Boolean categoryStatus;
 
-    public Category() {
+    public CategoryRequest() {
     }
 
-    public Category(Long id, String categoryName, Boolean categoryStatus) {
-        this.id = id;
+    public CategoryRequest(String categoryName, Boolean categoryStatus) {
         this.categoryName = categoryName;
         this.categoryStatus = categoryStatus;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getCategoryName() {

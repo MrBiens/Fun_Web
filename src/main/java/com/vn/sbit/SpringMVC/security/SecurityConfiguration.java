@@ -37,10 +37,12 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests(
-                configurer -> configurer
-                        .requestMatchers("/register/**").permitAll() // tat ca user duoc register
-                        .requestMatchers("/admin/**").hasAnyAuthority(RoleEnum.ROLE_ADMIN.name(),RoleEnum.ROLE_MANAGER.name())
-                        .anyRequest().authenticated() //tất cả request đều phải xác minh
+                configurer -> {
+                    configurer
+                            .requestMatchers("/register/**").permitAll() // tat ca user duoc register
+                            .requestMatchers("/admin/**").hasAnyAuthority(RoleEnum.ROLE_ADMIN.name(), RoleEnum.ROLE_MANAGER.name())
+                            .anyRequest().authenticated();
+                } //tất cả request đều phải xác minh
         ).formLogin(
                 formlogin->formlogin.loginPage("/proviso/login") //chuyển đến login form
                         .loginProcessingUrl("/authenticateTheUser") // dựa vào daoAuthenticationProvider
