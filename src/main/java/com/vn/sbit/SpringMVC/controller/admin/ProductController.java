@@ -39,8 +39,8 @@ public class ProductController {
     public String home(Model model){
         List<ProductResponse> list = productService.getAll();
         model.addAttribute("product_list",list);
-        List<Category>  categoryList = categoryService.getAll();
-        model.addAttribute("category_list",categoryList);
+        System.out.println(list);
+
         return "admin/product/index";
     }
 

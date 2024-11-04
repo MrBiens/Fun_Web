@@ -14,6 +14,7 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @FieldDefaults(level = AccessLevel.PRIVATE,makeFinal = true)
 @Service
@@ -25,7 +26,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ProductResponse> getAll() {
+//        return productRepository.findAll().stream().map(product -> productMapper.toProductResponse(product)).collect(Collectors.toList());
         return productRepository.findAll().stream().map(product -> productMapper.toProductResponse(product)).toList();
+
     }
 
     @Override

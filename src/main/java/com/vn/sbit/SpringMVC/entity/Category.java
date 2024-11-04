@@ -38,5 +38,13 @@ public class Category {
         this.categoryStatus = categoryStatus;
     }
 
-
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id=" + id +
+                ", categoryName='" + categoryName + '\'' +
+                ", categoryStatus=" + categoryStatus +
+                ", products=" + products +
+                '}';
+    }
 }
