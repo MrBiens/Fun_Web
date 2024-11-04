@@ -74,9 +74,7 @@ public class CategoryController {
             return "admin/category/edit";
         }
     }
-
-
-
+    
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable("id") Long id){
         categoryService.deleteCategory(id);
