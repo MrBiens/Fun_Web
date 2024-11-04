@@ -13,14 +13,11 @@ import lombok.Setter;
 public class ProductRequest {
 
 
-    @NotBlank(message = "productName not null")
     private String productName;
-    @NotBlank
     private Double price;
     private String image;
     private String description;
 
-    @NotBlank
     private Long categoryId;
 
 
