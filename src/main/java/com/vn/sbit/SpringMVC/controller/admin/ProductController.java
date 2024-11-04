@@ -4,10 +4,10 @@ import com.vn.sbit.SpringMVC.dto.request.ProductRequest;
 import com.vn.sbit.SpringMVC.dto.response.ProductResponse;
 import com.vn.sbit.SpringMVC.entity.Category;
 import com.vn.sbit.SpringMVC.entity.Product;
+import com.vn.sbit.SpringMVC.mapper.ProductMapper;
 import com.vn.sbit.SpringMVC.service.CategoryService;
 import com.vn.sbit.SpringMVC.service.ProductService;
 import com.vn.sbit.SpringMVC.service.StorageService;
-import org.hibernate.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +26,14 @@ public class ProductController {
     private final ProductService productService;
     private final CategoryService categoryService;
     private final StorageService storageService;
+    private final ProductMapper productMapper;
 
     @Autowired
-    public ProductController(ProductService productService,CategoryService categoryService,StorageService storageService) {
+    public ProductController(ProductService productService,CategoryService categoryService,StorageService storageService,ProductMapper productMapper) {
         this.productService = productService;
         this.categoryService=categoryService;
         this.storageService=storageService;
+        this.productMapper =productMapper;
     }
 
 
@@ -57,7 +59,6 @@ public class ProductController {
 
     @PostMapping("/add")
     public String add(@ModelAttribute("request") ProductRequest request, BindingResult result, Model model, @RequestParam("file") MultipartFile file){
-        log.info("Request File name: " + request.getImage());
 
         if (result.hasErrors()) {
             model.addAttribute("message_error", "File không hợp lệ, vui lòng chọn một file.");
@@ -67,8 +68,7 @@ public class ProductController {
         storageService.store(file);
         String fileName = file.getOriginalFilename(); //ten chu khong co dinh dang
         request.setImage(fileName);
-        log.info("File name:"+fileName);
-        log.info("Request File name: " + request.getImage());
+
 
         ProductResponse response = productService.createProduct(request);
         if(response != null){
@@ -78,7 +78,40 @@ public class ProductController {
             return "admin/product/add";
         }
     }
+    @GetMapping("/edit/{id}")
+    public String update(@PathVariable("id") Long id,Model model){
+        Product product=productService.findById(id);
+        model.addAttribute("product",product);
 
+        List<Category>  categoryList = categoryService.getAll();
+        model.addAttribute("category_list",categoryList);
+        return "admin/product/edit";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String update(@PathVariable("id") Long id,@ModelAttribute("product") ProductRequest request,@RequestParam("file") MultipartFile file){
+        // request thiếu category Id -> Vì là Object Category
+        if(request!=null){
+            storageService.store(file);
+            String fileName= file.getOriginalFilename();
+
+            log.info("Log Controller 1");
+
+            request.setImage(fileName);
+            productService.updateProduct(id,request);
+            return "redirect:/admin/product/home"; //load controller url
+        }else{
+            return "admin/product/edit";
+        }
+    }
+
+
+
+//    @GetMapping("/delete/{id}")
+//    public String delete(@PathVariable("id") Long id){
+//        categoryService.deleteCategory(id);
+//        return "redirect:/admin/category/home"; //load controller url
+//    }
 
 
 

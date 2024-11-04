@@ -38,13 +38,16 @@ public class Category {
         this.categoryStatus = categoryStatus;
     }
 
+    //?????? Bug to String Category - vì products -> lỗi khi OneToMany ToString
     @Override
     public String toString() {
         return "Category{" +
                 "id=" + id +
                 ", categoryName='" + categoryName + '\'' +
                 ", categoryStatus=" + categoryStatus +
-                ", products=" + products +
                 '}';
     }
+
+
+
 }

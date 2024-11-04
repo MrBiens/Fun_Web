@@ -11,16 +11,18 @@ import com.vn.sbit.SpringMVC.service.ProductService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @FieldDefaults(level = AccessLevel.PRIVATE,makeFinal = true)
 @Service
 @RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
-     ProductRepository productRepository;
+    private static final Logger log = LoggerFactory.getLogger(ProductServiceImpl.class);
+    ProductRepository productRepository;
      CategoryRepository categoryRepository;
      ProductMapper productMapper;
 
@@ -50,20 +52,36 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductResponse findByProductName(String name) {
+    public Product findByProductName(String name) {
         return null;
     }
 
 
     @Override
-    public ProductResponse findById(Long id) {
-        return null;
+    public Product findById(Long id) {
+         return productRepository.findById(id).orElseThrow(() ->new RuntimeException("Product not found"));
     }
 
     @Override
-    public ProductResponse updateProduct(Long id, ProductRequest request) {
-        return null;
+    public void updateProduct(Long id, ProductRequest request) {
+        Product product= productRepository.findById(id).orElseThrow( () -> new RuntimeException("Product Not found"));
+        log.info("Log Product{}",product);
+        log.info("Log request{}",request.getCategoryId());
+        if (request.getCategoryId() == null) {
+            throw new IllegalArgumentException("Category ID must not be null");
+        }
+        Category category = categoryRepository.findById(request.getCategoryId()).orElseThrow(() -> new RuntimeException("Category not found"));
+
+        log.info("Log Category {}",category);
+        productMapper.updateProduct(product,request);
+        log.info("Log Update");
+        product.setCategory(category);
+        productRepository.save(product);
+        log.info("Log Save");
+
+
     }
+
 
     @Override
     public void deleteProduct(Long id) {

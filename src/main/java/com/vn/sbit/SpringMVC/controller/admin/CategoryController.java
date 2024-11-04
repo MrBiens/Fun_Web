@@ -66,7 +66,7 @@ public class CategoryController {
     }
 
     @PostMapping("/edit/{id}")
-    public String update(@PathVariable("id") Long id,Model model,@ModelAttribute("category") CategoryRequest categoryRequest){
+    public String update(@PathVariable("id") Long id,@ModelAttribute("category") CategoryRequest categoryRequest){
         if(categoryRequest!=null){
            categoryService.updateCategory(id,categoryRequest);
            return "redirect:/admin/category/home"; //load controller url

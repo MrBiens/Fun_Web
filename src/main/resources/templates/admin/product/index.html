@@ -50,6 +50,8 @@
 
                             </tr>
 
+
+
                             <tr th:each="product : ${product_list}" >
                                 <td th:text="${product.id}"></td>
                                 <td th:text="${product.productName}"></td>
@@ -57,7 +59,6 @@
                                 <td th:text="${product.image}"></td>
                                 <td th:text="${product.description}"></td>
                                 <td th:text="${product.category != null ? product.category.id : 'Không có danh mục'}"></td> <!-- Kiểm tra null -->
-
                                 <td>
                                     <a th:href="@{/admin/product/edit/{id}(id=${product.id}) }" class="btn btn-success">Edit</a>
                                     <a th:href="@{/admin/product/delete/{id}(id=${product.id}) }" onclick="return confirm('Bạn có chắc chắn muốn xóa')" class="btn btn-success">Delete</a>
