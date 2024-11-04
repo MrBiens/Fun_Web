@@ -1,6 +1,5 @@
 package com.vn.sbit.SpringMVC.dto.request;
 
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 
 public class CategoryRequest {

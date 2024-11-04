@@ -40,12 +40,11 @@ public class FileSystemStorageService implements StorageService {
             Path destinationFile = this.rootLocation.resolve(
                             Paths.get(Objects.requireNonNull(file.getOriginalFilename())))
                     .normalize().toAbsolutePath();
-            log.info("đã đến đây 1 ");
 
             try (InputStream inputStream = file.getInputStream()) {
                 Files.copy(inputStream, destinationFile,
                         StandardCopyOption.REPLACE_EXISTING);
-                log.info("đã đến đây 2 ");
+                log.info("Đã đến MultiPath Store ");
             }
         }
         catch (IOException e) {
