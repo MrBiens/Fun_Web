@@ -25,6 +25,15 @@ public class ProductResponse{
     @NotBlank
     private Category category;
 
-
-
+    @Override
+    public String toString() {
+        return "ProductResponse{" +
+                "id=" + id +
+                ", productName='" + productName + '\'' +
+                ", price=" + price +
+                ", image='" + image + '\'' +
+                ", description='" + description + '\'' +
+                ", category=" + category +
+                '}';
+    }
 }
