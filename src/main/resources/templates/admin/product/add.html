@@ -35,7 +35,7 @@
                     <h3 class="box-title">Quick Example</h3>
                 </div>
 
-                <form role="form" method="post" th:action="@{/admin/product/add}" th:object="${request}">
+                <form role="form" enctype="multipart/form-data" method="post" th:action="@{/admin/product/add}" th:object="${request}" >
 
                     <div th:if="${message_error}">
                         <span th:text="${message_error}"> </span>
@@ -54,12 +54,12 @@
 
                         <div class="form-group">
                             <label >Price</label>
-                            <input type="text" th:field="*{price}" class="form-control"  placeholder="Price">
+                            <input type="number" th:field="*{price}" class="form-control"  placeholder="Price">
                         </div>
 
                         <div class="form-group">
                             <label >Image</label>
-                            <input type="file" th:field="*{image}" class="form-control"  placeholder="Image">
+                            <input type="file"  class="form-control" placeholder="Image" name="file" >  <!-- Name dung trong @RequestParam    th:field="*{image}" -->
                         </div>
 
 
@@ -85,6 +85,7 @@
                     <div class="box-footer">
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
+
                 </form>
             </div>
 

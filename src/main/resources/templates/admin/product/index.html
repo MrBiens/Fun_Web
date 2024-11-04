@@ -34,7 +34,7 @@
                     <div class="box-header with-border">
                         <h3 class="box-title">Danh sách danh mục</h3>
                         <div>
-                            <a class="btn btn-success" href="/admin/category/add">Thêm mới danh mục</a>
+                            <a class="btn btn-success" href="/admin/product/add">Thêm mới sản phẩm</a>
                         </div>
                     </div>
 
@@ -43,20 +43,24 @@
                             <tbody><tr>
                                 <th style="width: 10px">Id</th>
                                 <th>Category Name</th>
-                                <th>Status</th>
-                                <th>Action</th>
+                                <th>Price</th>
+                                <th>Image</th>
+                                <th>Description</th>
+                                <th>CategoryID</th>
+
                             </tr>
 
-                            <tr th:each="category : ${list_category}">
-                                <td th:text="${category.id}"></td>
-                                <td th:text="${category.categoryName}"></td>
+                            <tr th:each="product : ${product_list}" >
+                                <td th:text="${product.id}"></td>
+                                <td th:text="${product.productName}"></td>
+                                <td th:text="${product.price}"></td>
+                                <td th:text="${product.image}"></td>
+                                <td th:text="${product.description}"></td>
+                                <td th:text="${product.category != null ? product.category.id : 'Không có danh mục'}"></td> <!-- Kiểm tra null -->
+
                                 <td>
-                                    <span th:if="${category.categoryStatus}" class="badge bg-success">Show</span>
-                                    <span th:if="${!category.categoryStatus}" class="badge bg-danger">Hide</span>
-                                </td>
-                                <td>
-                                    <a th:href="@{/admin/category/edit/{id}(id=${category.id}) }" class="btn btn-success">Edit</a>
-                                    <a th:href="@{/admin/category/delete/{id}(id=${category.id}) }" onclick="return confirm('Bạn có chắc chắn muốn xóa')" class="btn btn-success">Delete</a>
+                                    <a th:href="@{/admin/product/edit/{id}(id=${product.id}) }" class="btn btn-success">Edit</a>
+                                    <a th:href="@{/admin/product/delete/{id}(id=${product.id}) }" onclick="return confirm('Bạn có chắc chắn muốn xóa')" class="btn btn-success">Delete</a>
                                 </td>
                             </tr>
 

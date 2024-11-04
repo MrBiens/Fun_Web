@@ -9,7 +9,7 @@ import com.vn.sbit.SpringMVC.entity.Product;
 import java.util.List;
 
 public interface ProductService {
-    List<Product> getAll();
+    List<ProductResponse> getAll();
     ProductResponse createProduct(ProductRequest request);
     ProductResponse findByProductName(String name);
     ProductResponse findById(Long id);
