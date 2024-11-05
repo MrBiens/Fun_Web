@@ -38,10 +38,11 @@ public class CategoryController {
     public String search(Model model, @Param("keyword") String keyword,@RequestParam(name = "pageNo",defaultValue = "1") Integer pageNo){
         Page<Category> list = categoryService.pagination(pageNo);
 
-//        if(keyword !=null){
-//            list=categoryService.searchByCategoryName(keyword);
-//            model.addAttribute("keyword",keyword);
-//        }
+        if(keyword !=null){
+            list=categoryService.searchAndPagination(keyword,pageNo);
+            model.addAttribute("keyword",keyword);
+        }
+
         model.addAttribute("totalPage",list.getTotalPages());
         model.addAttribute("currentPage",pageNo);
         model.addAttribute("list_category",list);
