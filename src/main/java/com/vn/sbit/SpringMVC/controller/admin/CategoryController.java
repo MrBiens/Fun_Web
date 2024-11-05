@@ -8,6 +8,8 @@ import com.vn.sbit.SpringMVC.service.CategoryService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,12 +28,26 @@ public class CategoryController {
     }
 
 
+//    @GetMapping("/home")
+//    public String index(Model model){
+//        List<Category> list = categoryService.getAll();
+//        model.addAttribute("list_category",list);
+//        return "admin/category/index";
+//    }
     @GetMapping("/home")
-    public String index(Model model){
-        List<Category> list = categoryService.getAll();
+    public String search(Model model, @Param("keyword") String keyword,@RequestParam(name = "pageNo",defaultValue = "1") Integer pageNo){
+        Page<Category> list = categoryService.pagination(pageNo);
+
+//        if(keyword !=null){
+//            list=categoryService.searchByCategoryName(keyword);
+//            model.addAttribute("keyword",keyword);
+//        }
+        model.addAttribute("totalPage",list.getTotalPages());
+        model.addAttribute("currentPage",pageNo);
         model.addAttribute("list_category",list);
         return "admin/category/index";
     }
+
     @GetMapping("/add")
     public String add(Model model){
         Category category = new Category();

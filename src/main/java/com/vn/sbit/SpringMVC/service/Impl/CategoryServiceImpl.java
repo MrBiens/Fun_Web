@@ -7,6 +7,9 @@ import com.vn.sbit.SpringMVC.mapper.CategoryMapper;
 import com.vn.sbit.SpringMVC.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -59,5 +62,16 @@ public class CategoryServiceImpl implements CategoryService {
             throw new RuntimeException("Category Not found");
         }
         categoryRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Category> searchByCategoryName(String name) {
+        return categoryRepository.searchCategory(name);
+    }
+
+    @Override
+    public Page<Category> pagination(Integer pageNo) {
+        Pageable pageable = PageRequest.of(pageNo-1,2); //page number and data in page  - page 0 co 5 ban ghi
+        return categoryRepository.findAll(pageable);
     }
 }

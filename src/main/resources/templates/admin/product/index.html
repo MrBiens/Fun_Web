@@ -47,7 +47,6 @@
                                 <th>Image</th>
                                 <th>Description</th>
                                 <th>CategoryID</th>
-
                             </tr>
 
 
@@ -56,7 +55,10 @@
                                 <td th:text="${product.id}"></td>
                                 <td th:text="${product.productName}"></td>
                                 <td th:text="${product.price}"></td>
-                                <td th:text="${product.image}"></td>
+<!--                                <td th:text="${product.image}"></td>-->
+                                <<td>
+                                    <img th:src="@{'/uploads/'+${product.image}}" width="50px" alt="Product image">
+                                </td>
                                 <td th:text="${product.description}"></td>
                                 <td th:text="${product.category != null ? product.category.id : 'Không có danh mục'}"></td> <!-- Kiểm tra null -->
                                 <td>
