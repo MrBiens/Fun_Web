@@ -65,19 +65,14 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void updateProduct(Long id, ProductRequest request) {
         Product product= productRepository.findById(id).orElseThrow( () -> new RuntimeException("Product Not found"));
-        log.info("Log Product{}",product);
-        log.info("Log request{}",request.getCategoryId());
         if (request.getCategoryId() == null) {
             throw new IllegalArgumentException("Category ID must not be null");
         }
         Category category = categoryRepository.findById(request.getCategoryId()).orElseThrow(() -> new RuntimeException("Category not found"));
 
-        log.info("Log Category {}",category);
         productMapper.updateProduct(product,request);
-        log.info("Log Update");
         product.setCategory(category);
         productRepository.save(product);
-        log.info("Log Save");
 
 
     }
@@ -85,7 +80,10 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void deleteProduct(Long id) {
-
+        if (!productRepository.existsById(id)) {
+            throw new RuntimeException("Category Not found");
+        }
+        productRepository.deleteById(id);
     }
 
 

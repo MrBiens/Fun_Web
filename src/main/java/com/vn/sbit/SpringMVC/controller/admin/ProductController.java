@@ -89,13 +89,13 @@ public class ProductController {
     }
 
     @PostMapping("/edit/{id}")
-    public String update(@PathVariable("id") Long id,@ModelAttribute("product") ProductRequest request,@RequestParam("file") MultipartFile file){
+    public String update(@PathVariable("id") Long id,@ModelAttribute("product") ProductRequest request,@RequestParam("file") MultipartFile file
+            ,@RequestParam("category_product")Category category){
         // request thiếu category Id -> Vì là Object Category
         if(request!=null){
+            request.setCategoryId(category.getId()); // ProductRequest category = id ,Product category = long
             storageService.store(file);
             String fileName= file.getOriginalFilename();
-
-            log.info("Log Controller 1");
 
             request.setImage(fileName);
             productService.updateProduct(id,request);
@@ -105,13 +105,11 @@ public class ProductController {
         }
     }
 
-
-
-//    @GetMapping("/delete/{id}")
-//    public String delete(@PathVariable("id") Long id){
-//        categoryService.deleteCategory(id);
-//        return "redirect:/admin/category/home"; //load controller url
-//    }
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable("id") Long id){
+        productService.deleteProduct(id);
+        return "redirect:/admin/product/home"; //load controller url
+    }
 
 
 
