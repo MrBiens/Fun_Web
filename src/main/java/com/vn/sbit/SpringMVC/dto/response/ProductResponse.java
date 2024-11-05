@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 @AllArgsConstructor
 @Getter
 @Setter
+
 public class ProductResponse{
     private Long id;
 
