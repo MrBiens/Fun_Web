@@ -8,6 +8,7 @@ import com.vn.sbit.SpringMVC.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -71,7 +72,18 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Page<Category> pagination(Integer pageNo) {
-        Pageable pageable = PageRequest.of(pageNo-1,2); //page number and data in page  - page 0 co 5 ban ghi
+        Pageable pageable = PageRequest.of(pageNo-1,4); //page number and data in page  - page 0 co 5 ban ghi
         return categoryRepository.findAll(pageable);
     }
+
+    @Override
+    public Page<Category> searchAndPagination(String name, Integer pageNo) {
+        List list = this.searchByCategoryName(name);
+        Pageable pageable = PageRequest.of(pageNo-1,5); //page number and data in page  - page 0 co 5 ban ghi
+        Integer start= (int) pageable.getOffset();
+        Integer end= (int) ((pageable.getOffset() + pageable.getPageSize()) > list.size() ?  list.size() :  pageable.getOffset()+pageable.getPageSize());
+        list = list.subList(start,end);
+        return new PageImpl<Category>(list,pageable,this.searchByCategoryName(name).size());
+    }
+
 }

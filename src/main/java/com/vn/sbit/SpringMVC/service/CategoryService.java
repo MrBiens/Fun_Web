@@ -15,6 +15,7 @@ public interface CategoryService {
     void deleteCategory(Long id);
     List<Category> searchByCategoryName(String name);
     Page<Category> pagination(Integer pageNo);
+    Page<Category> searchAndPagination(String name,Integer pageNo);
 
 
 

@@ -26,14 +26,12 @@ public class ProductController {
     private final ProductService productService;
     private final CategoryService categoryService;
     private final StorageService storageService;
-    private final ProductMapper productMapper;
 
     @Autowired
-    public ProductController(ProductService productService,CategoryService categoryService,StorageService storageService,ProductMapper productMapper) {
+    public ProductController(ProductService productService,CategoryService categoryService,StorageService storageService) {
         this.productService = productService;
         this.categoryService=categoryService;
         this.storageService=storageService;
-        this.productMapper =productMapper;
     }
 
 
