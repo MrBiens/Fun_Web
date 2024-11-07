@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -36,7 +38,28 @@ public class Product {
             CascadeType.MERGE,
             CascadeType.PERSIST})
     @JoinColumn(name = "category_id")
-    private Category category;
+    Category category;
+
+
+    @OneToMany(cascade ={
+            CascadeType.REFRESH,
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST}
+            ,mappedBy = "product")
+    List<PurchaseInvoiceDetail> purchaseInvoiceDetails;
+
+
+    @ManyToMany(fetch = FetchType.LAZY,cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE,
+            CascadeType.DETACH,
+            CascadeType.REFRESH
+    })
+    @JoinTable(name = "supplier_product"
+            ,joinColumns = @JoinColumn(name = "products_id")
+            ,inverseJoinColumns = @JoinColumn(name = "suppliers_id"))
+    List<Supplier> suppliers;
 
     @Override
     public String toString() {
