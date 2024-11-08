@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.time.LocalDate;
+import java.util.List;
+
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,21 +18,12 @@ public class PurchaseInvoiceDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-
     Long id;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "purchase_invoice_id")
     PurchaseInvoice purchaseInvoice;
 
-    @ManyToOne(cascade = {
-            CascadeType.DETACH,
-            CascadeType.PERSIST,
-            CascadeType.MERGE,
-            CascadeType.REFRESH
-    })
-    @JoinColumn(name = "supplier_id")
-    Supplier supplier;
 
     @ManyToOne(cascade ={
             CascadeType.REFRESH,
@@ -37,7 +31,7 @@ public class PurchaseInvoiceDetail {
             CascadeType.MERGE,
             CascadeType.PERSIST}
     )
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "products_id")
     Product product;
 
     @Column(name = "quantity")
@@ -49,9 +43,15 @@ public class PurchaseInvoiceDetail {
     @Column(name = "total_price")
     Double totalPrice;
 
+    @Column(name = "import_date")
+    LocalDate importDate;
+
+
     public Double calculateTotalPrice() {
         return quantity * purchasePrice;
     }
+
+
 
 
 

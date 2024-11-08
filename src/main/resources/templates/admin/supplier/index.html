@@ -52,21 +52,23 @@
                         <table class="table table-bordered">
                             <tbody><tr>
                                 <th style="width: 10px">Id</th>
-                                <th>Category Name</th>
-                                <th>Status</th>
+                                <th>Supplier Name</th>
+                                <th>Address</th>
+                                <th>NumberPhone</th>
+                                <th>Email</th>
                                 <th>Action</th>
                             </tr>
 
-                            <tr th:each="category : ${list_category}">
-                                <td th:text="${category.id}"></td>
-                                <td th:text="${category.categoryName}"></td>
+                            <tr th:each="supplier : ${list_supplier}">
+                                <td th:text="${supplier.id}"></td>
+                                <td th:text="${supplier.supplierName}"></td>
+                                <td th:text="${supplier.address}"></td>
+                                <td th:text="${supplier.numberPhone}"></td>
+                                <td th:text="${supplier.email}"></td>
+
                                 <td>
-                                    <span th:if="${category.categoryStatus}" class="badge bg-success">Show</span>
-                                    <span th:if="${!category.categoryStatus}" class="badge bg-danger">Hide</span>
-                                </td>
-                                <td>
-                                    <a th:href="@{/admin/category/edit/{id}(id=${category.id}) }" class="btn btn-success">Edit</a>
-                                    <a th:href="@{/admin/category/delete/{id}(id=${category.id}) }" onclick="return confirm('Bạn có chắc chắn muốn xóa')" class="btn btn-success">Delete</a>
+                                    <a th:href="@{/admin/supplier/edit/{id}(id=${supplier.id}) }" class="btn btn-success">Edit</a>
+                                    <a th:href="@{/admin/supplier/delete/{id}(id=${supplier.id}) }" onclick="return confirm('Bạn có chắc chắn muốn xóa')" class="btn btn-success">Delete</a>
                                 </td>
                             </tr>
 
@@ -74,15 +76,15 @@
                         </table>
                     </div>
 
-                    <div class="box-footer clearfix">
-                        <ul class="pagination pagination-sm no-margin pull-right">
-                            <li th:if="${currentPage > 1}"><a th:href="@{'?pageNo='+${currentPage-1}}">«</a></li>
-                            <li th:each="i:${#numbers.sequence(1,totalPage)}" th:classappend="${currentPage == i?'active':''}">
-                                <a th:href="@{${keyword !=null && keyword !='' ? '?keyword='+keyword+'&' :'?'}+'pageNo='+${i}}" th:text="${i}"></a>
-                            </li>
-                            <li th:if="${currentPage<totalPage}"><a th:href="@{'?pageNo='+${currentPage+1}}">»</a></li>
-                        </ul>
-                    </div>
+<!--                    <div class="box-footer clearfix">-->
+<!--                        <ul class="pagination pagination-sm no-margin pull-right">-->
+<!--                            <li th:if="${currentPage > 1}"><a th:href="@{'?pageNo='+${currentPage-1}}">«</a></li>-->
+<!--                            <li th:each="i:${#numbers.sequence(1,totalPage)}" th:classappend="${currentPage == i?'active':''}">-->
+<!--                                <a th:href="@{${keyword !=null && keyword !='' ? '?keyword='+keyword+'&' :'?'}+'pageNo='+${i}}" th:text="${i}"></a>-->
+<!--                            </li>-->
+<!--                            <li th:if="${currentPage<totalPage}"><a th:href="@{'?pageNo='+${currentPage+1}}">»</a></li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
 
             </div>
 
