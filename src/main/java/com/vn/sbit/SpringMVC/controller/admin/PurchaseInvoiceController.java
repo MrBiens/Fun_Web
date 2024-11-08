@@ -2,7 +2,9 @@ package com.vn.sbit.SpringMVC.controller.admin;
 
 import com.vn.sbit.SpringMVC.dto.request.ProductRequest;
 import com.vn.sbit.SpringMVC.dto.request.purchase.PurchaseCreateRequest;
+import com.vn.sbit.SpringMVC.dto.request.purchase.PurchaseUpdateRequest;
 import com.vn.sbit.SpringMVC.dto.request.supp.SupplierCreateRequest;
+import com.vn.sbit.SpringMVC.dto.request.supp.SupplierUpdateRequest;
 import com.vn.sbit.SpringMVC.dto.response.ProductResponse;
 import com.vn.sbit.SpringMVC.dto.response.PurchaseResponse;
 import com.vn.sbit.SpringMVC.dto.response.SupplierResponse;
@@ -63,6 +65,42 @@ public class PurchaseInvoiceController {
             return "admin/purchase/add";
         }
     }
+
+    @GetMapping("/edit/{id}")
+    public String update(@PathVariable("id") Long id, Model model){
+        PurchaseInvoice purchaseInvoice=purchaseService.findById(id);
+        model.addAttribute("id",id);
+
+
+        List<SupplierResponse> supplierList=supplierService.getAll();
+        model.addAttribute("list_supplier",supplierList);
+
+        PurchaseUpdateRequest request = new PurchaseUpdateRequest();
+        request.setPurchaseInvoiceName(purchaseInvoice.getPurchaseInvoiceName());
+        request.setSupplierId(purchaseInvoice.getSupplier().getId());
+
+        model.addAttribute("purchaseUpdate",request);
+        return "admin/purchase/edit";
+    }
+
+//
+//    @PostMapping("/edit")
+//    public String update(@RequestParam("id")Long id,@ModelAttribute("supplierUpdate")SupplierUpdateRequest request,@RequestParam("supplier_purchase")SupplierResponse response){
+//        if(request != null) {
+//            supplierService.updateById(id, request);
+//            return "redirect:/admin/supplier/home";
+//        }else {
+//            return "admin/supplier/edit";
+//        }
+//    }
+
+//
+//    @GetMapping("/delete/{id}")
+//    public String delete(@PathVariable("id") Long id){
+//        supplierService.deleteById(id);
+//        return "redirect:/admin/supplier/home"; //load controller url
+//    }
+
 
 
 }
