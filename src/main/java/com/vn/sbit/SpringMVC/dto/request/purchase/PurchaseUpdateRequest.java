@@ -1,5 +1,6 @@
 package com.vn.sbit.SpringMVC.dto.request.purchase;
 
+import com.vn.sbit.SpringMVC.entity.Supplier;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -52,7 +52,7 @@
 
 
                             <tr th:each="purchase : ${list_purchase}" >
-                                <td th:utext="${purchase.id}"></td>  <!-- Hiển thị purchase.id -->
+                                <td th:text="${purchase.id}"></td>  <!-- Hiển thị purchase.id -->
                                 <td th:text="${purchase.purchaseInvoiceName}"></td>
                                 <td th:text="${purchase.supplier.id}"></td>
                                 <td th:text="${purchase.supplier.supplierName}"></td>

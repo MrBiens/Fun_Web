@@ -53,4 +53,9 @@ public class PurchaseServiceImpl implements PurchaseService {
     public void deleteById(Long id) {
 
     }
+
+    @Override
+    public PurchaseInvoice findById(Long id) {
+        return purchaseRepository.findById(id).orElseThrow(() -> new RuntimeException("Purchase Id not found"));
+    }
 }
