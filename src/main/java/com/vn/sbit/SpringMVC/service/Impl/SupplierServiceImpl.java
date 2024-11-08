@@ -1,13 +1,13 @@
 package com.vn.sbit.SpringMVC.service.Impl;
 
-import com.vn.sbit.SpringMVC.DAO.SupplierRepository;
-import com.vn.sbit.SpringMVC.dto.request.SupplierRequest;
+import com.vn.sbit.SpringMVC.dto.request.supp.SupplierUpdateRequest;
+import com.vn.sbit.SpringMVC.repository.SupplierRepository;
+import com.vn.sbit.SpringMVC.dto.request.supp.SupplierCreateRequest;
 import com.vn.sbit.SpringMVC.dto.response.SupplierResponse;
 import com.vn.sbit.SpringMVC.entity.Supplier;
 import com.vn.sbit.SpringMVC.mapper.SupplierMapper;
 import com.vn.sbit.SpringMVC.service.SupplierService;
 import lombok.AccessLevel;
-import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,20 +32,39 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
-    public SupplierResponse create(SupplierRequest request) {
+    public SupplierResponse create(SupplierCreateRequest request) {
+        if(supplierRepository.existsBySupplierName(request.getSupplierName()) ){
+            throw new RuntimeException("Supplier exist");
+        }
         Supplier supplier = supplierMapper.toSupplier(request);
         supplierRepository.save(supplier);
         return supplierMapper.toSupplierResponse(supplier);
     }
 
+    @Override
+    public Supplier findById(Long id) {
+        return supplierRepository.findById(id).orElseThrow( () -> new RuntimeException("Supplier not found"));
+    }
+
+
 
     @Override
-    public SupplierResponse updateById(Long id) {
-        return null;
+    public SupplierResponse updateById(Long id, SupplierUpdateRequest request) {
+        Supplier supplier =findById(id);
+        if(supplierRepository.existsBySupplierName(request.getSupplierName()) ){
+            throw new RuntimeException("Supplier Name exist");
+        }
+        supplierMapper.updateSupplier(supplier,request);
+        supplierRepository.save(supplier);
+        return supplierMapper.toSupplierResponse(supplier);
     }
 
     @Override
     public void deleteById(Long id) {
-
+        if (!supplierRepository.existsById(id)) {
+            throw new RuntimeException("Category Not found");
+        }
+        supplierRepository.deleteById(id);
     }
+
 }

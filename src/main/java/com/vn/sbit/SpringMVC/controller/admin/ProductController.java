@@ -4,7 +4,6 @@ import com.vn.sbit.SpringMVC.dto.request.ProductRequest;
 import com.vn.sbit.SpringMVC.dto.response.ProductResponse;
 import com.vn.sbit.SpringMVC.entity.Category;
 import com.vn.sbit.SpringMVC.entity.Product;
-import com.vn.sbit.SpringMVC.mapper.ProductMapper;
 import com.vn.sbit.SpringMVC.service.CategoryService;
 import com.vn.sbit.SpringMVC.service.ProductService;
 import com.vn.sbit.SpringMVC.service.StorageService;

@@ -1,12 +1,11 @@
 package com.vn.sbit.SpringMVC.service.Impl;
 
-import com.vn.sbit.SpringMVC.DAO.CategoryRepository;
+import com.vn.sbit.SpringMVC.repository.CategoryRepository;
 import com.vn.sbit.SpringMVC.dto.request.CategoryRequest;
 import com.vn.sbit.SpringMVC.entity.Category;
 import com.vn.sbit.SpringMVC.mapper.CategoryMapper;
 import com.vn.sbit.SpringMVC.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;

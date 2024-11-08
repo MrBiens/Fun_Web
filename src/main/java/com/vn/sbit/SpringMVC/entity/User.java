@@ -14,7 +14,7 @@ public class User {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "username",length = 20)
+    @Column(name = "username",unique = true,columnDefinition = "VARCHAR(255) COLLATE utf8mb4_unicode_ci",length = 20)
     private String username;
 
     @Column(name = "password",length = 256)

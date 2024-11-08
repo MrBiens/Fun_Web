@@ -2,6 +2,7 @@ package com.vn.sbit.SpringMVC.entity;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -20,7 +21,7 @@ public class Supplier {
     @Column(name = "id")
     Long id;
 
-    @Column(name = "supplier_name")
+    @Column(name = "supplier_name",unique = true,columnDefinition = "VARCHAR(255) COLLATE utf8mb4_unicode_ci") //unique field - không phân biệt hoa thường (utf8mb4_bin là phân biệt)
     String supplierName;
 
     @Column(name = "address")
@@ -30,6 +31,7 @@ public class Supplier {
     String numberPhone;
 
     @Column(name = "email")
+    @Email
     String email;
 
     @Column(name = "debt")
