@@ -17,10 +17,10 @@ import java.util.List;
 public class PurchaseInvoice {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "id",unique = true)
     Long id;
 
-    @Column(name = "purchase_invoice_name")
+    @Column(name = "purchase_invoice_name",unique = true,columnDefinition = "VARCHAR(255) COLLATE utf8mb4_unicode_ci",length = 20)
     String purchaseInvoiceName;
 
     @ManyToOne(cascade = {

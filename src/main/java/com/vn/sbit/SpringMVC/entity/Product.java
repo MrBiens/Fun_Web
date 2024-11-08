@@ -48,6 +48,7 @@ public class Product {
             ,mappedBy = "product")
     List<PurchaseInvoiceDetail> purchaseInvoiceDetails;
 
+
 //    @ManyToOne(cascade ={
 //            CascadeType.REFRESH,
 //            CascadeType.DETACH,

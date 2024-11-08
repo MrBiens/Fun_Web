@@ -83,6 +83,7 @@ public class ProductController {
         List<Category>  categoryList = categoryService.getAll();
         model.addAttribute("category_list",categoryList);
         return "admin/product/edit";
+
     }
 
     @PostMapping("/edit/{id}")
