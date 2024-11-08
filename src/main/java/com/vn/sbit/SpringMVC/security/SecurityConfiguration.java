@@ -41,6 +41,7 @@ public class SecurityConfiguration {
                     configurer
                             .requestMatchers("/register/**").permitAll() // tat ca user duoc register
                             .requestMatchers("/admin/**").hasAnyAuthority(RoleEnum.ROLE_ADMIN.name(), RoleEnum.ROLE_MANAGER.name())
+
                             .anyRequest().authenticated();
                 } //tất cả request đều phải xác minh
         ).formLogin(

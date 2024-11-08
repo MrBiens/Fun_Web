@@ -40,8 +40,7 @@ public class Product {
     @JoinColumn(name = "category_id")
     Category category;
 
-
-    @OneToMany(cascade ={
+    @OneToMany(fetch = FetchType.LAZY,cascade ={
             CascadeType.REFRESH,
             CascadeType.DETACH,
             CascadeType.MERGE,
@@ -49,17 +48,28 @@ public class Product {
             ,mappedBy = "product")
     List<PurchaseInvoiceDetail> purchaseInvoiceDetails;
 
+//    @ManyToOne(cascade ={
+//            CascadeType.REFRESH,
+//            CascadeType.DETACH,
+//            CascadeType.MERGE,
+//            CascadeType.PERSIST})
+//    @JoinColumn(name = "purchase_invoice_detail_id")
+//    PurchaseInvoiceDetail purchaseInvoiceDetail;
 
-    @ManyToMany(fetch = FetchType.LAZY,cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE,
-            CascadeType.DETACH,
-            CascadeType.REFRESH
-    })
-    @JoinTable(name = "supplier_product"
-            ,joinColumns = @JoinColumn(name = "products_id")
-            ,inverseJoinColumns = @JoinColumn(name = "suppliers_id"))
-    List<Supplier> suppliers;
+
+
+
+
+//    @ManyToMany(fetch = FetchType.LAZY,cascade = {
+//            CascadeType.PERSIST,
+//            CascadeType.MERGE,
+//            CascadeType.DETACH,
+//            CascadeType.REFRESH
+//    })
+//    @JoinTable(name = "supplier_product"
+//            ,joinColumns = @JoinColumn(name = "products_id")
+//            ,inverseJoinColumns = @JoinColumn(name = "suppliers_id"))
+//    List<Supplier> suppliers;
 
     @Override
     public String toString() {

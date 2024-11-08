@@ -9,8 +9,9 @@ import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
 public interface SupplierMapper {
-    @Mapping(target = "products", ignore = true) // Bỏ qua ánh xạ trường products
-    @Mapping(target = "purchaseInvoiceDetail", ignore = true) // Bỏ qua ánh xạ trường purchaseInvoiceDetail
+//    @Mapping(target = "products", ignore = true) // Bỏ qua ánh xạ trường products
+//    @Mapping(target = "purchaseInvoiceDetail", ignore = true) // Bỏ qua ánh xạ trường purchaseInvoiceDetail
+
     Supplier toSupplier(SupplierRequest request);
 
     SupplierResponse toSupplierResponse(Supplier supplier);

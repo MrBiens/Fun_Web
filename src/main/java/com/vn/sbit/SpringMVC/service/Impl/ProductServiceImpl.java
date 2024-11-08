@@ -29,7 +29,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductResponse> getAll() {
 //        return productRepository.findAll().stream().map(product -> productMapper.toProductResponse(product)).collect(Collectors.toList());
-        return productRepository.findAll().stream().map(product -> productMapper.toProductResponse(product)).toList();
+        return productRepository.findAll().stream().map(productMapper::toProductResponse).toList();
 
     }
 

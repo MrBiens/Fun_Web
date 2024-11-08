@@ -9,28 +9,34 @@ import com.vn.sbit.SpringMVC.service.SupplierService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
-@RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE,makeFinal = true)
 public class SupplierServiceImpl implements SupplierService {
 
     SupplierRepository supplierRepository;
     SupplierMapper supplierMapper;
 
+    @Autowired
+    public SupplierServiceImpl(SupplierRepository supplierRepository, SupplierMapper supplierMapper) {
+        this.supplierRepository = supplierRepository;
+        this.supplierMapper = supplierMapper;
+    }
+
     @Override
     public List<SupplierResponse> getAll() {
-
-        return supplierRepository.findAll().stream().map(supplier -> supplierMapper.toSupplierResponse(supplier)).toList();
+        return supplierRepository.findAll().stream().map(supplierMapper::toSupplierResponse).toList();
     }
 
     @Override
     public SupplierResponse create(SupplierRequest request) {
-        return null;
+        Supplier supplier = supplierMapper.toSupplier(request);
+        supplierRepository.save(supplier);
+        return supplierMapper.toSupplierResponse(supplier);
     }
-
 
 
     @Override

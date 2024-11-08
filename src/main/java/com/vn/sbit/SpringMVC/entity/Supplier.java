@@ -32,24 +32,29 @@ public class Supplier {
     @Column(name = "email")
     String email;
 
-    @OneToMany(mappedBy = "supplier",cascade = {
-            CascadeType.DETACH,
-            CascadeType.PERSIST,
-            CascadeType.MERGE,
-            CascadeType.REFRESH
-    })
-    List<PurchaseInvoiceDetail> purchaseInvoiceDetail;
+    @Column(name = "debt")
+    Double debt;
 
-    @ManyToMany(fetch = FetchType.LAZY,cascade = {
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "supplier",cascade = {
+            CascadeType.DETACH,
             CascadeType.PERSIST,
             CascadeType.MERGE,
-            CascadeType.DETACH,
             CascadeType.REFRESH
     })
-    @JoinTable(name = "supplier_product"
-            ,joinColumns = @JoinColumn(name = "suppliers_id")
-            ,inverseJoinColumns = @JoinColumn(name = "products_id"))
-    List<Product> products;
+    List<PurchaseInvoice> purchaseInvoice;
+
+//    @ManyToMany(fetch = FetchType.LAZY,cascade = {
+//            CascadeType.PERSIST,
+//            CascadeType.MERGE,
+//            CascadeType.DETACH,
+//            CascadeType.REFRESH
+//    })
+//    @JoinTable(name = "supplier_product"
+//            ,joinColumns = @JoinColumn(name = "suppliers_id")
+//            ,inverseJoinColumns = @JoinColumn(name = "products_id"))
+//    List<Product> products;
+
+
 
 
 
