@@ -65,11 +65,11 @@
                                 <td th:text="${supplier.address}"></td>
                                 <td th:text="${supplier.numberPhone}"></td>
                                 <td th:text="${supplier.email}"></td>
-
                                 <td>
                                     <a th:href="@{/admin/supplier/edit/{id}(id=${supplier.id}) }" class="btn btn-success">Edit</a>
                                     <a th:href="@{/admin/supplier/delete/{id}(id=${supplier.id}) }" onclick="return confirm('Bạn có chắc chắn muốn xóa')" class="btn btn-success">Delete</a>
                                 </td>
+
                             </tr>
 
                             </tbody>

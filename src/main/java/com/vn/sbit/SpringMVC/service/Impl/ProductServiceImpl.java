@@ -1,7 +1,7 @@
 package com.vn.sbit.SpringMVC.service.Impl;
 
-import com.vn.sbit.SpringMVC.DAO.CategoryRepository;
-import com.vn.sbit.SpringMVC.DAO.ProductRepository;
+import com.vn.sbit.SpringMVC.repository.CategoryRepository;
+import com.vn.sbit.SpringMVC.repository.ProductRepository;
 import com.vn.sbit.SpringMVC.dto.request.ProductRequest;
 import com.vn.sbit.SpringMVC.dto.response.ProductResponse;
 import com.vn.sbit.SpringMVC.entity.Category;

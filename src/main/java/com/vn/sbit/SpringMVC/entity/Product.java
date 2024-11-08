@@ -19,7 +19,7 @@ public class Product {
     @Column(name = "id")
     Long id;
 
-    @Column(name = "product_name")
+    @Column(name = "product_name",unique = true,columnDefinition = "VARCHAR(255) COLLATE utf8mb4_unicode_ci")
     String productName;
 
     @Column(name = "price")

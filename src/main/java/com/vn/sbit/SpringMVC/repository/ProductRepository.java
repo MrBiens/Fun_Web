@@ -1,4 +1,4 @@
-package com.vn.sbit.SpringMVC.DAO;
+package com.vn.sbit.SpringMVC.repository;
 
 import com.vn.sbit.SpringMVC.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;

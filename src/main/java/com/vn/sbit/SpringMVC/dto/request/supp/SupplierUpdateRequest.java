@@ -1,6 +1,5 @@
-package com.vn.sbit.SpringMVC.dto.request;
+package com.vn.sbit.SpringMVC.dto.request.supp;
 
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,7 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class SupplierRequest {
+public class SupplierUpdateRequest {
     @NotBlank(message = "Supplier Name not null")
     String supplierName;
 

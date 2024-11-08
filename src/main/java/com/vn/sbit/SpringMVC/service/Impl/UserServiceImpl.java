@@ -1,7 +1,7 @@
 package com.vn.sbit.SpringMVC.service.Impl;
 
-import com.vn.sbit.SpringMVC.DAO.RoleRepository;
-import com.vn.sbit.SpringMVC.DAO.UserRepository;
+import com.vn.sbit.SpringMVC.repository.RoleRepository;
+import com.vn.sbit.SpringMVC.repository.UserRepository;
 import com.vn.sbit.SpringMVC.entity.Role;
 import com.vn.sbit.SpringMVC.entity.User;
 import com.vn.sbit.SpringMVC.enum_project.RoleEnum;

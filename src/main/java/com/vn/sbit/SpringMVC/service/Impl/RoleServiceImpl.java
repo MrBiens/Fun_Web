@@ -1,6 +1,6 @@
 package com.vn.sbit.SpringMVC.service.Impl;
 
-import com.vn.sbit.SpringMVC.DAO.RoleRepository;
+import com.vn.sbit.SpringMVC.repository.RoleRepository;
 import com.vn.sbit.SpringMVC.dto.request.RoleRequest;
 import com.vn.sbit.SpringMVC.entity.Role;
 import com.vn.sbit.SpringMVC.service.RoleService;

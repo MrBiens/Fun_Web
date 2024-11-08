@@ -1,19 +1,15 @@
 package com.vn.sbit.SpringMVC.controller.admin;
 
-import com.vn.sbit.SpringMVC.dto.request.SupplierRequest;
+import com.vn.sbit.SpringMVC.dto.request.supp.SupplierCreateRequest;
+import com.vn.sbit.SpringMVC.dto.request.supp.SupplierUpdateRequest;
 import com.vn.sbit.SpringMVC.dto.response.SupplierResponse;
+import com.vn.sbit.SpringMVC.entity.Supplier;
 import com.vn.sbit.SpringMVC.service.SupplierService;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,13 +31,13 @@ public class SupplierController {
 
     @GetMapping("/add")
     public String add(Model model){
-        SupplierRequest request = new SupplierRequest();
+        SupplierCreateRequest request = new SupplierCreateRequest();
         model.addAttribute("supplier",request);
         return "admin/supplier/add";
     }
 
     @PostMapping("/add")
-    public String add(@ModelAttribute("supplier") SupplierRequest request,BindingResult result, Model model){
+    public String add(@ModelAttribute("supplier") SupplierCreateRequest request,BindingResult result, Model model){
         if(result.hasErrors()){
             model.addAttribute("message_error","Tên sản phẩm đã tồn tại");
             return "redirect:/admin/supplier/add";
@@ -53,6 +49,41 @@ public class SupplierController {
             return "admin/supplier/add";
         }
     }
+
+    @GetMapping("/edit/{id}")
+    public String update(@PathVariable("id") Long id, Model model){
+        Supplier supplier = supplierService.findById(id);
+        model.addAttribute("id",supplier.getId());
+
+        SupplierUpdateRequest request = new SupplierUpdateRequest();
+        request.setSupplierName(supplier.getSupplierName());
+        request.setAddress(supplier.getAddress());
+        request.setNumberPhone(supplier.getNumberPhone());
+        request.setEmail(supplier.getEmail());
+
+        model.addAttribute("supplierUpdate",request);
+        return "admin/supplier/edit";
+    }
+
+    @PostMapping("/edit")
+    public String update(@RequestParam("id")Long id,@ModelAttribute("supplierUpdate")SupplierUpdateRequest request){
+        if(request != null) {
+            supplierService.updateById(id, request);
+            return "redirect:/admin/supplier/home";
+        }else {
+            return "admin/supplier/edit";
+        }
+    }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable("id") Long id){
+        supplierService.deleteById(id);
+        return "redirect:/admin/supplier/home"; //load controller url
+    }
+
+
+
+
 
 
 }
