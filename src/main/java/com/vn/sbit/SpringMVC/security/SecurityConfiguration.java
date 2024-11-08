@@ -29,7 +29,6 @@ public class SecurityConfiguration {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setUserDetailsService(userService);//implementation của UserDetailsService để getInfoUser
         authenticationProvider.setPasswordEncoder(bCryptPasswordEncoder());
-        log.info(authenticationProvider.toString());
         return authenticationProvider;//Đối tượng này sẽ được Spring Security sử dụng để xử lý quá trình xác thực người dùng
     }
 
@@ -50,8 +49,7 @@ public class SecurityConfiguration {
                         .permitAll()
         ).logout(
                 LogoutConfigurer::permitAll
-        ).exceptionHandling(exception -> exception.accessDeniedPage("/proviso/show403Page"))
-        ;
+        ).exceptionHandling(exception -> exception.accessDeniedPage("/proviso/show403Page"));
 
         return httpSecurity.build();
     }

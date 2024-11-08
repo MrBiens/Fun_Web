@@ -34,39 +34,31 @@
                     <div class="box-header with-border">
                         <h3 class="box-title">Danh sách danh mục</h3>
                         <div>
-                            <a class="btn btn-success" href="/admin/product/add">Thêm mới sản phẩm</a>
+                            <a class="btn btn-success" href="/admin/purchase/add">Thêm mới sản phẩm</a>
                         </div>
                     </div>
 
                     <div class="box-body">
                         <table class="table table-bordered">
-                            <tbody><tr>
+                            <tbody>
+                            <tr>
                                 <th style="width: 10px">Id</th>
-                                <th>Product Name</th>
-                                <th>Price</th>
-                                <th>Image</th>
-                                <th>Description</th>
-                                <th>Category Id</th>
-                                <th>Category Name</th>
-
+                                <th>PurchaseInvoice Name</th>
+                                <th>Supplier ID</th>
+                                <th>Supplier Name</th>
+                                <th>Action</th>
                             </tr>
 
 
 
-                            <tr th:each="product : ${product_list}" >
-                                <td th:text="${product.id}"></td>
-                                <td th:text="${product.productName}"></td>
-                                <td th:text="${product.price}"></td>
-<!--                                <td th:text="${product.image}"></td>-->
-                                <<td>
-                                    <img th:src="@{'/uploads/'+${product.image}}" width="50px" alt="Product image">
-                                </td>
-                                <td th:text="${product.description}"></td>
-                                <td th:text="${product.category != null ? product.category.id : 'Không có danh mục'}"></td> <!-- Kiểm tra null -->
-                                <td th:text="${product.category != null ? product.category.categoryName : 'Không có danh mục'}"></td> <!-- Kiểm tra null -->
+                            <tr th:each="purchase : ${list_purchase}" >
+                                <td th:utext="${purchase.id}"></td>  <!-- Hiển thị purchase.id -->
+                                <td th:text="${purchase.purchaseInvoiceName}"></td>
+                                <td th:text="${purchase.supplier.id}"></td>
+                                <td th:text="${purchase.supplier.supplierName}"></td>
                                 <td>
-                                    <a th:href="@{/admin/product/edit/{id}(id=${product.id}) }" class="btn btn-success">Edit</a>
-                                    <a th:href="@{/admin/product/delete/{id}(id=${product.id}) }" onclick="return confirm('Bạn có chắc chắn muốn xóa')" class="btn btn-success">Delete</a>
+                                    <a th:href="@{/admin/purchase/edit/{id}(id=${purchase.id}) }" class="btn btn-success">Edit</a>
+                                    <a th:href="@{/admin/purchase/delete/{id}(id=${purchase.id}) }" onclick="return confirm('Bạn có chắc chắn muốn xóa')" class="btn btn-success">Delete</a>
                                 </td>
                             </tr>
 
