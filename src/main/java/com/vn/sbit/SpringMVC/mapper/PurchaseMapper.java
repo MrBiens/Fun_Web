@@ -13,11 +13,12 @@ import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
 public interface PurchaseMapper {
-    @Mapping(target = "supplier", ignore = true) // Bỏ qua ánh xạ category
+    @Mapping(target = "supplier", ignore = true) // Bỏ qua ánh xạ supplier
     PurchaseInvoice toPurchaseInvoice(PurchaseCreateRequest request);
 
     @Mapping(target = "id",source = "id")
     PurchaseResponse toPurchaseResponse(PurchaseInvoice purchase);
 
+    @Mapping(target = "supplier", ignore = true) // Bỏ qua ánh xạ supplier
     void updatePurchase(@MappingTarget PurchaseInvoice purchase, PurchaseUpdateRequest request);
 }

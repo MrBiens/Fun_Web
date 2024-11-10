@@ -83,23 +83,23 @@ public class PurchaseInvoiceController {
         return "admin/purchase/edit";
     }
 
-//
-//    @PostMapping("/edit")
-//    public String update(@RequestParam("id")Long id,@ModelAttribute("supplierUpdate")SupplierUpdateRequest request,@RequestParam("supplier_purchase")SupplierResponse response){
-//        if(request != null) {
-//            supplierService.updateById(id, request);
-//            return "redirect:/admin/supplier/home";
-//        }else {
-//            return "admin/supplier/edit";
-//        }
-//    }
 
-//
-//    @GetMapping("/delete/{id}")
-//    public String delete(@PathVariable("id") Long id){
-//        supplierService.deleteById(id);
-//        return "redirect:/admin/supplier/home"; //load controller url
-//    }
+    @PostMapping("/edit")
+    public String update(@RequestParam("id")Long id,@ModelAttribute("purchaseUpdate")PurchaseUpdateRequest request){
+        if(request != null) {
+            purchaseService.updateById(id, request);
+            return "redirect:/admin/purchase/home";
+        }else {
+            return "admin/purchase/edit";
+        }
+    }
+
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable("id") Long id){
+        purchaseService.deleteById(id);
+        return "redirect:/admin/purchase/home"; //load controller url
+    }
 
 
 
