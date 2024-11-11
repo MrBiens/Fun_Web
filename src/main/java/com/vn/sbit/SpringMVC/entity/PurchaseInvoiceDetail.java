@@ -5,7 +5,6 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
@@ -31,8 +30,8 @@ public class PurchaseInvoiceDetail {
             CascadeType.MERGE,
             CascadeType.PERSIST}
     )
-    @JoinColumn(name = "products_id")
-    Product product;
+    @JoinColumn(name = "product_supplier_id")
+    ProductSupplier productSupplier;
 
     @Column(name = "quantity")
     int quantity;
@@ -43,13 +42,30 @@ public class PurchaseInvoiceDetail {
     @Column(name = "total_price")
     Double totalPrice;
 
-    @Column(name = "import_date")
-    LocalDate importDate;
+    @Column(name = "total_quantity")
+    int totalQuantity;
+
+    @Column(name = "debt")
+    Double debt;
 
 
-    public Double calculateTotalPrice() {
-        return quantity * purchasePrice;
+
+    public PurchaseInvoiceDetail(Long id, PurchaseInvoice purchaseInvoice, ProductSupplier productSupplier, int quantity, Double purchasePrice, LocalDate importDate,Double debt) {
+        this.id = id;
+        this.purchaseInvoice = purchaseInvoice;
+        this.productSupplier = productSupplier;
+        this.quantity = quantity;
+        this.purchasePrice = productSupplier.getPurchasePrice(); // Lấy giá từ Product khi khởi tạo
+        this.totalPrice = quantity * purchasePrice; // Tính tổng tiền
+        this.debt=debt;
     }
+
+    public String getProductInfo(){
+        return "Product Id:"+productSupplier.getProduct().getId()+", Product name:"+productSupplier.getProduct().getProductName();
+    }
+
+
+
 
 
 

@@ -2,11 +2,15 @@ package com.vn.sbit.SpringMVC.controller.admin;
 
 import com.vn.sbit.SpringMVC.dto.request.ProductRequest;
 import com.vn.sbit.SpringMVC.dto.response.ProductResponse;
+import com.vn.sbit.SpringMVC.dto.response.SupplierResponse;
 import com.vn.sbit.SpringMVC.entity.Category;
 import com.vn.sbit.SpringMVC.entity.Product;
+import com.vn.sbit.SpringMVC.entity.ProductSupplier;
+import com.vn.sbit.SpringMVC.entity.Supplier;
 import com.vn.sbit.SpringMVC.service.CategoryService;
 import com.vn.sbit.SpringMVC.service.ProductService;
 import com.vn.sbit.SpringMVC.service.StorageService;
+import com.vn.sbit.SpringMVC.service.SupplierService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +29,14 @@ public class ProductController {
     private final ProductService productService;
     private final CategoryService categoryService;
     private final StorageService storageService;
+    private final SupplierService supplierService;
 
     @Autowired
-    public ProductController(ProductService productService,CategoryService categoryService,StorageService storageService) {
+    public ProductController(ProductService productService,CategoryService categoryService,StorageService storageService,SupplierService supplierService) {
         this.productService = productService;
         this.categoryService=categoryService;
         this.storageService=storageService;
+        this.supplierService=supplierService;
     }
 
 
@@ -51,11 +57,17 @@ public class ProductController {
         List<Category>  categoryList = categoryService.getAll();
         model.addAttribute("category_list",categoryList);
 
+        List<SupplierResponse>  list_supplier = supplierService.getAll();
+        model.addAttribute("list_supplier",list_supplier);
+
         return "admin/product/add";
     }
 
     @PostMapping("/add")
-    public String add(@ModelAttribute("request") ProductRequest request, BindingResult result, Model model, @RequestParam("file") MultipartFile file){
+    public String add(@ModelAttribute("request") ProductRequest request, BindingResult result, Model model,
+                      @RequestParam("file") MultipartFile file,
+                      @RequestParam("supplierId")Long supplierId,
+                      @RequestParam("purchasePrice") Double purchasePrice){
 
         if (result.hasErrors()) {
             model.addAttribute("message_error", "File không hợp lệ, vui lòng chọn một file.");
@@ -66,8 +78,11 @@ public class ProductController {
         String fileName = file.getOriginalFilename(); //ten chu khong co dinh dang
         request.setImage(fileName);
 
+        Supplier supplier = supplierService.findById(supplierId);
+        ProductSupplier  productSupplier = new ProductSupplier();
+        productSupplier.setPurchasePrice(purchasePrice);
 
-        ProductResponse response = productService.createProduct(request);
+        ProductResponse response = productService.createProductAndSupplier(request,supplier,productSupplier);
         if(response != null){
             model.addAttribute("response",response);
             return "redirect:/admin/product/home";

@@ -4,6 +4,8 @@ import com.vn.sbit.SpringMVC.entity.Supplier;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.time.LocalDate;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Setter
@@ -12,6 +14,7 @@ import lombok.experimental.FieldDefaults;
 public class PurchaseResponse {
     Long id;
     String purchaseInvoiceName;
-
     Supplier supplier;
+    LocalDate importDate;
+
 }

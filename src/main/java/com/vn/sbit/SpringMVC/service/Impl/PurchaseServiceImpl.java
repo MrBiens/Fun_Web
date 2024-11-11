@@ -16,8 +16,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -46,7 +46,8 @@ public class PurchaseServiceImpl implements PurchaseService {
         Supplier supplier = supplierRepository.findById(request.getSupplierId()).orElseThrow(() -> new RuntimeException("Supplier Id not found"));
 
         PurchaseInvoice purchaseInvoice = purchaseMapper.toPurchaseInvoice(request);
-        purchaseInvoice.setSupplier(supplier);
+//        purchaseInvoice.setSupplier(supplier);
+        purchaseInvoice.setImportDate(LocalDate.now());
         purchaseRepository.save(purchaseInvoice);
 
         return purchaseMapper.toPurchaseResponse(purchaseInvoice);
@@ -60,7 +61,8 @@ public class PurchaseServiceImpl implements PurchaseService {
         Supplier supplier = supplierRepository.findById(request.getSupplierId()).orElseThrow(() -> new RuntimeException("Supplier id not found"));
 
         purchaseMapper.updatePurchase(purchaseInvoice,request);
-        purchaseInvoice.setSupplier(supplier);
+//        purchaseInvoice.setSupplier(supplier);
+        purchaseInvoice.setImportDate(LocalDate.now());
         purchaseRepository.save(purchaseInvoice);
 
         return purchaseMapper.toPurchaseResponse(purchaseInvoice);

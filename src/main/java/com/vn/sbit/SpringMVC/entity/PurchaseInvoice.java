@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -23,6 +24,8 @@ public class PurchaseInvoice {
     @Column(name = "purchase_invoice_name",unique = true,columnDefinition = "VARCHAR(255) COLLATE utf8mb4_unicode_ci",length = 20)
     String purchaseInvoiceName;
 
+    @Column(name = "import_date")
+    LocalDate importDate;
     @ManyToOne(cascade = {
             CascadeType.DETACH,
             CascadeType.PERSIST,
@@ -36,6 +39,9 @@ public class PurchaseInvoice {
             CascadeType.ALL
     })
     List<PurchaseInvoiceDetail> purchaseInvoiceDetail;
+
+
+
 
 
 

@@ -5,12 +5,16 @@ import com.vn.sbit.SpringMVC.dto.request.ProductRequest;
 import com.vn.sbit.SpringMVC.dto.response.ProductResponse;
 import com.vn.sbit.SpringMVC.entity.Category;
 import com.vn.sbit.SpringMVC.entity.Product;
+import com.vn.sbit.SpringMVC.entity.ProductSupplier;
+import com.vn.sbit.SpringMVC.entity.Supplier;
 
 import java.util.List;
 
 public interface ProductService {
     List<ProductResponse> getAll();
     ProductResponse createProduct(ProductRequest request);
+    ProductResponse createProductAndSupplier(ProductRequest request, Supplier supplier, ProductSupplier productSupplier);
+
     Product findByProductName(String name);
     Product findById(Long id);
     void updateProduct(Long id,ProductRequest request);
