@@ -34,7 +34,7 @@
                     <div class="box-header with-border">
                         <h3 class="box-title">Danh sách danh mục</h3>
                         <div>
-                            <a class="btn btn-success" href="/admin/purchase/add">Thêm mới sản phẩm</a>
+                            <a class="btn btn-success" href="/admin/purchasedetail/add">Thêm mới sản phẩm</a>
                         </div>
                     </div>
 
@@ -42,23 +42,29 @@
                         <table class="table table-bordered">
                             <tbody>
                             <tr>
-                                <th style="width: 10px">Id</th>
+                                <th style="width: 10px">STT</th>
+                                <th>PurchaseInvoice Id</th>
                                 <th>PurchaseInvoice Name</th>
-                                <th>Supplier ID</th>
-                                <th>Supplier Name</th>
+                                <th>Product Name</th>
+                                <th>Quantity</th>
+                                <th>TotalPrice</th>
+                                <th>Import Date</th>
                                 <th>Action</th>
                             </tr>
 
 
 
-                            <tr th:each="purchase : ${list_purchase}" >
-                                <td th:text="${purchase.id}" th:href="@{/admin/purchase-detail/index/{id}(id=${purchase.id}) }"></td>  <!-- Hiển thị purchase.id -->
-                                <td th:text="${purchase.purchaseInvoiceName}"></td>
-                                <td th:text="${purchase.supplier.id}"></td>
-                                <td th:text="${purchase.supplier.supplierName}"></td>
+                            <tr th:each="purchasedetail ,stat: ${list_purchasedetail}" >
+                                <td th:text="${stat.count}"></td>
+                                <td th:text="${purchasedetail.purchaseInvoice.purchaseInvoiceName}"></td>
+                                <td th:text="${purchasedetail.product.id}"></td>
+                                <td th:text="${purchasedetail.product.productName}"></td>
+                                <td th:text="${purchasedetail.quantity}"></td>
+                                <td th:text="${purchasedetail.purchasePrice}"></td>
+                                <td th:text="${purchasedetail.totalPrice}"></td>
                                 <td>
-                                    <a th:href="@{/admin/purchase/edit/{id}(id=${purchase.id}) }" class="btn btn-success">Edit</a>
-                                    <a th:href="@{/admin/purchase/delete/{id}(id=${purchase.id}) }" onclick="return confirm('Bạn có chắc chắn muốn xóa')" class="btn btn-success">Delete</a>
+                                    <a th:href="@{/admin/purchasedetail/edit/{id}(id=${purchase.id}) }" class="btn btn-success">Edit</a>
+                                    <a th:href="@{/admin/purchasedetail/delete/{id}(id=${purchase.id}) }" onclick="return confirm('Bạn có chắc chắn muốn xóa')" class="btn btn-success">Delete</a>
                                 </td>
                             </tr>
 
