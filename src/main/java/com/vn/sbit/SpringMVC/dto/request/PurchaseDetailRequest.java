@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class PurchaseDetailRequest {
     Long purchaseInvoiceId;
-    Long productId;
+    Long productSupplierId;
     int quantity;
     Double purchasePrice;
 }
