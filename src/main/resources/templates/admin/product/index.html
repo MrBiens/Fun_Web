@@ -32,9 +32,9 @@
 
                 <div class="box">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Danh sách danh mục</h3>
+                        <h3 class="box-title">Danh sách phẩm</h3>
                         <div>
-                            <a class="btn btn-success" href="/admin/product/add">Thêm mới sản phẩm</a>
+                            <a class="btn btn-success" th:href="@{/admin/product/add}">Thêm mới sản phẩm</a>
                         </div>
                     </div>
 
@@ -57,8 +57,7 @@
                                 <td th:text="${product.id}"></td>
                                 <td th:text="${product.productName}"></td>
                                 <td th:text="${product.price}"></td>
-<!--                                <td th:text="${product.image}"></td>-->
-                                <<td>
+                                <td>
                                     <img th:src="@{'/uploads/'+${product.image}}" width="50px" alt="Product image">
                                 </td>
                                 <td th:text="${product.description}"></td>

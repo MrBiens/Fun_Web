@@ -38,6 +38,7 @@ public class PurchaseServiceImpl implements PurchaseService {
         return purchaseRepository.findById(id).orElseThrow(() -> new RuntimeException("Purchase Id not found"));
     }
 
+    @Transactional
     @Override
     public PurchaseResponse create(PurchaseCreateRequest request) {
         if(purchaseRepository.existsByPurchaseInvoiceName(request.getPurchaseInvoiceName()) ){
@@ -46,7 +47,7 @@ public class PurchaseServiceImpl implements PurchaseService {
         Supplier supplier = supplierRepository.findById(request.getSupplierId()).orElseThrow(() -> new RuntimeException("Supplier Id not found"));
 
         PurchaseInvoice purchaseInvoice = purchaseMapper.toPurchaseInvoice(request);
-//        purchaseInvoice.setSupplier(supplier);
+        purchaseInvoice.setSupplier(supplier);
         purchaseInvoice.setImportDate(LocalDate.now());
         purchaseRepository.save(purchaseInvoice);
 
@@ -61,13 +62,13 @@ public class PurchaseServiceImpl implements PurchaseService {
         Supplier supplier = supplierRepository.findById(request.getSupplierId()).orElseThrow(() -> new RuntimeException("Supplier id not found"));
 
         purchaseMapper.updatePurchase(purchaseInvoice,request);
-//        purchaseInvoice.setSupplier(supplier);
+        purchaseInvoice.setSupplier(supplier);
         purchaseInvoice.setImportDate(LocalDate.now());
         purchaseRepository.save(purchaseInvoice);
 
         return purchaseMapper.toPurchaseResponse(purchaseInvoice);
     }
-
+    @Transactional
     @Override
     public void deleteById(Long id) {
         if (!purchaseRepository.existsById(id)) {

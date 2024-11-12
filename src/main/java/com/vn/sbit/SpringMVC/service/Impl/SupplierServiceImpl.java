@@ -11,6 +11,7 @@ import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 @Service
@@ -31,6 +32,7 @@ public class SupplierServiceImpl implements SupplierService {
         return supplierRepository.findAll().stream().map(supplierMapper::toSupplierResponse).toList();
     }
 
+    @Transactional
     @Override
     public SupplierResponse create(SupplierCreateRequest request) {
         if(supplierRepository.existsBySupplierName(request.getSupplierName()) ){

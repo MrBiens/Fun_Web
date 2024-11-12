@@ -1,6 +1,10 @@
 package com.vn.sbit.SpringMVC.controller.admin;
 
+import com.vn.sbit.SpringMVC.dto.request.PurchaseDetailRequest;
+import com.vn.sbit.SpringMVC.dto.request.purchase.PurchaseCreateRequest;
 import com.vn.sbit.SpringMVC.dto.response.PurchaseDetailResponse;
+import com.vn.sbit.SpringMVC.dto.response.SupplierResponse;
+import com.vn.sbit.SpringMVC.entity.ProductSupplier;
 import com.vn.sbit.SpringMVC.service.PurchaseDetailService;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -32,4 +36,16 @@ public class PurchaseDetailController {
 
         return "";
     }
+
+    @GetMapping("/add")
+    public String add(Model model){
+        PurchaseDetailRequest request = new PurchaseDetailRequest();
+        model.addAttribute("request",request);
+
+//        List<ProductSupplier> supplierList=.getAll();
+//        model.addAttribute("list_supplier",supplierList);
+
+        return "admin/purchase/add";
+    }
+
 }
