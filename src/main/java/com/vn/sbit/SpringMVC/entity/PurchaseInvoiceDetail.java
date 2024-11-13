@@ -8,11 +8,10 @@ import java.time.LocalDate;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
 @Entity
 @Table(name = "purchase_invoice_detail")
+@Getter
+@Setter
 public class PurchaseInvoiceDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,12 +41,9 @@ public class PurchaseInvoiceDetail {
     @Column(name = "total_price")
     Double totalPrice;
 
-    @Column(name = "total_quantity")
-    int totalQuantity;
 
     @Column(name = "debt")
     Double debt;
-
 
 
     public PurchaseInvoiceDetail(Long id, PurchaseInvoice purchaseInvoice, ProductSupplier productSupplier, int quantity, Double purchasePrice, LocalDate importDate,Double debt) {
@@ -59,17 +55,6 @@ public class PurchaseInvoiceDetail {
         this.totalPrice = quantity * purchasePrice; // Tính tổng tiền
         this.debt=debt;
     }
-
-    public String getProductInfo(){
-        return "Product Id:"+productSupplier.getProduct().getId()+", Product name:"+productSupplier.getProduct().getProductName();
-    }
-
-
-
-
-
-
-
 
 
 

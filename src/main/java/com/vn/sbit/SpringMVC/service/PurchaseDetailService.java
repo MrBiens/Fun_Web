@@ -9,4 +9,7 @@ import java.util.List;
 
 public interface PurchaseDetailService extends CRUDService<PurchaseDetailRequest, PurchaseInvoiceDetail, PurchaseDetailResponse> {
     public List<PurchaseDetailResponse> getPurchaseInvoiceDetailsByPurchaseInvoiceId(Long purchaseInvoiceId) ;
+    public Double calculateTotalAmountByInvoiceId(Long purchaseInvoiceId);
+
+    public Integer calculateTotalQuantityByInvoiceId(Long purchaseInvoiceId);
 }

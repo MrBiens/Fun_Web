@@ -48,6 +48,13 @@ public class PurchaseDetailController {
         model.addAttribute("list",list);
 
         model.addAttribute("purchaseInvoiceId",purchaseInvoiceId);
+
+        Double totalAmount = purchaseDetailService.calculateTotalAmountByInvoiceId(purchaseInvoiceId);
+        model.addAttribute("totalAmount",totalAmount);
+
+        int totalQuantity = purchaseDetailService.calculateTotalQuantityByInvoiceId(purchaseInvoiceId);
+        model.addAttribute("totalQuantity",totalQuantity);
+
         return "admin/purchasedetail/detail";
     }
 
