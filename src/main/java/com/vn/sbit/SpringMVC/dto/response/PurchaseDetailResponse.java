@@ -1,6 +1,7 @@
 package com.vn.sbit.SpringMVC.dto.response;
 
 import com.vn.sbit.SpringMVC.entity.ProductSupplier;
+import com.vn.sbit.SpringMVC.entity.PurchaseInvoice;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -11,9 +12,20 @@ import lombok.experimental.FieldDefaults;
 @Setter
 public class PurchaseDetailResponse {
     Long id;
+
+    PurchaseInvoice purchaseInvoice;
+
     ProductSupplier productSupplier;
+
     int quantity;
+
     Double purchasePrice;
+
     Double totalPrice;
+
+
+    int totalQuantity;
+
+    Double debt;
 
 }
