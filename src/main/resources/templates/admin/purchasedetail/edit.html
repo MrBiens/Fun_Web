@@ -35,35 +35,29 @@
                     <h3 class="box-title">Quick Example</h3>
                 </div>
 
-                <form role="form" method="post" th:action="@{/admin/purchase/edit}" th:object="${purchaseUpdate}">
-                    <input type="hidden" name="id" th:value="${id}" />
-
-                    <div th:if="${message_error}">
-                        <span th:text="${message_error}"> </span>
-                    </div>
-                    <div th:if="${#fields.hasErrors('purchaseInvoiceName')}">
-                        <ul>
-                            <li th:each="e:${#fields.errors('purchaseInvoiceName')}" th:text="${e}"> </li>
-                        </ul>
-                    </div>
-
+                <form role="form"  method="post" th:action="@{/admin/purchase-detail/edit}" th:object="${request}" >
+                    <input type="hidden" name="purchaseDetailId" th:value="${purchaseDetailId}" />
+                    <!-- Name dung trong @RequestParam  th:field="*{category}"    th:field="*{image}" -->
                     <div class="box-body">
-                        <div class="form-group">
-                            <label >Purchase Invoice Name</label>
-                            <input type="text" th:field="*{purchaseInvoiceName}" class="form-control"  placeholder="Product name">
-                        </div>
-
-<!--                        name="supplier_purchase"-->
+                        <input type="hidden" th:field="*{purchaseInvoiceId}"  />
 
                         <div class="form-group">
                             <div class="form-group" data-select2-id="13">
-                                <label>Supplier name</label>
-                                <select class="form-control select 2 select2-hidden-accessible" th:field="*{supplierId}"  style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                    <option th:each="supplier: ${list_supplier}" th:value="${supplier.id}"  th:text="${supplier.supplierName}"> </option>
+                                <label>Product</label>
+                                <select class="form-control select 2 select2-hidden-accessible" th:field="*{productSupplierId}" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                    <option th:each="productSupplier: ${list_productSupplier}" th:value="${productSupplier.id}"  th:text="${productSupplier.product.productName}"> </option>
                                 </select>
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <label >Quantity</label>
+                            <input type="number" th:field="*{quantity}" class="form-control"  placeholder="Quantity">
+                        </div>
+                        <div class="form-group">
+                            <label >Purchase Price</label>
+                            <input type="number" th:field="*{purchasePrice}" class="form-control"  placeholder="Purchase Price">
+                        </div>
 
                     </div>
 

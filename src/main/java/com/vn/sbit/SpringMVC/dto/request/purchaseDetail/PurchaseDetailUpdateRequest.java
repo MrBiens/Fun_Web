@@ -1,15 +1,14 @@
-package com.vn.sbit.SpringMVC.dto.request;
+package com.vn.sbit.SpringMVC.dto.request.purchaseDetail;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.time.LocalDate;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PurchaseDetailRequest {
+public class PurchaseDetailUpdateRequest {
     Long purchaseInvoiceId;
     Long productSupplierId;
     int quantity;

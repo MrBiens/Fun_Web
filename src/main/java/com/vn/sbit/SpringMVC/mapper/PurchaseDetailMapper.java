@@ -1,11 +1,8 @@
 package com.vn.sbit.SpringMVC.mapper;
 
-import com.vn.sbit.SpringMVC.dto.request.PurchaseDetailRequest;
-import com.vn.sbit.SpringMVC.dto.request.purchase.PurchaseCreateRequest;
-import com.vn.sbit.SpringMVC.dto.request.purchase.PurchaseUpdateRequest;
+import com.vn.sbit.SpringMVC.dto.request.purchaseDetail.PurchaseDetailRequest;
+import com.vn.sbit.SpringMVC.dto.request.purchaseDetail.PurchaseDetailUpdateRequest;
 import com.vn.sbit.SpringMVC.dto.response.PurchaseDetailResponse;
-import com.vn.sbit.SpringMVC.dto.response.PurchaseResponse;
-import com.vn.sbit.SpringMVC.entity.PurchaseInvoice;
 import com.vn.sbit.SpringMVC.entity.PurchaseInvoiceDetail;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -21,7 +18,7 @@ public interface PurchaseDetailMapper {
     @Mapping(target = "purchaseInvoice",source = "purchaseInvoice")
     PurchaseDetailResponse toPurchaseDetailResponse(PurchaseInvoiceDetail purchaseDetail);
 
-    @Mapping(target = "productSupplier", ignore = true) // Bỏ qua ánh xạ product
+    @Mapping(target = "productSupplier", ignore = true) // Bỏ qua ánh xạ productSupplier
     @Mapping(target = "purchaseInvoice",ignore = true)
-    void updatePurchaseDetail (@MappingTarget PurchaseInvoiceDetail purchaseDetail, PurchaseDetailRequest request);
+    void updatePurchaseDetail (@MappingTarget PurchaseInvoiceDetail purchaseDetail, PurchaseDetailUpdateRequest request);
 }

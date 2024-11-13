@@ -62,8 +62,8 @@
                                 <td th:text="${purchasedetail.purchasePrice}"></td>
                                 <td th:text="${purchasedetail.totalPrice}"></td>
                                 <td>
-                                    <a th:href="@{/admin/purchase-detail/edit/{id}(id=${purchase.id}) }" class="btn btn-success">Edit</a>
-                                    <a th:href="@{/admin/purchase-detail/delete/{id}(id=${purchase.id}) }" onclick="return confirm('Bạn có chắc chắn muốn xóa')" class="btn btn-success">Delete</a>
+                                    <a th:href="@{/admin/purchase-detail/edit/{id}(id=${purchasedetail.id}) }" class="btn btn-success">Edit</a>
+                                    <a th:href="@{/admin/purchase-detail/delete/{id}(id=${purchasedetail.id}) }" onclick="return confirm('Bạn có chắc chắn muốn xóa')" class="btn btn-success">Delete</a>
                                 </td>
                             </tr>
 
