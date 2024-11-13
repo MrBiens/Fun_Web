@@ -10,6 +10,7 @@ import com.vn.sbit.SpringMVC.dto.response.PurchaseResponse;
 import com.vn.sbit.SpringMVC.dto.response.SupplierResponse;
 import com.vn.sbit.SpringMVC.entity.PurchaseInvoice;
 import com.vn.sbit.SpringMVC.entity.Supplier;
+import com.vn.sbit.SpringMVC.service.PurchaseDetailService;
 import com.vn.sbit.SpringMVC.service.PurchaseService;
 import com.vn.sbit.SpringMVC.service.SupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,7 @@ public class PurchaseInvoiceController {
     public String index(Model model){
         List<PurchaseResponse> purchaseInvoices = purchaseService.getAll();
         model.addAttribute("list_purchase",purchaseInvoices);
+//        Double totalAmount=purchaseDetailService.calculateTotalQuantityByInvoiceId()
         return "admin/purchase/index";
     }
     @GetMapping("/add")
@@ -69,7 +71,8 @@ public class PurchaseInvoiceController {
     @GetMapping("/edit/{id}")
     public String update(@PathVariable("id") Long id, Model model){
         PurchaseInvoice purchaseInvoice=purchaseService.findById(id);
-        model.addAttribute("id",id);
+
+        model.addAttribute("id",id); //id purchase
 
 
         List<SupplierResponse> supplierList=supplierService.getAll();
@@ -84,8 +87,8 @@ public class PurchaseInvoiceController {
     }
 
 
-    @PostMapping("/edit")
-    public String update(@RequestParam("id")Long id,@ModelAttribute("purchaseUpdate")PurchaseUpdateRequest request){
+    @PostMapping("/edit/{id}")
+    public String update(@PathVariable("id")Long id,@ModelAttribute("purchaseUpdate")PurchaseUpdateRequest request){
         if(request != null) {
             purchaseService.updateById(id, request);
             return "redirect:/admin/purchase/home";

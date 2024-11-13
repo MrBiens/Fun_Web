@@ -61,7 +61,8 @@
                                 <td th:text="${purchase.supplier.id}"></td>
                                 <td th:text="${purchase.supplier.supplierName}"></td>
                                 <td th:text="${purchase.importDate}"></td>
-
+                                
+<!--                                <td th:text="${totalAmount}"></td>-->
                                 <td>Tổng tiền</td>
                                 <td>
                                     <a th:href="@{/admin/purchase/edit/{id}(id=${purchase.id}) }" class="btn btn-success">Edit</a>

@@ -1,6 +1,7 @@
 package com.vn.sbit.SpringMVC.service.Impl;
 
-import com.vn.sbit.SpringMVC.dto.request.PurchaseDetailRequest;
+import com.vn.sbit.SpringMVC.dto.request.purchaseDetail.PurchaseDetailRequest;
+import com.vn.sbit.SpringMVC.dto.request.purchaseDetail.PurchaseDetailUpdateRequest;
 import com.vn.sbit.SpringMVC.dto.response.PurchaseDetailResponse;
 import com.vn.sbit.SpringMVC.entity.ProductSupplier;
 import com.vn.sbit.SpringMVC.entity.PurchaseInvoice;
@@ -42,8 +43,6 @@ public class PurchaseDetailServiceImpl implements PurchaseDetailService {
         if(request == null ){
             throw new RuntimeException("Request null");
         }
-        log.info("PurchaseInvoiceId{}",request.getPurchaseInvoiceId());
-
         PurchaseInvoice purchaseInvoice = purchaseRepository.findById(request.getPurchaseInvoiceId()).orElseThrow(
                 () -> new RuntimeException("Purchase Invoice Id false")
         );
@@ -62,14 +61,32 @@ public class PurchaseDetailServiceImpl implements PurchaseDetailService {
         return purchaseDetailMapper.toPurchaseDetailResponse(purchaseInvoiceDetail);
     }
 
+    @Transactional
     @Override
-    public PurchaseDetailResponse updateById(Long id, PurchaseInvoiceDetail purchaseInvoiceDetail) {
-        return null;
+    public PurchaseDetailResponse updateById(Long id, PurchaseDetailUpdateRequest updateRequest) {
+        PurchaseInvoiceDetail invoiceDetail = purchaseDetailRepository.findById(id).orElseThrow(
+                () -> new RuntimeException("Purchase Detail Id ")
+        );
+        ProductSupplier productSupplier = productSupplierRepository.findById(updateRequest.getProductSupplierId()).orElseThrow(
+                () -> new RuntimeException("Product Supplier Id false")
+        );
+
+        productSupplier.setPurchasePrice(updateRequest.getPurchasePrice());
+
+        purchaseDetailMapper.updatePurchaseDetail(invoiceDetail,updateRequest);
+        invoiceDetail.setProductSupplier(productSupplier);
+        invoiceDetail.setTotalPrice(updateRequest.getPurchasePrice()*updateRequest.getQuantity());
+        purchaseDetailRepository.save(invoiceDetail);
+
+        return purchaseDetailMapper.toPurchaseDetailResponse(invoiceDetail);
     }
 
     @Override
     public void deleteById(Long id) {
-
+        if(!purchaseDetailRepository.existsById(id)){
+            throw  new RuntimeException("Purchase Detail Id Not Found");
+        }
+        purchaseDetailRepository.deleteById(id);
     }
 
     @Override
@@ -85,6 +102,12 @@ public class PurchaseDetailServiceImpl implements PurchaseDetailService {
                 .mapToDouble(PurchaseInvoiceDetail::getTotalPrice)
                 .sum();
     }
+
+    @Override
+    public PurchaseInvoiceDetail getById(Long purchaseDetailId) {
+        return purchaseDetailRepository.findById(purchaseDetailId).orElseThrow(() ->  new RuntimeException("Purchase Detail Id False - PurchaseDetail null"));
+    }
+
 
     @Override
     public Integer calculateTotalQuantityByInvoiceId(Long purchaseInvoiceId) {

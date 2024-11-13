@@ -18,7 +18,12 @@ public class PurchaseInvoiceDetail {
     @Column(name = "id")
     Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade ={
+            CascadeType.REFRESH,
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST}
+    )
     @JoinColumn(name = "purchase_invoice_id")
     PurchaseInvoice purchaseInvoice;
 
