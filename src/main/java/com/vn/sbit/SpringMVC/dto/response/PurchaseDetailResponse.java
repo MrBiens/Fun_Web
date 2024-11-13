@@ -23,9 +23,6 @@ public class PurchaseDetailResponse {
 
     Double totalPrice;
 
-
-    int totalQuantity;
-
     Double debt;
 
 }

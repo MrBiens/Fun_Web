@@ -6,7 +6,6 @@ import com.vn.sbit.SpringMVC.entity.ProductSupplier;
 import com.vn.sbit.SpringMVC.entity.PurchaseInvoice;
 import com.vn.sbit.SpringMVC.entity.PurchaseInvoiceDetail;
 import com.vn.sbit.SpringMVC.mapper.PurchaseDetailMapper;
-import com.vn.sbit.SpringMVC.repository.ProductRepository;
 import com.vn.sbit.SpringMVC.repository.ProductSupplierRepository;
 import com.vn.sbit.SpringMVC.repository.PurchaseDetailRepository;
 import com.vn.sbit.SpringMVC.repository.PurchaseRepository;
@@ -19,7 +18,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -58,6 +56,7 @@ public class PurchaseDetailServiceImpl implements PurchaseDetailService {
         purchaseInvoiceDetail.setProductSupplier(productSupplier);
         purchaseInvoiceDetail.setPurchaseInvoice(purchaseInvoice);
         purchaseInvoiceDetail.setTotalPrice(request.getPurchasePrice()*request.getQuantity());
+
         purchaseDetailRepository.save(purchaseInvoiceDetail);
 
         return purchaseDetailMapper.toPurchaseDetailResponse(purchaseInvoiceDetail);
@@ -77,4 +76,21 @@ public class PurchaseDetailServiceImpl implements PurchaseDetailService {
     public List<PurchaseDetailResponse> getPurchaseInvoiceDetailsByPurchaseInvoiceId(Long purchaseInvoiceId) {
         return purchaseDetailRepository.findPurchaseDetailsByPurchaseId(purchaseInvoiceId).stream().map(purchaseDetailMapper::toPurchaseDetailResponse).toList();
     }
+
+    @Override
+    public Double calculateTotalAmountByInvoiceId(Long purchaseInvoiceId) {
+        List<PurchaseInvoiceDetail> details = purchaseDetailRepository.findPurchaseDetailsByPurchaseId(purchaseInvoiceId);
+        // Tính tổng số tiền từ các chi tiết hóa đơn
+        return details.stream()
+                .mapToDouble(PurchaseInvoiceDetail::getTotalPrice)
+                .sum();
+    }
+
+    @Override
+    public Integer calculateTotalQuantityByInvoiceId(Long purchaseInvoiceId) {
+        List<PurchaseInvoiceDetail> details = purchaseDetailRepository.findPurchaseDetailsByPurchaseId(purchaseInvoiceId);
+        return details.stream().mapToInt(PurchaseInvoiceDetail::getQuantity).sum();
+
+    }
+
 }
