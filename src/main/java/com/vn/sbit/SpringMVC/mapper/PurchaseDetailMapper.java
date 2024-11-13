@@ -18,6 +18,7 @@ public interface PurchaseDetailMapper {
     PurchaseInvoiceDetail toPurchaseInvoiceDetail(PurchaseDetailRequest request);
 
     @Mapping(target = "id",source = "id")
+    @Mapping(target = "purchaseInvoice",source = "purchaseInvoice")
     PurchaseDetailResponse toPurchaseDetailResponse(PurchaseInvoiceDetail purchaseDetail);
 
     @Mapping(target = "productSupplier", ignore = true) // Bỏ qua ánh xạ product
