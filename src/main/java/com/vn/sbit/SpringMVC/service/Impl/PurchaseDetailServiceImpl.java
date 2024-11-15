@@ -15,6 +15,7 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,7 +35,7 @@ public class PurchaseDetailServiceImpl implements PurchaseDetailService {
 
     @Override
     public List<PurchaseDetailResponse> getAll() {
-        return purchaseDetailRepository.findAll().stream().map(purchaseDetailMapper::toPurchaseDetailResponse).toList();
+        return purchaseDetailRepository.findAll(Sort.by("id").ascending()).stream().map(purchaseDetailMapper::toPurchaseDetailResponse).toList();
     }
 
     @Transactional
