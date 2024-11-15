@@ -38,6 +38,7 @@ public class PurchaseInvoiceController {
     @GetMapping("/home")
     public String index(Model model){
         List<PurchaseResponse> purchaseInvoices = purchaseService.getAll();
+
         model.addAttribute("list_purchase",purchaseInvoices);
 //        Double totalAmount=purchaseDetailService.calculateTotalQuantityByInvoiceId()
         return "admin/purchase/index";

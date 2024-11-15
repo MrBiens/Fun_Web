@@ -35,6 +35,8 @@
                         <h3 class="box-title">Danh sách chi tiết của hóa đơn <h3 th:text="${purchaseInvoiceId}"></h3></h3>
                         <div>
                             <a class="btn btn-success" th:href="@{/admin/purchase-detail/add/{purchaseId}(purchaseId=${purchaseInvoiceId}) }">Thêm mới chi tiết hóa đơn</a>
+                            <a class="btn btn-success" th:href="@{/admin/purchase-detail/export}">Export to CSV</a>
+
                         </div>
                     </div>
 
