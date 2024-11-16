@@ -1,10 +1,12 @@
 package com.vn.sbit.SpringMVC.security;
 
 import com.vn.sbit.SpringMVC.enum_project.RoleEnum;
+import com.vn.sbit.SpringMVC.service.Impl.CustomerOauth2UserServiceImpl;
 import com.vn.sbit.SpringMVC.service.Impl.UserServiceImpl;
 import com.vn.sbit.SpringMVC.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -16,6 +18,9 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfiguration {
     private static final Logger log = LoggerFactory.getLogger(SecurityConfiguration.class);
+
+    @Autowired
+    private CustomerOauth2UserServiceImpl customerOauth2UserService;
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder(){
@@ -47,6 +52,11 @@ public class SecurityConfiguration {
                 formlogin->formlogin.loginPage("/proviso/login") //chuyển đến login form
                         .loginProcessingUrl("/authenticateTheUser") // dựa vào daoAuthenticationProvider
                         .permitAll()
+
+        ).oauth2Login(oauth2Login -> oauth2Login.loginPage("/proviso/login")
+                .userInfoEndpoint(userInfoEndpointConfig -> {
+                    userInfoEndpointConfig.userService(customerOauth2UserService);  // Sử dụng service để xử lý dữ liệu người dùng
+                })
         ).logout(
                 LogoutConfigurer::permitAll
         ).exceptionHandling(exception -> exception.accessDeniedPage("/proviso/show403Page"));

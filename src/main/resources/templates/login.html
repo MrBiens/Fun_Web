@@ -37,6 +37,7 @@
                         </div>
                     </div>
 
+
                     <div class="col">
                         <!-- Simple link -->
                         <a href="#!">Forgot password?</a>
@@ -44,6 +45,10 @@
                     <div class="col">
                         <a th:href="@{/register/showRegister}">Register</a>
                     </div>
+                </div>
+                <div>
+                     <a class="btn btn-secondary fab fa-google" th:href="@{/oauth2/authorization/google}">Continue with Google </a>
+                     <a class="btn btn-secondary fab fa-facebook" th:href="@{/oauth2/authorization/facebook}">Continue with Facebook </a>
                 </div>
                 <!-- Submit button -->
                 <button data-mdb-ripple-init type="submit" class="btn btn-primary btn-block">Sign in</button>

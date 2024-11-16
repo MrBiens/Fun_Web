@@ -8,7 +8,6 @@ import com.vn.sbit.SpringMVC.entity.ProductSupplier;
 import com.vn.sbit.SpringMVC.entity.PurchaseInvoiceDetail;
 import com.vn.sbit.SpringMVC.repository.ProductSupplierRepository;
 import com.vn.sbit.SpringMVC.service.PurchaseDetailService;
-import com.vn.sbit.SpringMVC.service.PurchaseService;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -22,13 +21,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.supercsv.io.CsvBeanWriter;
 import org.supercsv.io.ICsvBeanWriter;
 import org.supercsv.prefs.CsvPreference;
-
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/admin/purchase-detail")
@@ -38,7 +35,6 @@ public class PurchaseDetailController {
     private static final Logger log = LoggerFactory.getLogger(PurchaseDetailController.class);
     PurchaseDetailService purchaseDetailService;
     ProductSupplierRepository productSupplierRepository;
-    PurchaseService purchaseService;
 
 
     //get All PurchaseInvoiceDetail
@@ -141,9 +137,7 @@ public class PurchaseDetailController {
         String currentDateTime = dateFormat.format(new Date());
 
         String fileName="purchaseDetail"+currentDateTime+".csv";
-
         String headerKey="Content-Disposition";
-
         String headerValue="attachment; filename="+fileName;
 
         response.setHeader(headerKey,headerValue);
@@ -153,13 +147,12 @@ public class PurchaseDetailController {
         List<PurchaseDetailCSV> detailCSVList = detailList.stream()
                 .map(PurchaseDetailCSV::new)
                 .toList();
-
-
         ICsvBeanWriter csvBeanWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
+
 //        String [] csvHeader = {"Mã chi tiết hóa đơn","Mã hóa đơn","Mã sản phẩm nhà ","Số lượng","Đơn giá","Tổng tiền","Số tiền đã thanh toán"}; // loi font text
 
         String [] csvHeader = {"id","purchase_invoice_id","product_supplier_id","quantity","purchase_price","total_price","debt"};
-        String [] nameMapping = {"id","purchaseInvoiceId","productSupplierId","quantity","purchasePrice","totalPrice","debt"};
+        String [] nameMapping = {"id","purchaseInvoiceId","productSupplierId","quantity","purchasePrice","totalPrice","debt"}; //PurchaseDetailCSV request
 
         csvBeanWriter.writeHeader(csvHeader);
         for (PurchaseDetailCSV detailCSV : detailCSVList) {

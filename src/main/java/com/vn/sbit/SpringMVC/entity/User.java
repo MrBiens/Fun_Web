@@ -1,6 +1,7 @@
 package com.vn.sbit.SpringMVC.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 
 import java.sql.Blob;
 import java.util.Set;
@@ -29,7 +30,8 @@ public class User {
     @Column(name = "lastname")
     private String lastname;
 
-    @Column(name = "email")
+    @Column(name = "email",unique = true,columnDefinition = "VARCHAR(255) COLLATE utf8mb4_unicode_ci",length = 20)
+    @Email
     private String email;
 
     //image attribute trong csdl chua 65535 byte(kieu dl to lon) -hoac luu duong dan thu muc
