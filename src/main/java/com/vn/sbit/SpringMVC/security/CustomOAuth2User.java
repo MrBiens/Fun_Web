@@ -12,9 +12,12 @@ import java.util.Set;
 public class CustomOAuth2User implements OAuth2User {
 
     private OAuth2User oAuth2User;
+    private String clientName;
 
-    public CustomOAuth2User(OAuth2User oAuth2User) {
+    public CustomOAuth2User(OAuth2User oAuth2User,String clientName) {
         this.oAuth2User = oAuth2User;
+        this.clientName = clientName;
+
     }
 
 
@@ -47,7 +50,7 @@ public class CustomOAuth2User implements OAuth2User {
         return oAuth2User.getAttribute("family_name"); // "family_name" là trường chứa họ
     }
 
-
-
-
+    public String getClientName() {
+        return clientName;
+    }
 }

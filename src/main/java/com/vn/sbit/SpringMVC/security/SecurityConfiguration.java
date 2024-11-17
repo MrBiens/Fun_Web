@@ -19,8 +19,15 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfiguration {
     private static final Logger log = LoggerFactory.getLogger(SecurityConfiguration.class);
 
-    @Autowired
     private CustomerOauth2UserServiceImpl customerOauth2UserService;
+
+    private Oauth2LoginSuccessHandler oauth2LoginSuccessHandler;
+
+    @Autowired
+    public SecurityConfiguration(CustomerOauth2UserServiceImpl customerOauth2UserService, Oauth2LoginSuccessHandler oauth2LoginSuccessHandler) {
+        this.customerOauth2UserService = customerOauth2UserService;
+        this.oauth2LoginSuccessHandler = oauth2LoginSuccessHandler;
+    }
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder(){
@@ -57,6 +64,7 @@ public class SecurityConfiguration {
                 .userInfoEndpoint(userInfoEndpointConfig -> {
                     userInfoEndpointConfig.userService(customerOauth2UserService);  // Sử dụng service để xử lý dữ liệu người dùng
                 })
+                .successHandler(oauth2LoginSuccessHandler)
         ).logout(
                 LogoutConfigurer::permitAll
         ).exceptionHandling(exception -> exception.accessDeniedPage("/proviso/show403Page"));

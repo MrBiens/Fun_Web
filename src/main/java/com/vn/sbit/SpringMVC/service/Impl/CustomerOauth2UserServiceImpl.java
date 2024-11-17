@@ -33,6 +33,7 @@ public class CustomerOauth2UserServiceImpl extends DefaultOAuth2UserService {
 
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
+        String clientName =userRequest.getClientRegistration().getClientName();
 
 //        OAuth2User oauth2User = super.loadUser(userRequest);
 //        // Lấy thông tin người dùng từ Google
@@ -61,8 +62,7 @@ public class CustomerOauth2UserServiceImpl extends DefaultOAuth2UserService {
 //
 //            userRepository.save(user);
 //        }
-
-        return new CustomOAuth2User(super.loadUser(userRequest));
+        return new CustomOAuth2User(super.loadUser(userRequest),clientName);
     }
 
 }

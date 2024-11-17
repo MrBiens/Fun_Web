@@ -114,6 +114,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-oauth2-client</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>nz.ac.waikato.cms.weka</groupId>
+			<artifactId>weka-stable</artifactId>
+			<version>3.8.6</version> <!-- hoặc phiên bản mới nhất -->
+		</dependency>
+
 	</dependencies>
 
 	<build>
