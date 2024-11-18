@@ -1,0 +1,4 @@
+id,purchase_invoice_id,product_supplier_id,quantity,purchase_price,total_price,debt
+10,3,1,3,200.0,600.0,
+13,3,1,10,100.0,1000.0,
+20,8,1,5,4.0,20.0,

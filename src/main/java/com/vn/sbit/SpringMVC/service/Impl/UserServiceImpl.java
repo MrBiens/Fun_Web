@@ -124,7 +124,6 @@ public class UserServiceImpl implements UserService {
 
 
     private Set<? extends GrantedAuthority> roleToAuthorities(Set<Role> roles){
-
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toSet());
         // duyệt (stream) từng roles trong set , mỗi string(vd:role_admin) sẽ trả về 1 SimpleGrantedAuthority mới . Và tập hợp nó thành 1 chuỗi set
     }
