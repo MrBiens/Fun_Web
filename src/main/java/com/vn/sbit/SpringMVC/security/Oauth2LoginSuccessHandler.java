@@ -24,6 +24,7 @@ public class Oauth2LoginSuccessHandler extends SavedRequestAwareAuthenticationSu
         this.userService = userService;
     }
 
+
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication) throws IOException, ServletException {
         CustomOAuth2User oAuth2User = (CustomOAuth2User) authentication.getPrincipal();

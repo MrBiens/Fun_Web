@@ -13,7 +13,7 @@
         <hr/>
             <form class="w-50" th:action="@{/authenticateTheUser}" method="post">
                 <div th:if="${param.error}">
-                    <span style="color:red"> Login false, please check username or password!</span>
+                    <span style="color:red"> Login false, please check username and password or Account is not enabled !</span>
                 </div>
                 <!-- Email input -->
                 <div data-mdb-input-init class="form-outline mb-4">
