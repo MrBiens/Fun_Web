@@ -1,6 +1,7 @@
 package com.vn.sbit.SpringMVC.controller;
 
 import com.vn.sbit.SpringMVC.entity.User;
+import com.vn.sbit.SpringMVC.repository.UserRepository;
 import com.vn.sbit.SpringMVC.service.Impl.UserServiceImpl;
 import com.vn.sbit.SpringMVC.dto.request.RegisterUser;
 import jakarta.servlet.http.HttpSession;
@@ -8,6 +9,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -17,10 +19,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/register")
 public class RegisterController {
     UserServiceImpl userService;
+    UserRepository userRepository;
 
     @Autowired
-    public RegisterController(UserServiceImpl userService) {
+    public RegisterController(UserServiceImpl userService,UserRepository userRepository) {
         this.userService = userService;
+        this.userRepository=userRepository;
     }
 
     @GetMapping("/showRegister")
@@ -48,9 +52,19 @@ public class RegisterController {
             return "register/register";
         }else {
             userService.createUser(registerUser);
-            session.setAttribute("register_user", user);
-            return "home/index";
+            return "register/success";
         }
+    }
+
+    @GetMapping("/confirm") public String confirmUser(@RequestParam("code") String code, Model model) {
+        User user = userService.findByVerifyCode(code);
+        if (user == null) {
+            model.addAttribute("message_error", "Invalid verification code");
+            return "error";
+        }
+        user.setEnabled(true);
+        userRepository.save(user);
+        return "login";
     }
 
 
