@@ -1,8 +1,5 @@
 package com.vn.sbit.SpringMVC.service.Impl;
 
-import com.vn.sbit.SpringMVC.entity.Role;
-import com.vn.sbit.SpringMVC.entity.User;
-import com.vn.sbit.SpringMVC.enum_project.RoleEnum;
 import com.vn.sbit.SpringMVC.repository.RoleRepository;
 import com.vn.sbit.SpringMVC.repository.UserRepository;
 import com.vn.sbit.SpringMVC.security.CustomOAuth2User;
@@ -11,12 +8,8 @@ import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserServ
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
-import org.springframework.security.oauth2.core.user.OAuth2UserAuthority;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
 
 @Service
 public class CustomerOauth2UserServiceImpl extends DefaultOAuth2UserService {

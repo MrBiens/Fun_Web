@@ -40,7 +40,9 @@ public class Product {
     @JoinColumn(name = "category_id")
     Category category;
 
-    @OneToMany(mappedBy = "product")
+    @OneToMany(mappedBy = "product"
+            ,cascade = {
+    })
     private List<ProductSupplier> productSuppliers;
 
 

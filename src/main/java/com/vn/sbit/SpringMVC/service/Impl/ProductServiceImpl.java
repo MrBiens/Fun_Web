@@ -38,6 +38,7 @@ public class ProductServiceImpl implements ProductService {
 
     }
 
+    @Transactional
     @Override
     public ProductResponse createProduct(ProductRequest request) {
         if (!categoryRepository.existsById(request.getCategoryId())) {
