@@ -28,6 +28,26 @@ public class CreateUserAspect {
 
 //    @Around()
 
+//Trong Spring AOP, @Around là một annotation mạnh mẽ và linh hoạt hơn, bao gồm cả @Before, @After, @AfterReturning, và @AfterThrowing. Annotation
+// @Around cho phép bạn can thiệp vào quá trình thực thi của một phương thức trước khi phương thức đó bắt đầu và sau khi nó hoàn thành.
+//@Around("execution(* com.vn.sbit.SpringMVC.service.Impl.UserServiceImpl.createUser(..))")
+//public Object aroundCreateUser(ProceedingJoinPoint joinPoint) throws Throwable {
+//    // Trước khi phương thức thực thi
+//    System.out.println("Before method execution");
+//
+//    try {
+//        Object result = joinPoint.proceed(); // Thực thi phương thức
+//
+//        // Sau khi phương thức hoàn thành mà không có ngoại lệ
+//        System.out.println("After method execution");
+//        return result;
+//    } catch (Throwable throwable) {
+//        // Xử lý ngoại lệ nếu có
+//        System.out.println("After throwing exception");
+//        throw throwable;
+//
+
+
     // diem ta thuc thi
     @Pointcut("execution (* com.vn.sbit.SpringMVC.service.Impl.(.*.*) )")
     public void printResult(){
