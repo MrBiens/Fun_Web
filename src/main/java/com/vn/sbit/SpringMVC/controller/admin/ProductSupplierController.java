@@ -5,8 +5,6 @@ import com.vn.sbit.SpringMVC.dto.response.ProductResponse;
 import com.vn.sbit.SpringMVC.dto.response.SupplierResponse;
 import com.vn.sbit.SpringMVC.entity.Category;
 import com.vn.sbit.SpringMVC.entity.Product;
-import com.vn.sbit.SpringMVC.entity.ProductSupplier;
-import com.vn.sbit.SpringMVC.entity.Supplier;
 import com.vn.sbit.SpringMVC.service.CategoryService;
 import com.vn.sbit.SpringMVC.service.ProductService;
 import com.vn.sbit.SpringMVC.service.StorageService;
@@ -22,17 +20,17 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
-@RequestMapping("/admin/product")
+@RequestMapping("/admin/productSupplier")
 @Controller
-public class ProductController {
-    private static final Logger log = LoggerFactory.getLogger(ProductController.class);
+public class ProductSupplierController {
+    private static final Logger log = LoggerFactory.getLogger(ProductSupplierController.class);
     private final ProductService productService;
     private final CategoryService categoryService;
     private final StorageService storageService;
     private final SupplierService supplierService;
 
     @Autowired
-    public ProductController(ProductService productService,CategoryService categoryService,StorageService storageService,SupplierService supplierService) {
+    public ProductSupplierController(ProductService productService, CategoryService categoryService, StorageService storageService, SupplierService supplierService) {
         this.productService = productService;
         this.categoryService=categoryService;
         this.storageService=storageService;
