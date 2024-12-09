@@ -43,31 +43,28 @@
                             <tbody><tr>
                                 <th style="width: 10px">Id</th>
                                 <th>Product Name</th>
-                                <th>Price</th>
-                                <th>Image</th>
-                                <th>Description</th>
-                                <th>Category Id</th>
-                                <th>Category Name</th>
+                                <th>Supplier Name</th>
+                                <th>Product Price</th>
+                                <th>Purchase Price</th>
+                                <th>About</th>
 
                             </tr>
 
 
 
-                            <tr th:each="product : ${product_list}" >
-                                <td th:text="${product.id}"></td>
-                                <td th:text="${product.productName}"></td>
-                                <td th:text="${product.price}"></td>
+                            <tr th:each="productSupplier : ${productSupplier_list}">
+                                <td th:text="${productSupplier.id}"></td>
+                                <td th:text="${productSupplier.productResponse?.productName != null ? productSupplier.productResponse.productName : 'No Product'}"></td>
+                                <td th:text="${productSupplier.productResponse?.price != null ? productSupplier.productResponse.price : 'No Product'}"></td>
+
+                                <td th:text="${productSupplier.supplierResponse?.supplierName != null ? productSupplier.supplierResponse.supplierName : 'No Supplier'}"></td>
+                                <td th:text="${productSupplier.purchasePrice != null ? productSupplier.purchasePrice : 'No Price'}"></td>
                                 <td>
-                                    <img th:src="@{'/uploads/'+${product.image}}" width="50px" alt="Product image">
-                                </td>
-                                <td th:text="${product.description}"></td>
-                                <td th:text="${product.category != null ? product.category.id : 'Không có danh mục'}"></td> <!-- Kiểm tra null -->
-                                <td th:text="${product.category != null ? product.category.categoryName : 'Không có danh mục'}"></td> <!-- Kiểm tra null -->
-                                <td>
-                                    <a th:href="@{/admin/product/edit/{id}(id=${product.id}) }" class="btn btn-success">Edit</a>
-                                    <a th:href="@{/admin/product/delete/{id}(id=${product.id}) }" onclick="return confirm('Bạn có chắc chắn muốn xóa')" class="btn btn-success">Delete</a>
+                                    <a th:href="@{/admin/productSupplier/edit/{id}(id=${productSupplier.id})}" class="btn btn-success">Edit</a>
+                                    <a th:href="@{/admin/productSupplier/delete/{id}(id=${productSupplier.id})}" onclick="return confirm('Bạn có chắc chắn muốn xóa')" class="btn btn-danger">Delete</a>
                                 </td>
                             </tr>
+
 
                             </tbody>
                         </table>

@@ -16,9 +16,7 @@ import org.springframework.stereotype.Repository;
 public class ProductResponse{
     private Long id;
 
-    @NotBlank(message = "productName not null")
     private String productName;
-    @NotBlank
     private Double price;
     private String image;
     private String description;
