@@ -4,6 +4,5 @@ import com.vn.sbit.SpringMVC.entity.ProductSupplier;
 
 import java.util.List;
 
-public interface ProductSupplierService {
-    public List<ProductSupplier> getAll();
+public interface ProductSupplierService<R,U,V> extends CRUDService{
 }

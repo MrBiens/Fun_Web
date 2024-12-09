@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head th:replace="admin/fragments/head :: head"></head> <!-- head :: head  not header-->
+<body class="hold-transition skin-blue sidebar-mini">
+<!-- Site wrapper -->
+<div class="wrapper">
+
+    <header th:replace="admin/fragments/header :: header"> </header>
+    <!-- =============================================== -->
+
+    <!-- Left side column. contains the sidebar -->
+    <aside th:replace="admin/fragments/sidebar :: sidebar"></aside>
+    <!-- =============================================== -->
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Blank page
+                <small>it all starts here</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a href="#">Examples</a></li>
+                <li class="active">Blank page</li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Danh sách phẩm</h3>
+                        <div>
+                            <a class="btn btn-success" th:href="@{/admin/product/add}">Thêm mới sản phẩm</a>
+                        </div>
+                    </div>
+
+                    <div class="box-body">
+                        <table class="table table-bordered">
+                            <tbody><tr>
+                                <th style="width: 10px">Id</th>
+                                <th>Product Name</th>
+                                <th>Price</th>
+                                <th>Image</th>
+                                <th>Description</th>
+                                <th>Category Id</th>
+                                <th>Category Name</th>
+
+                            </tr>
+
+
+
+                            <tr th:each="product : ${product_list}" >
+                                <td th:text="${product.id}"></td>
+                                <td th:text="${product.productName}"></td>
+                                <td th:text="${product.price}"></td>
+                                <td>
+                                    <img th:src="@{'/uploads/'+${product.image}}" width="50px" alt="Product image">
+                                </td>
+                                <td th:text="${product.description}"></td>
+                                <td th:text="${product.category != null ? product.category.id : 'Không có danh mục'}"></td> <!-- Kiểm tra null -->
+                                <td th:text="${product.category != null ? product.category.categoryName : 'Không có danh mục'}"></td> <!-- Kiểm tra null -->
+                                <td>
+                                    <a th:href="@{/admin/product/edit/{id}(id=${product.id}) }" class="btn btn-success">Edit</a>
+                                    <a th:href="@{/admin/product/delete/{id}(id=${product.id}) }" onclick="return confirm('Bạn có chắc chắn muốn xóa')" class="btn btn-success">Delete</a>
+                                </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="box-footer clearfix">
+                        <ul class="pagination pagination-sm no-margin pull-right">
+                            <li><a href="#">«</a></li>
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">»</a></li>
+                        </ul>
+                    </div>
+
+            </div>
+
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <footer th:replace="admin/fragments/footer :: footer"></footer>
+
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery 3 -->
+<div th:replace="admin/fragments/script :: script"></div>
+</body>
+</html>
