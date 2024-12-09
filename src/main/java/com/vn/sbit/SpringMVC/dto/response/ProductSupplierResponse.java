@@ -11,11 +11,10 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-
 public class ProductSupplierResponse {
     private Long id;
     private ProductResponse productResponse;
     private SupplierResponse supplierResponse;
     private Double purchasePrice;
-    
+
 }
