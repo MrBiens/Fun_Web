@@ -1,6 +1,7 @@
 package com.vn.sbit.SpringMVC.controller.admin;
 
 import com.vn.sbit.SpringMVC.dto.request.ProductRequest;
+import com.vn.sbit.SpringMVC.dto.request.ProductSupplierRequest;
 import com.vn.sbit.SpringMVC.dto.response.ProductResponse;
 import com.vn.sbit.SpringMVC.dto.response.ProductSupplierResponse;
 import com.vn.sbit.SpringMVC.dto.response.SupplierResponse;
@@ -25,18 +26,15 @@ import java.util.List;
 public class ProductSupplierController {
     private static final Logger log = LoggerFactory.getLogger(ProductSupplierController.class);
     private final ProductSupplierService productSupplierService;
-    private final CategoryService categoryService;
-    private final StorageService storageService;
+    private final ProductService productService;
     private final SupplierService supplierService;
 
     @Autowired
-    public ProductSupplierController(ProductSupplierService productSupplierService, CategoryService categoryService, StorageService storageService, SupplierService supplierService) {
+    public ProductSupplierController(ProductSupplierService productSupplierService, ProductService productService,  SupplierService supplierService) {
         this.productSupplierService = productSupplierService;
-        this.categoryService=categoryService;
-        this.storageService=storageService;
+        this.productService=productService;
         this.supplierService=supplierService;
     }
-
 
     @GetMapping("/home")
     public String home(Model model){
@@ -48,40 +46,42 @@ public class ProductSupplierController {
 
     @GetMapping("/add")
     public String add(Model model){
-        ProductRequest request = new ProductRequest();
+        ProductSupplierRequest request = new ProductSupplierRequest();
         model.addAttribute("request",request);
 
-        List<Category>  categoryList = categoryService.getAll();
-        model.addAttribute("category_list",categoryList);
+        List<ProductResponse>  productResponseList = productService.getAll();
+        model.addAttribute("product_list",productResponseList);
 
         List<SupplierResponse>  list_supplier = supplierService.getAll();
         model.addAttribute("list_supplier",list_supplier);
 
-        return "admin/product/add";
+        return "admin/productSupplier/add";
     }
 
-//    @PostMapping("/add")
-//    public String add(@ModelAttribute("request") ProductRequest request, BindingResult result, Model model,
-//                      @RequestParam("file") MultipartFile file
-//                      ){
-//
-//        if (result.hasErrors()) {
-//            model.addAttribute("message_error", "File không hợp lệ, vui lòng chọn một file.");
-//            return "redirect:/admin/product/add"; // Trả về trang thêm sản phẩm
-//        }
-//
-//        storageService.store(file);
-//        String fileName = file.getOriginalFilename(); //ten chu khong co dinh dang
-//        request.setImage(fileName);
-//
-//        ProductResponse response = productService.createProduct(request);
-//        if(response != null){
-//            model.addAttribute("response",response);
-//            return "redirect:/admin/product/home";
-//        }else{
-//            return "admin/product/add";
-//        }
+    @PostMapping("/add")
+    public String add(@ModelAttribute("request") ProductSupplierRequest request) {
+        if (request == null) {
+            log.error("Request object is null");
+        }
+        if (request.getProductId() == null) {
+            log.error("Product ID is null");
+        }
+        if (request.getSupplierId() == null) {
+            log.error("Supplier ID is null");
+        }
+        if (request.getPurchasePrice() == null) {
+            log.error("Purchase Price is null");
+        }
+
+        if (productSupplierService.create(request) != null) {
+            return "redirect:/admin/productSupplier/home";
+        } else {
+            return "admin/productSupplier/add";
+        }
+
+
 //    }
+
 //    @GetMapping("/edit/{id}")
 //    public String update(@PathVariable("id") Long id,Model model){
 //        Product product=productService.findById(id);
@@ -117,7 +117,6 @@ public class ProductSupplierController {
 //    }
 
 
-
-
+    }
 
 }

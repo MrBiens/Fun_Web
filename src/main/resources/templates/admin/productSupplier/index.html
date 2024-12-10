@@ -34,7 +34,7 @@
                     <div class="box-header with-border">
                         <h3 class="box-title">Danh sách phẩm</h3>
                         <div>
-                            <a class="btn btn-success" th:href="@{/admin/product/add}">Thêm mới sản phẩm</a>
+                            <a class="btn btn-success" th:href="@{/admin/productSupplier/add}">Thêm mới sản phẩm</a>
                         </div>
                     </div>
 
@@ -43,9 +43,9 @@
                             <tbody><tr>
                                 <th style="width: 10px">Id</th>
                                 <th>Product Name</th>
-                                <th>Supplier Name</th>
                                 <th>Product Price</th>
                                 <th>Purchase Price</th>
+                                <th>Supplier Name</th>
                                 <th>About</th>
 
                             </tr>
@@ -54,11 +54,10 @@
 
                             <tr th:each="productSupplier : ${productSupplier_list}">
                                 <td th:text="${productSupplier.id}"></td>
-                                <td th:text="${productSupplier.productResponse?.productName != null ? productSupplier.productResponse.productName : 'No Product'}"></td>
-                                <td th:text="${productSupplier.productResponse?.price != null ? productSupplier.productResponse.price : 'No Product'}"></td>
-
-                                <td th:text="${productSupplier.supplierResponse?.supplierName != null ? productSupplier.supplierResponse.supplierName : 'No Supplier'}"></td>
+                                <td th:text="${productSupplier.productResponse.productName != null ? productSupplier.productResponse.productName : 'No Product'}"></td>
+                                <td th:text="${productSupplier.productResponse.price != null ? productSupplier.productResponse.price : 'No Product'}"></td>
                                 <td th:text="${productSupplier.purchasePrice != null ? productSupplier.purchasePrice : 'No Price'}"></td>
+                                <td th:text="${productSupplier.supplierResponse.supplierName != null ? productSupplier.supplierResponse.supplierName : 'No Supplier'}"></td>
                                 <td>
                                     <a th:href="@{/admin/productSupplier/edit/{id}(id=${productSupplier.id})}" class="btn btn-success">Edit</a>
                                     <a th:href="@{/admin/productSupplier/delete/{id}(id=${productSupplier.id})}" onclick="return confirm('Bạn có chắc chắn muốn xóa')" class="btn btn-danger">Delete</a>
