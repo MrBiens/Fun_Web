@@ -12,8 +12,8 @@ import org.mapstruct.MappingTarget;
 
 @Mapper(componentModel = "spring")
 public interface ProductSupplierMapper {
-
-
+    @Mapping(target = "product.id", source = "productId")
+    @Mapping(target = "supplier.id", source = "supplierId")
     ProductSupplier toProductSupplier(ProductSupplierRequest request);
 
     @Mapping(source = "product", target = "productResponse")

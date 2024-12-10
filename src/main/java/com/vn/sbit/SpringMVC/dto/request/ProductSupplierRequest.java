@@ -5,11 +5,14 @@ import com.vn.sbit.SpringMVC.dto.response.SupplierResponse;
 import lombok.*;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Builder
+@ToString
 public class ProductSupplierRequest {
-    private ProductResponse productResponse;
-    private SupplierResponse supplierResponse;
+    private Long productId;
+    private Long supplierId;
     private Double purchasePrice;
+
 
 }
