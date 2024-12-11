@@ -2,17 +2,13 @@ package com.vn.sbit.SpringMVC.dto.response;
 
 import com.vn.sbit.SpringMVC.entity.Category;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.stereotype.Repository;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-
 public class ProductResponse{
     private Long id;
 
