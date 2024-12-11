@@ -62,7 +62,7 @@
                                 <td th:text="${purchaseDetail.productSupplier.product.id}"></td>
                                 <td th:text="${purchaseDetail.productSupplier.product.productName}"></td>
                                 <td th:text="${purchaseDetail.quantity}"></td>
-                                <td th:text="${purchaseDetail.purchasePrice}"></td>
+                                <td th:text="${purchaseDetail.productSupplier.purchasePrice}"></td>
                                 <td th:text="${purchaseDetail.totalPrice}"></td>
                                 <td>
                                     <a th:href="@{/admin/purchase-detail/edit/{id}(id=${purchaseDetail.id}) }" class="btn btn-success">Edit</a>

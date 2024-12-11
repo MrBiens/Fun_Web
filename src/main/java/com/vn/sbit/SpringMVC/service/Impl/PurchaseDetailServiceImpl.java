@@ -50,12 +50,11 @@ public class PurchaseDetailServiceImpl implements PurchaseDetailService {
         ProductSupplier productSupplier = productSupplierRepository.findById(request.getProductSupplierId()).orElseThrow(
                 () -> new RuntimeException("Product Supplier Id false")
         );
-        productSupplier.setPurchasePrice(request.getPurchasePrice());
 
         PurchaseInvoiceDetail purchaseInvoiceDetail= purchaseDetailMapper.toPurchaseInvoiceDetail(request);
         purchaseInvoiceDetail.setProductSupplier(productSupplier);
         purchaseInvoiceDetail.setPurchaseInvoice(purchaseInvoice);
-        purchaseInvoiceDetail.setTotalPrice(request.getPurchasePrice()*request.getQuantity());
+        purchaseInvoiceDetail.setTotalPrice(productSupplier.getPurchasePrice()*request.getQuantity());
 
         purchaseDetailRepository.save(purchaseInvoiceDetail);
 
