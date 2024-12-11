@@ -7,4 +7,6 @@ import com.vn.sbit.SpringMVC.entity.ProductSupplier;
 import java.util.List;
 
 public interface ProductSupplierService extends CRUDService<ProductSupplierRequest,ProductSupplier, ProductSupplierResponse> {
+    ProductSupplier findById(Long id);
+    boolean UpdateProductSupplier(ProductSupplierRequest request);
 }

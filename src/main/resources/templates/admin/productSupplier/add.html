@@ -35,13 +35,13 @@
                     <h3 class="box-title">Quick Example</h3>
                 </div>
 
-                <form role="form" method="post" th:action="@{/admin/productSupplier/add}" th:object="${request}"  >
+                <form role="form" method="post" th:action="@{/admin/productSupplier/add}" th:object="${request}">
                     <div class="box-body">
                         <div class="form-group">
                             <div class="form-group" data-select2-id="13">
                                 <label>Product Id</label>
                                 <select class="form-control" th:field="*{productId}">
-                                    <option th:each="product : ${product_list}"
+                                    <option th:each="product: ${product_list}"
                                             th:value="${product.id}"
                                             th:text="${product.productName}">
                                     </option>
@@ -56,12 +56,13 @@
                             <div class="form-group" data-select2-id="13">
                                 <label>Supplier name</label>
                                 <select class="form-control" th:field="*{supplierId}">
-                                    <option th:each="supplier : ${list_supplier}"
+                                    <option th:each="supplier: ${list_supplier}"
                                             th:value="${supplier.id}"
                                             th:text="${supplier.supplierName}">
                                     </option>
                                 </select>
                             </div>
+
                         </div>
 
                     </div>

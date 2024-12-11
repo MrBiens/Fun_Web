@@ -5,9 +5,11 @@ import com.vn.sbit.SpringMVC.dto.request.purchaseDetail.PurchaseDetailRequest;
 import com.vn.sbit.SpringMVC.dto.request.purchaseDetail.PurchaseDetailUpdateRequest;
 import com.vn.sbit.SpringMVC.dto.response.PurchaseDetailResponse;
 import com.vn.sbit.SpringMVC.entity.ProductSupplier;
+import com.vn.sbit.SpringMVC.entity.PurchaseInvoice;
 import com.vn.sbit.SpringMVC.entity.PurchaseInvoiceDetail;
 import com.vn.sbit.SpringMVC.repository.ProductSupplierRepository;
 import com.vn.sbit.SpringMVC.service.PurchaseDetailService;
+import com.vn.sbit.SpringMVC.service.PurchaseService;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -34,6 +36,7 @@ import java.util.List;
 public class PurchaseDetailController {
     private static final Logger log = LoggerFactory.getLogger(PurchaseDetailController.class);
     PurchaseDetailService purchaseDetailService;
+    PurchaseService purchaseService;
     ProductSupplierRepository productSupplierRepository;
 
 
@@ -44,6 +47,8 @@ public class PurchaseDetailController {
         model.addAttribute("list_purchasedetail",list_purchasedetail);
         return "admin/purchasedetail/index";
     }
+
+
 
     @GetMapping("/index/{purchaseId}")
     public String getPurchase(@PathVariable("purchaseId")Long purchaseInvoiceId,Model model){
@@ -66,15 +71,19 @@ public class PurchaseDetailController {
         PurchaseDetailRequest request = new PurchaseDetailRequest();
         request.setPurchaseInvoiceId(purchaseId);
 
+        PurchaseInvoice purchaseInvoice =purchaseService.findById(purchaseId);
+
         model.addAttribute("request",request);
 
         model.addAttribute("purchaseId",purchaseId); // xem đó là hóa đơn nào - who supplier
 
-        List<ProductSupplier> productSupllier = productSupplierRepository.findAll();
-        model.addAttribute("list_productSupplier",productSupllier); // lấy productsupplier xem user nhập product của supplier nào -> trả về productSupplierId
+        List<ProductSupplier> productSupplier = productSupplierRepository.findProductSupplierBySupplierId(purchaseInvoice.getSupplier().getId());
+
+        model.addAttribute("list_productSupplier",productSupplier); // lấy productsupplier xem user nhập product của supplier nào -> trả về productSupplierId
 
         return "admin/purchasedetail/add";
     }
+
     @PostMapping("/add")
     public String add(@ModelAttribute("request") PurchaseDetailRequest request, Model model, RedirectAttributes redirectAttributes){
         PurchaseDetailResponse response = purchaseDetailService.create(request);
@@ -96,14 +105,14 @@ public class PurchaseDetailController {
 
         model.addAttribute("request",request);
 
+
+
         List<ProductSupplier> productSupllier = productSupplierRepository.findAll();
         model.addAttribute("list_productSupplier",productSupllier); // lấy productsupplier xem user nhập product của supplier nào -> trả về productSupplierId
 
         return "admin/purchasedetail/edit";
 
     }
-
-
 
     @PostMapping("/edit")
     public String update(@RequestParam("purchaseDetailId")Long id,@ModelAttribute("request")PurchaseDetailUpdateRequest request,RedirectAttributes redirectAttributes){
@@ -117,9 +126,6 @@ public class PurchaseDetailController {
         }
 
     }
-
-
-
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable("id") Long id,RedirectAttributes redirectAttributes){

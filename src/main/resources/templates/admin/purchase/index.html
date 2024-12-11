@@ -30,59 +30,59 @@
         <!-- Main content -->
         <section class="content">
 
-                <div class="box">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Danh sách hóa đơn</h3>
-                        <a class="btn btn-success" th:href="@{/admin/purchase/add}">Thêm mới hóa đơn</a>
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Danh sách hóa đơn</h3>
+                    <a class="btn btn-success" th:href="@{/admin/purchase/add}">Thêm mới hóa đơn</a>
 
-                    </div>
+                </div>
 
-                    <div class="box-body">
-                        <table class="table table-bordered">
-                            <tbody>
-                            <tr>
-                                <th style="width: 10px">Id</th>
-                                <th>PurchaseInvoice Name</th>
-                                <th>Supplier ID</th>
-                                <th>Supplier Name</th>
-                                <th>Import Date</th>
-                                <th>Total Bill</th>
-                                <th>Action</th>
-                            </tr>
+                <div class="box-body">
+                    <table class="table table-bordered">
+                        <tbody>
+                        <tr>
+                            <th style="width: 10px">Id</th>
+                            <th>PurchaseInvoice Name</th>
+                            <th>Supplier ID</th>
+                            <th>Supplier Name</th>
+                            <th>Import Date</th>
+                            <th>Total Bill</th>
+                            <th>Action</th>
+                        </tr>
 
 
 
-                            <tr th:each="purchase : ${list_purchase}" >
-                                <td th:text="${purchase.id}" ></td>  <!-- Hiển thị purchase.id -->
-                                <td>
-                                    <a th:href="@{/admin/purchase-detail/index/{purchaseId}(purchaseId=${purchase.id}) }"
-                                       th:text="${purchase.purchaseInvoiceName}"></a>
-                                </td>
-                                <td th:text="${purchase.supplier.id}"></td>
-                                <td th:text="${purchase.supplier.supplierName}"></td>
-                                <td th:text="${purchase.importDate}"></td>
-                                
-<!--                                <td th:text="${totalAmount}"></td>-->
-                                <td>Tổng tiền</td>
-                                <td>
-                                    <a th:href="@{/admin/purchase/edit/{id}(id=${purchase.id}) }" class="btn btn-success">Edit</a>
-                                    <a th:href="@{/admin/purchase/delete/{id}(id=${purchase.id}) }" onclick="return confirm('Bạn có chắc chắn muốn xóa')" class="btn btn-success">Delete</a>
-                                </td>
-                            </tr>
+                        <tr th:each="purchase : ${list_purchase}" >
+                            <td th:text="${purchase.id}" ></td>  <!-- Hiển thị purchase.id -->
+                            <td>
+                                <a th:href="@{/admin/purchase-detail/index/{purchaseId}(purchaseId=${purchase.id}) }"
+                                   th:text="${purchase.purchaseInvoiceName}"></a>
+                            </td>
+                            <td th:text="${purchase.supplier.id}"></td>
+                            <td th:text="${purchase.supplier.supplierName}"></td>
+                            <td th:text="${purchase.importDate}"></td>
 
-                            </tbody>
-                        </table>
-                    </div>
+                            <!--                                <td th:text="${totalAmount}"></td>-->
+                            <td>Tổng tiền</td>
+                            <td>
+                                <a th:href="@{/admin/purchase/edit/{id}(id=${purchase.id}) }" class="btn btn-success">Edit</a>
+                                <a th:href="@{/admin/purchase/delete/{id}(id=${purchase.id}) }" onclick="return confirm('Bạn có chắc chắn muốn xóa')" class="btn btn-success">Delete</a>
+                            </td>
+                        </tr>
 
-                    <div class="box-footer clearfix">
-                        <ul class="pagination pagination-sm no-margin pull-right">
-                            <li><a href="#">«</a></li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">»</a></li>
-                        </ul>
-                    </div>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="box-footer clearfix">
+                    <ul class="pagination pagination-sm no-margin pull-right">
+                        <li><a href="#">«</a></li>
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">»</a></li>
+                    </ul>
+                </div>
 
             </div>
 
