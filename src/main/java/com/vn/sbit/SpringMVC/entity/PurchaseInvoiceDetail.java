@@ -46,7 +46,6 @@ public class PurchaseInvoiceDetail {
     @Column(name = "total_price")
     Double totalPrice;
 
-
     @Column(name = "debt")
     Double debt;
 
