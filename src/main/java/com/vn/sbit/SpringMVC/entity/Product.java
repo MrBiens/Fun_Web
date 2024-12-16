@@ -41,9 +41,14 @@ public class Product {
     Category category;
 
     @OneToMany(mappedBy = "product"
-            ,cascade = {
+            ,cascade = {CascadeType.ALL
     })
-    private List<ProductSupplier> productSuppliers;
+    List<ProductSupplier> productSuppliers;
+
+    @OneToMany(cascade = {
+            CascadeType.ALL
+    },mappedBy = "product")
+    List<SaleInvoiceDetail> saleInvoicesDetails;
 
 
     @Override
