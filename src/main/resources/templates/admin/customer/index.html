@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head th:replace="admin/fragments/head :: head"></head> <!-- head :: head  not header-->
+<body class="hold-transition skin-blue sidebar-mini">
+<!-- Site wrapper -->
+<div class="wrapper">
+
+    <header th:replace="admin/fragments/header :: header"> </header>
+    <!-- =============================================== -->
+
+    <!-- Left side column. contains the sidebar -->
+    <aside th:replace="admin/fragments/sidebar :: sidebar"></aside>
+    <!-- =============================================== -->
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Blank page
+                <small>it all starts here</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li><a href="#">Examples</a></li>
+                <li class="active">Blank page</li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Danh sách Employee</h3>
+                        <div>
+                            <a class="btn btn-success" href="/admin/employee/add">Thêm mới Employee</a>
+                        </div>
+                    </div>
+
+                    <div class="box-body">
+                        <form>
+                            <div class="input-group input-group-sm hidden-xs" style="width: 150px">
+                                <input type="text" name="keyword" th:value="${keyword}" class="form-control pull-right" placeholder="Search">
+                                <div class="input-group-btn">
+                                    <button type="submit" class="btn btn-default"> <i class="fa fa-search"> </i> </button>
+                                </div>
+                            </div>
+                        </form>
+
+
+                        <table class="table table-bordered">
+                            <tbody><tr>
+                                <th style="width: 10px">Id</th>
+                                <th>Employee Name</th>
+                                <th>Address</th>
+                                <th>Date Of Birth</th>
+                                <th>NumberPhone</th>
+                                <th>Email</th>
+                                <th>Action</th>
+                            </tr>
+
+                            <tr th:each="employee : ${employee_list}">
+                                <td th:text="${employee.id}"></td>
+                                <td th:text="${employee.fullName}"></td>
+                                <td th:text="${employee.address}"></td>
+                                <td th:text="${employee.dateOfBirth}"></td>
+                                <td th:text="${employee.numberPhone}"></td>
+                                <td th:text="${employee.email}"></td>
+                                <td>
+                                    <a th:href="@{/admin/employee/edit/{id}(id=${employee.id}) }" class="btn btn-success">Edit</a>
+                                    <a th:href="@{/admin/employee/delete/{id}(id=${employee.id}) }" onclick="return confirm('Bạn có chắc chắn muốn xóa')" class="btn btn-success">Delete</a>
+                                </td>
+
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+<!--                    <div class="box-footer clearfix">-->
+<!--                        <ul class="pagination pagination-sm no-margin pull-right">-->
+<!--                            <li th:if="${currentPage > 1}"><a th:href="@{'?pageNo='+${currentPage-1}}">«</a></li>-->
+<!--                            <li th:each="i:${#numbers.sequence(1,totalPage)}" th:classappend="${currentPage == i?'active':''}">-->
+<!--                                <a th:href="@{${keyword !=null && keyword !='' ? '?keyword='+keyword+'&' :'?'}+'pageNo='+${i}}" th:text="${i}"></a>-->
+<!--                            </li>-->
+<!--                            <li th:if="${currentPage<totalPage}"><a th:href="@{'?pageNo='+${currentPage+1}}">»</a></li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+
+            </div>
+
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <footer th:replace="admin/fragments/footer :: footer"></footer>
+
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery 3 -->
+<div th:replace="admin/fragments/script :: script"></div>
+</body>
+</html>

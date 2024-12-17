@@ -10,7 +10,11 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE,makeFinal = true)
@@ -22,7 +26,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public List<EmployeeResponse> getAll() {
         return employeeRepository.findAll().stream().map(employeeMapper::toEmployeeResponse).toList();
     }
-
+    @Transactional
     @Override
     public EmployeeResponse create(EmployeeRequest request) {
         Employee employee = employeeMapper.toEmployee(request);
@@ -35,6 +39,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         return null;
     }
 
+    @Transactional
     @Override
     public void deleteById(Long id) {
         if(employeeRepository.existsById(id)){
@@ -44,4 +49,16 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
     }
 
+    @Override
+    public Employee findById(Long id) {
+        return employeeRepository.findById(id).orElseThrow( () -> new RuntimeException("Cannot find Employee"));
+    }
+
+    @Transactional
+    @Override
+    public void updateEmployee(Long id, EmployeeRequest request) {
+        Employee employee = findById(id);
+        employeeMapper.updateEmployee(employee,request);
+        employeeRepository.save(employee);
+    }
 }

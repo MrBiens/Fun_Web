@@ -9,10 +9,11 @@ import java.util.List;
 @Table(name = "employees")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
-//@Setter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@ToString
 public class Employee {
     @Id
     @Column(name = "id")
