@@ -1,10 +1,7 @@
 package com.vn.sbit.SpringMVC.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.util.List;
@@ -12,6 +9,7 @@ import java.util.List;
 @Table(name = "employees")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Getter
+//@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -21,11 +19,15 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
 
-    @Column(name = "full_name")
+    @Column(name = "full_name",unique = true)
     String fullName;
+
+    @Column(name = "address")
+    String address;
 
     @Column(name = "date_of_birth")
     String dateOfBirth;
+
 
     @Column(name = "email",unique = true)
     String email;
