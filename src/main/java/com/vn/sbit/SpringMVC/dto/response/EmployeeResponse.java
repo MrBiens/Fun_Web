@@ -15,15 +15,14 @@ import lombok.experimental.FieldDefaults;
 public class EmployeeResponse {
     Long id;
 
-    @NotBlank
     String fullName;
+
+    String address;
 
     String dateOfBirth;
     
-    @Email
     String email;
 
-    @NotBlank
     String numberPhone;
 
 }
