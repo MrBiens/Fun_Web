@@ -72,10 +72,37 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a th:href="@{/admin/purchase/home}"><i class="fa fa-circle-o"></i>Danh sách hóa đơn nhập</a></li>
-                    <li><a th:href="@{/admin/purchase-detail/home}"><i class="fa fa-circle-o"></i>Chi tiết hóa đơn nhập</a></li>
                     <li><a th:href="@{/admin/sale/home}"><i class="fa fa-circle-o"></i>Danh sách hóa đơn xuất</a></li>
                 </ul>
             </li>
+
+            <li class="treeview">
+                <a th:href="@{/admin/employee/home}">
+                    <i class="fa fa-dashboard"></i> <span>Quản lý nhân viên</span>
+                    <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a th:href="@{/admin/employee/home}"><i class="fa fa-circle-o"></i> Danh sách</a></li>
+                    <li><a th:href="@{/admin/employee/add}"><i class="fa fa-circle-o"></i> Thêm mới</a></li>
+                </ul>
+            </li>
+
+            <li class="treeview">
+                <a th:href="@{/admin/customer/home}">
+                    <i class="fa fa-dashboard"></i> <span>Quản lý khách hàng</span>
+                    <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a th:href="@{/admin/customer/home}"><i class="fa fa-circle-o"></i> Danh sách</a></li>
+                    <li><a th:href="@{/admin/customer/add}"><i class="fa fa-circle-o"></i> Thêm mới</a></li>
+                </ul>
+            </li>
+
+
 
             <li>
                 <a th:href="@{/admin/datamining/home}">
@@ -87,16 +114,6 @@
             </li>
 
 
-
-
-            <li>
-                <a href="">
-                    <i class="fa fa-th"></i> <span>Widgets</span>
-                    <span class="pull-right-container">
-              <small class="label pull-right bg-green">Hot</small>
-            </span>
-                </a>
-            </li>
 
         </ul>
     </section>

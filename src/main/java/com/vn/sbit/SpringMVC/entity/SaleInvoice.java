@@ -37,4 +37,7 @@ public class SaleInvoice {
 
     @OneToMany(mappedBy = "saleInvoice",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     List<SaleInvoiceDetail> saleInvoiceDetails;
+
+    @Column(name = "depot")
+    String depot;
 }
