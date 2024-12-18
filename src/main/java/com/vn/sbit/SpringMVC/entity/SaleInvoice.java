@@ -20,7 +20,7 @@ public class SaleInvoice {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
+    Long id;
 
     @Column(name = "name_invoice",unique = true)
     String invoiceName;

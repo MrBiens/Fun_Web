@@ -67,6 +67,7 @@ public class ProductSupplierServiceImpl implements ProductSupplierService {
                 .orElseThrow(() -> new RuntimeException("Cannot find Supplier"));
 
         ProductSupplier productSupplier = productSupplierMapper.toProductSupplier(request);
+
         productSupplier.setProduct(product);
         productSupplier.setSupplier(supplier);
         productSupplierRepository.save(productSupplier);

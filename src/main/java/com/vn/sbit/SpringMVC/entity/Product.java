@@ -13,7 +13,9 @@ import java.util.List;
 @Entity
 @Table(name = "products")
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Product {
+public class
+
+Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -22,8 +24,8 @@ public class Product {
     @Column(name = "product_name",unique = true,columnDefinition = "VARCHAR(255) COLLATE utf8mb4_unicode_ci")
     String productName;
 
-    @Column(name = "price")
-    Double price;
+    @Column(name = "quantity")
+    Long quantity;
 
     @Column(name = "image")
     String image;
@@ -51,15 +53,5 @@ public class Product {
     List<SaleInvoiceDetail> saleInvoicesDetails;
 
 
-    @Override
-    public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", productName='" + productName + '\'' +
-                ", price=" + price +
-                ", image='" + image + '\'' +
-                ", description='" + description + '\'' +
-                ", category=" + category +
-                '}';
-    }
+
 }

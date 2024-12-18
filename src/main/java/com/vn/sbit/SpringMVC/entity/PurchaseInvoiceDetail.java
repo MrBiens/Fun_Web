@@ -38,7 +38,7 @@ public class PurchaseInvoiceDetail {
     ProductSupplier productSupplier;
 
     @Column(name = "quantity")
-    int quantity;
+    Long quantity;
 
     @Column(name = "purchase_price")
     Double purchasePrice;
@@ -50,7 +50,7 @@ public class PurchaseInvoiceDetail {
     Double debt;
 
 
-    public PurchaseInvoiceDetail(Long id, PurchaseInvoice purchaseInvoice, ProductSupplier productSupplier, int quantity, Double purchasePrice, LocalDate importDate,Double debt) {
+    public PurchaseInvoiceDetail(Long id, PurchaseInvoice purchaseInvoice, ProductSupplier productSupplier, Long quantity, Double purchasePrice, LocalDate importDate,Double debt) {
         this.id = id;
         this.purchaseInvoice = purchaseInvoice;
         this.productSupplier = productSupplier;

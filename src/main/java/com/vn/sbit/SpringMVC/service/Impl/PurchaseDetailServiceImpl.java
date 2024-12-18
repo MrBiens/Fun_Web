@@ -112,7 +112,7 @@ public class PurchaseDetailServiceImpl implements PurchaseDetailService {
     @Override
     public Integer calculateTotalQuantityByInvoiceId(Long purchaseInvoiceId) {
         List<PurchaseInvoiceDetail> details = purchaseDetailRepository.findPurchaseDetailsByPurchaseId(purchaseInvoiceId);
-        return details.stream().mapToInt(PurchaseInvoiceDetail::getQuantity).sum();
+        return Math.toIntExact(details.stream().mapToLong(PurchaseInvoiceDetail::getQuantity).sum());
 
     }
 

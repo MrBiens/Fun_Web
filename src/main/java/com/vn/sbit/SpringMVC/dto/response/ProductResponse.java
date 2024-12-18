@@ -13,22 +13,12 @@ public class ProductResponse{
     private Long id;
 
     private String productName;
-    private Double price;
+    private Long quantity;;
     private String image;
     private String description;
 
     @NotBlank
     private Category category;
 
-    @Override
-    public String toString() {
-        return "ProductResponse{" +
-                "id=" + id +
-                ", productName='" + productName + '\'' +
-                ", price=" + price +
-                ", image='" + image + '\'' +
-                ", description='" + description + '\'' +
-                ", category=" + category +
-                '}';
-    }
+
 }
