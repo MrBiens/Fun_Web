@@ -17,7 +17,7 @@ public class PurchaseDetailResponse {
 
     ProductSupplier productSupplier;
 
-    int quantity;
+    Long quantity;
 
     Double purchasePrice;
 

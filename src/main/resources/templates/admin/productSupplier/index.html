@@ -43,7 +43,6 @@
                             <tbody><tr>
                                 <th style="width: 10px">Id</th>
                                 <th>Product Name</th>
-                                <th>Product Price</th>
                                 <th>Purchase Price</th>
                                 <th>Supplier Name</th>
                                 <th>About</th>
@@ -55,7 +54,6 @@
                             <tr th:each="productSupplier : ${productSupplier_list}">
                                 <td th:text="${productSupplier.id}"></td>
                                 <td th:text="${productSupplier.productResponse.productName != null ? productSupplier.productResponse.productName : 'No Product'}"></td>
-                                <td th:text="${productSupplier.productResponse.price != null ? productSupplier.productResponse.price : 'No Product'}"></td>
                                 <td th:text="${productSupplier.purchasePrice != null ? productSupplier.purchasePrice : 'No Price'}"></td>
                                 <td th:text="${productSupplier.supplierResponse.supplierName != null ? productSupplier.supplierResponse.supplierName : 'No Supplier'}"></td>
                                 <td>

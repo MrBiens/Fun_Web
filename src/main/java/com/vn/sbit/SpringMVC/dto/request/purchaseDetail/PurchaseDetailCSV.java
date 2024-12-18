@@ -11,7 +11,7 @@ public class PurchaseDetailCSV {
     private Long id;
     private Long purchaseInvoiceId; // ID của purchaseInvoice
     private Long productSupplierId; // Tên của productSupplier
-    private int quantity;
+    private Long quantity;
     private Double purchasePrice;
     private Double totalPrice;
     private Double debt;

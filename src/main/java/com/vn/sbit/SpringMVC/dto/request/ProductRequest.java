@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 public class ProductRequest {
     private String productName;
-    private Double price;
+    private Long quantity;
     private String image;
     private String description;
     private Long categoryId;

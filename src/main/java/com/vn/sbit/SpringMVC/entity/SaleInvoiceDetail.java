@@ -17,7 +17,7 @@ public class SaleInvoiceDetail {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
+    Long id;
 
     @ManyToOne(cascade = {
             CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH
@@ -32,7 +32,7 @@ public class SaleInvoiceDetail {
     Product product;
 
     @Column(name = "quantity")
-    int quantity;
+    Long quantity;
 
     @Column(name = "price")
     float price;
