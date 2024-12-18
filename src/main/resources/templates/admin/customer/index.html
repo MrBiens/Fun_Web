@@ -32,9 +32,9 @@
 
                 <div class="box">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Danh sách Employee</h3>
+                        <h3 class="box-title">Danh sách Customer</h3>
                         <div>
-                            <a class="btn btn-success" href="/admin/employee/add">Thêm mới Employee</a>
+                            <a class="btn btn-success" href="/admin/customer/add">Thêm mới Customer</a>
                         </div>
                     </div>
 
@@ -52,24 +52,22 @@
                         <table class="table table-bordered">
                             <tbody><tr>
                                 <th style="width: 10px">Id</th>
-                                <th>Employee Name</th>
+                                <th>Customer Name</th>
                                 <th>Address</th>
-                                <th>Date Of Birth</th>
                                 <th>NumberPhone</th>
                                 <th>Email</th>
                                 <th>Action</th>
                             </tr>
 
-                            <tr th:each="employee : ${employee_list}">
-                                <td th:text="${employee.id}"></td>
-                                <td th:text="${employee.fullName}"></td>
-                                <td th:text="${employee.address}"></td>
-                                <td th:text="${employee.dateOfBirth}"></td>
-                                <td th:text="${employee.numberPhone}"></td>
-                                <td th:text="${employee.email}"></td>
+                            <tr th:each="customer : ${customer_list}">
+                                <td th:text="${customer.id}"></td>
+                                <td th:text="${customer.fullName}"></td>
+                                <td th:text="${customer.address}"></td>
+                                <td th:text="${customer.numberPhone}"></td>
+                                <td th:text="${customer.email}"></td>
                                 <td>
-                                    <a th:href="@{/admin/employee/edit/{id}(id=${employee.id}) }" class="btn btn-success">Edit</a>
-                                    <a th:href="@{/admin/employee/delete/{id}(id=${employee.id}) }" onclick="return confirm('Bạn có chắc chắn muốn xóa')" class="btn btn-success">Delete</a>
+                                    <a th:href="@{/admin/customer/edit/{id}(id=${customer.id}) }" class="btn btn-success">Edit</a>
+                                    <a th:href="@{/admin/customer/delete/{id}(id=${customer.id}) }" onclick="return confirm('Bạn có chắc chắn muốn xóa')" class="btn btn-success">Delete</a>
                                 </td>
 
                             </tr>
