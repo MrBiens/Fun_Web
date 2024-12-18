@@ -2,7 +2,6 @@ package com.vn.sbit.SpringMVC.security;
 
 
 import com.vn.sbit.SpringMVC.entity.User;
-import com.vn.sbit.SpringMVC.service.Impl.CustomerOauth2UserServiceImpl;
 import com.vn.sbit.SpringMVC.service.UserService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

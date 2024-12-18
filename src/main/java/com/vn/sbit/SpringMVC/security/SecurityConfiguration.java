@@ -19,9 +19,9 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfiguration {
     private static final Logger log = LoggerFactory.getLogger(SecurityConfiguration.class);
 
-    private CustomerOauth2UserServiceImpl customerOauth2UserService;
+    private final CustomerOauth2UserServiceImpl customerOauth2UserService;
 
-    private Oauth2LoginSuccessHandler oauth2LoginSuccessHandler;
+    private final Oauth2LoginSuccessHandler oauth2LoginSuccessHandler;
 
     @Autowired
     public SecurityConfiguration(CustomerOauth2UserServiceImpl customerOauth2UserService, Oauth2LoginSuccessHandler oauth2LoginSuccessHandler) {
