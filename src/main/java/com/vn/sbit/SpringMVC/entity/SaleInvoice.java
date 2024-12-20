@@ -1,17 +1,17 @@
 package com.vn.sbit.SpringMVC.entity;
 
+import com.vn.sbit.SpringMVC.enum_project.PaymentStatus;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
 @Table(name = "sale_invoice")
 @Getter
+@Setter
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
@@ -21,6 +21,7 @@ public class SaleInvoice {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
+
 
     @Column(name = "name_invoice",unique = true)
     String invoiceName;
@@ -38,6 +39,8 @@ public class SaleInvoice {
     @OneToMany(mappedBy = "saleInvoice",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     List<SaleInvoiceDetail> saleInvoiceDetails;
 
-    @Column(name = "depot")
-    String depot;
+
+    @Column(name = "total_amount", precision = 15, scale = 3)
+    BigDecimal totalAmount;
+
 }
