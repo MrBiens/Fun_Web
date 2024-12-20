@@ -13,9 +13,7 @@ import java.util.List;
 @Entity
 @Table(name = "products")
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class
-
-Product {
+public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -25,7 +23,7 @@ Product {
     String productName;
 
     @Column(name = "quantity")
-    Long quantity;
+    int quantity;
 
     @Column(name = "image")
     String image;

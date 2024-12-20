@@ -52,6 +52,7 @@ public class ProductServiceImpl implements ProductService {
 
         Product product = productMapper.toProduct(request);
         product.setCategory(category);
+        product.setQuantity(0);
         productRepository.save(product);
         return productMapper.toProductResponse(product);
 

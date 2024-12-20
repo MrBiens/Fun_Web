@@ -23,7 +23,7 @@ public class ProductSupplier {
     @JoinColumn(name = "supplier_id", nullable = false)
     private Supplier supplier;
 
-    private Double purchasePrice; // Giá của sản phẩm từ nhà cung cấp
+    private int purchasePrice; // Giá của sản phẩm từ nhà cung cấp
 
     @OneToMany(fetch = FetchType.LAZY,cascade ={
             CascadeType.REFRESH,
@@ -42,7 +42,7 @@ public class ProductSupplier {
     public ProductSupplier() {
     }
 
-    public ProductSupplier(Long id, Product product, Supplier supplier, Double purchasePrice) {
+    public ProductSupplier(Long id, Product product, Supplier supplier, int purchasePrice) {
         this.id = id;
         this.product = product;
         this.supplier = supplier;

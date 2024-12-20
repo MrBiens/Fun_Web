@@ -39,7 +39,7 @@ public class SaleInvoice {
     @OneToMany(mappedBy = "saleInvoice",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     List<SaleInvoiceDetail> saleInvoiceDetails;
 
-    @Column(name = "total_amount",length = 10)
+    @Column(name = "total_amount",length = 12)
     int totalAmount ;
 
 }

@@ -57,7 +57,7 @@ public class PurchaseDetailController {
 
         model.addAttribute("purchaseInvoiceId",purchaseInvoiceId);
 
-        Double totalAmount = purchaseDetailService.calculateTotalAmountByInvoiceId(purchaseInvoiceId);
+        int totalAmount = purchaseDetailService.calculateTotalAmountByInvoiceId(purchaseInvoiceId);
         model.addAttribute("totalAmount",totalAmount);
 
         int totalQuantity = purchaseDetailService.calculateTotalQuantityByInvoiceId(purchaseInvoiceId);

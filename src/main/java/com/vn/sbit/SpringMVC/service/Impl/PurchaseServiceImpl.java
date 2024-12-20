@@ -49,6 +49,7 @@ public class PurchaseServiceImpl implements PurchaseService {
         PurchaseInvoice purchaseInvoice = purchaseMapper.toPurchaseInvoice(request);
         purchaseInvoice.setSupplier(supplier);
         purchaseInvoice.setImportDate(LocalDate.now());
+        purchaseInvoice.setTotalAmount(0);
         purchaseRepository.save(purchaseInvoice);
 
         return purchaseMapper.toPurchaseResponse(purchaseInvoice);

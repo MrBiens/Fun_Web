@@ -55,7 +55,8 @@ public class PurchaseDetailServiceImpl implements PurchaseDetailService {
         );
         //update product Quantity
         Product product = productRepository.findById(productSupplier.getProduct().getId()).orElseThrow(()-> new RuntimeException("Cannot find Product By ProductSupplier Id"));
-        product.setQuantity(request.getQuantity());
+        int quantity=product.getQuantity();
+        product.setQuantity(quantity+request.getQuantity());
         productRepository.save(product);
 
         PurchaseInvoiceDetail purchaseInvoiceDetail= purchaseDetailMapper.toPurchaseInvoiceDetail(request);
@@ -79,12 +80,11 @@ public class PurchaseDetailServiceImpl implements PurchaseDetailService {
         );
 
         //update product Quantity
-
         Product product = productRepository.findById(productSupplier.getProduct().getId()).orElseThrow(()-> new RuntimeException("Cannot find Product By ProductSupplier Id"));
-        product.setQuantity(updateRequest.getQuantity());
+        int quantity=product.getQuantity();
+        quantity =quantity-invoiceDetail.getQuantity();
+        product.setQuantity(quantity+updateRequest.getQuantity());
         productRepository.save(product);
-
-        productSupplier.setPurchasePrice(updateRequest.getPurchasePrice());
 
         purchaseDetailMapper.updatePurchaseDetail(invoiceDetail,updateRequest);
         invoiceDetail.setProductSupplier(productSupplier);
@@ -94,11 +94,14 @@ public class PurchaseDetailServiceImpl implements PurchaseDetailService {
         return purchaseDetailMapper.toPurchaseDetailResponse(invoiceDetail);
     }
 
+    @Transactional
     @Override
     public void deleteById(Long id) {
-        if(!purchaseDetailRepository.existsById(id)){
-            throw  new RuntimeException("Purchase Detail Id Not Found");
-        }
+        PurchaseInvoiceDetail invoiceDetail = purchaseDetailRepository.findById(id).orElseThrow(()-> new RuntimeException("Cannot find By Id"));
+        Product product = productRepository.findById(invoiceDetail.getProductSupplier().getProduct().getId()).orElseThrow(()->new RuntimeException("Cannot find Product By PurchaseInvoiceId"));
+        product.setQuantity(product.getQuantity()-invoiceDetail.getQuantity());
+
+        productRepository.save(product);
         purchaseDetailRepository.deleteById(id);
     }
 
@@ -108,11 +111,11 @@ public class PurchaseDetailServiceImpl implements PurchaseDetailService {
     }
 
     @Override
-    public Double calculateTotalAmountByInvoiceId(Long purchaseInvoiceId) {
+    public Integer calculateTotalAmountByInvoiceId(Long purchaseInvoiceId) {
         List<PurchaseInvoiceDetail> details = purchaseDetailRepository.findPurchaseDetailsByPurchaseId(purchaseInvoiceId);
         // Tính tổng số tiền từ các chi tiết hóa đơn
         return details.stream()
-                .mapToDouble(PurchaseInvoiceDetail::getTotalPrice)
+                .mapToInt(PurchaseInvoiceDetail::getTotalPrice)
                 .sum();
     }
 
@@ -125,8 +128,8 @@ public class PurchaseDetailServiceImpl implements PurchaseDetailService {
     @Override
     public Integer calculateTotalQuantityByInvoiceId(Long purchaseInvoiceId) {
         List<PurchaseInvoiceDetail> details = purchaseDetailRepository.findPurchaseDetailsByPurchaseId(purchaseInvoiceId);
-        return Math.toIntExact(details.stream().mapToLong(PurchaseInvoiceDetail::getQuantity).sum());
-
+        return details.stream().mapToInt(PurchaseInvoiceDetail::getQuantity).sum();
     }
+
 
 }

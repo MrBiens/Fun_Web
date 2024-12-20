@@ -17,12 +17,10 @@ public class PurchaseDetailResponse {
 
     ProductSupplier productSupplier;
 
-    Long quantity;
+    int quantity;
 
-    Double purchasePrice;
+    int purchasePrice;
 
-    Double totalPrice;
-
-    Double debt;
+    int totalPrice;
 
 }
