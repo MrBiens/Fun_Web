@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Getter
@@ -22,6 +23,6 @@ public class SaleInvoiceResponse {
 
     EmployeeResponse employee;
 
-    Double depot;
+    int totalAmount;
 
 }

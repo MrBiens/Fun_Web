@@ -1,16 +1,10 @@
 package com.vn.sbit.SpringMVC.controller.admin;
 
-import com.vn.sbit.SpringMVC.dto.request.ProductRequest;
 import com.vn.sbit.SpringMVC.dto.request.purchase.PurchaseCreateRequest;
 import com.vn.sbit.SpringMVC.dto.request.purchase.PurchaseUpdateRequest;
-import com.vn.sbit.SpringMVC.dto.request.supp.SupplierCreateRequest;
-import com.vn.sbit.SpringMVC.dto.request.supp.SupplierUpdateRequest;
-import com.vn.sbit.SpringMVC.dto.response.ProductResponse;
 import com.vn.sbit.SpringMVC.dto.response.PurchaseResponse;
 import com.vn.sbit.SpringMVC.dto.response.SupplierResponse;
 import com.vn.sbit.SpringMVC.entity.PurchaseInvoice;
-import com.vn.sbit.SpringMVC.entity.Supplier;
-import com.vn.sbit.SpringMVC.service.PurchaseDetailService;
 import com.vn.sbit.SpringMVC.service.PurchaseService;
 import com.vn.sbit.SpringMVC.service.SupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
