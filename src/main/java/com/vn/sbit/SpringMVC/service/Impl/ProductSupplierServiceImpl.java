@@ -71,8 +71,7 @@ public class ProductSupplierServiceImpl implements ProductSupplierService {
         productSupplier.setProduct(product);
         productSupplier.setSupplier(supplier);
         productSupplierRepository.save(productSupplier);
-        log.info("ProductSupplier Impl:{}",productSupplier);
-        System.out.println(productSupplier);
+
         return productSupplierMapper.toProductSupplierResponse(productSupplier);
     }
 
