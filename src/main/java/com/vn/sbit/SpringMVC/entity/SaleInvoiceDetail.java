@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
+import java.math.BigDecimal;
+
 @Table(name = "sale_invoice_detail")
 @AllArgsConstructor
 @Getter
@@ -32,13 +34,14 @@ public class SaleInvoiceDetail {
     Product product;
 
     @Column(name = "quantity")
-    Long quantity;
+    int quantity;
 
-    @Column(name = "price")
-    float price;
+    @Column(name = "price",precision = 10,scale = 3)
+    BigDecimal price;
 
-    @Column(name = "total_price")
-    Double totalPrice;
+    @Column(name = "total_price",precision = 13,scale = 3)
+    BigDecimal totalPrice;
+
 
 
 }

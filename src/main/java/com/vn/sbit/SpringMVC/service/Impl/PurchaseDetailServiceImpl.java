@@ -3,10 +3,12 @@ package com.vn.sbit.SpringMVC.service.Impl;
 import com.vn.sbit.SpringMVC.dto.request.purchaseDetail.PurchaseDetailRequest;
 import com.vn.sbit.SpringMVC.dto.request.purchaseDetail.PurchaseDetailUpdateRequest;
 import com.vn.sbit.SpringMVC.dto.response.PurchaseDetailResponse;
+import com.vn.sbit.SpringMVC.entity.Product;
 import com.vn.sbit.SpringMVC.entity.ProductSupplier;
 import com.vn.sbit.SpringMVC.entity.PurchaseInvoice;
 import com.vn.sbit.SpringMVC.entity.PurchaseInvoiceDetail;
 import com.vn.sbit.SpringMVC.mapper.PurchaseDetailMapper;
+import com.vn.sbit.SpringMVC.repository.ProductRepository;
 import com.vn.sbit.SpringMVC.repository.ProductSupplierRepository;
 import com.vn.sbit.SpringMVC.repository.PurchaseDetailRepository;
 import com.vn.sbit.SpringMVC.repository.PurchaseRepository;
@@ -30,6 +32,7 @@ public class PurchaseDetailServiceImpl implements PurchaseDetailService {
     ProductSupplierRepository productSupplierRepository;
     PurchaseDetailMapper purchaseDetailMapper;
     PurchaseRepository purchaseRepository;
+    ProductRepository productRepository;
     
 
 
@@ -50,6 +53,10 @@ public class PurchaseDetailServiceImpl implements PurchaseDetailService {
         ProductSupplier productSupplier = productSupplierRepository.findById(request.getProductSupplierId()).orElseThrow(
                 () -> new RuntimeException("Product Supplier Id false")
         );
+        //update product Quantity
+        Product product = productRepository.findById(productSupplier.getProduct().getId()).orElseThrow(()-> new RuntimeException("Cannot find Product By ProductSupplier Id"));
+        product.setQuantity(request.getQuantity());
+        productRepository.save(product);
 
         PurchaseInvoiceDetail purchaseInvoiceDetail= purchaseDetailMapper.toPurchaseInvoiceDetail(request);
         purchaseInvoiceDetail.setProductSupplier(productSupplier);
@@ -70,6 +77,12 @@ public class PurchaseDetailServiceImpl implements PurchaseDetailService {
         ProductSupplier productSupplier = productSupplierRepository.findById(updateRequest.getProductSupplierId()).orElseThrow(
                 () -> new RuntimeException("Product Supplier Id false")
         );
+
+        //update product Quantity
+
+        Product product = productRepository.findById(productSupplier.getProduct().getId()).orElseThrow(()-> new RuntimeException("Cannot find Product By ProductSupplier Id"));
+        product.setQuantity(updateRequest.getQuantity());
+        productRepository.save(product);
 
         productSupplier.setPurchasePrice(updateRequest.getPurchasePrice());
 
