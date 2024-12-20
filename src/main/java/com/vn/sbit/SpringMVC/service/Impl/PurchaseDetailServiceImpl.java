@@ -88,7 +88,9 @@ public class PurchaseDetailServiceImpl implements PurchaseDetailService {
 
         purchaseDetailMapper.updatePurchaseDetail(invoiceDetail,updateRequest);
         invoiceDetail.setProductSupplier(productSupplier);
-        invoiceDetail.setTotalPrice(updateRequest.getPurchasePrice()*updateRequest.getQuantity());
+        //purchase Price in ProductSupplier
+        invoiceDetail.setTotalPrice(productSupplier.getPurchasePrice()*updateRequest.getQuantity());
+
         purchaseDetailRepository.save(invoiceDetail);
 
         return purchaseDetailMapper.toPurchaseDetailResponse(invoiceDetail);

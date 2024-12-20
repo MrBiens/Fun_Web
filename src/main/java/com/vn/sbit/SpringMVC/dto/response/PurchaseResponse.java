@@ -16,5 +16,5 @@ public class PurchaseResponse {
     String purchaseInvoiceName;
     Supplier supplier;
     LocalDate importDate;
-
+    int totalAmount;
 }

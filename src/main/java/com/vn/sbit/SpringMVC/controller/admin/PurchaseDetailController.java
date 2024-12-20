@@ -40,15 +40,6 @@ public class PurchaseDetailController {
     ProductSupplierRepository productSupplierRepository;
 
 
-    //get All PurchaseInvoiceDetail
-    @GetMapping("/home")
-    public String home(Model model){
-        List<PurchaseDetailResponse> list_purchasedetail=purchaseDetailService.getAll();
-        model.addAttribute("list_purchasedetail",list_purchasedetail);
-        return "admin/purchasedetail/index";
-    }
-
-
 
     @GetMapping("/index/{purchaseId}")
     public String getPurchase(@PathVariable("purchaseId")Long purchaseInvoiceId,Model model){
