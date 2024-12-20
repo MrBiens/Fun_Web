@@ -36,11 +36,11 @@ public class SaleInvoiceDetail {
     @Column(name = "quantity")
     int quantity;
 
-    @Column(name = "price",precision = 10,scale = 3)
-    BigDecimal price;
+    @Column(name = "price",length = 10)
+    int price;
 
-    @Column(name = "total_price",precision = 13,scale = 3)
-    BigDecimal totalPrice;
+    @Column(name = "total_price",length = 10)
+    int totalPrice;
 
 
 

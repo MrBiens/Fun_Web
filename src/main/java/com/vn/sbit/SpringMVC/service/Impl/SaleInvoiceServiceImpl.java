@@ -10,12 +10,14 @@ import com.vn.sbit.SpringMVC.repository.CustomerRepository;
 import com.vn.sbit.SpringMVC.repository.EmployeeRepository;
 import com.vn.sbit.SpringMVC.repository.SaleInvoiceRepository;
 import com.vn.sbit.SpringMVC.service.SaleInvoiceService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE,makeFinal = true)
 @Service
@@ -29,8 +31,26 @@ public class SaleInvoiceServiceImpl implements SaleInvoiceService {
 
     @Override
     public void updateSaleInvoice(Long id, SaleInvoiceRequest request) {
+        SaleInvoice saleInvoice=saleInvoiceRepository.findById(id).orElseThrow(()-> new RuntimeException("Cannot find SaleInvoice By Id"));
+        saleInvoiceMapper.updateSaleInvoice(saleInvoice,request);
 
+        Employee employee = employeeRepository.findById(request.getEmployeeId()).orElseThrow(()-> new RuntimeException("Employee Not Found"));
+        if(saleInvoice.getEmployee() != employee){
+            saleInvoice.setEmployee(employee);
+        }
+        Customer customer = customerRepository.findById(request.getCustomerId()).orElseThrow(()-> new RuntimeException("Customer Not Found"));
+        if(saleInvoice.getCustomer() != customer){
+            saleInvoice.setCustomer(customer);
+        }
+        saleInvoiceRepository.save(saleInvoice);
     }
+
+    @Override
+    public SaleInvoiceResponse findById(Long id) {
+        return saleInvoiceRepository.findById(id)
+                .map(saleInvoiceMapper::toSaleInvoiceResponse).orElseThrow(() -> new EntityNotFoundException("SaleInvoice not found with id: " + id));
+    }
+
 
     @Override
     public List<SaleInvoiceResponse> getAll() {
@@ -47,6 +67,8 @@ public class SaleInvoiceServiceImpl implements SaleInvoiceService {
         SaleInvoice saleInvoice = saleInvoiceMapper.toSaleInvoice(request);
         saleInvoice.setCustomer(customer);
         saleInvoice.setEmployee(employee);
+        saleInvoice.setDayCreate(LocalDate.now());
+        saleInvoice.setTotalAmount(0);
 
         saleInvoiceRepository.save(saleInvoice);
 
@@ -61,6 +83,9 @@ public class SaleInvoiceServiceImpl implements SaleInvoiceService {
 
     @Override
     public void deleteById(Long id) {
-
+        if(saleInvoiceRepository.existsById(id)){
+            saleInvoiceRepository.deleteById(id);
+        }
     }
+
 }

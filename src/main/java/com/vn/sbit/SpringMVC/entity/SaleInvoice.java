@@ -39,8 +39,7 @@ public class SaleInvoice {
     @OneToMany(mappedBy = "saleInvoice",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     List<SaleInvoiceDetail> saleInvoiceDetails;
 
-
-    @Column(name = "total_amount", precision = 15, scale = 3)
-    BigDecimal totalAmount;
+    @Column(name = "total_amount",length = 10)
+    int totalAmount ;
 
 }

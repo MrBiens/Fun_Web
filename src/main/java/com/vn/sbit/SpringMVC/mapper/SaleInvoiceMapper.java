@@ -15,6 +15,8 @@ public interface SaleInvoiceMapper {
 
     SaleInvoiceResponse toSaleInvoiceResponse(SaleInvoice saleInvoice);
 
+    @Mapping(target = "customer",ignore = true)
+    @Mapping(target = "employee",ignore = true)
     void updateSaleInvoice(@MappingTarget SaleInvoice saleInvoice,SaleInvoiceRequest request);
 
 }
