@@ -39,7 +39,7 @@ public class SaleInvoiceDetail {
     @Column(name = "price",length = 10)
     int price;
 
-    @Column(name = "total_price",length = 10)
+    @Column(name = "total_price",length = 12)
     int totalPrice;
 
 

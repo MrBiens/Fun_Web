@@ -40,6 +40,9 @@ public class PurchaseInvoice {
     })
     List<PurchaseInvoiceDetail> purchaseInvoiceDetail;
 
+    @Column(name = "total_amount",length = 12)
+    int totalAmount ;
+
 
 
 

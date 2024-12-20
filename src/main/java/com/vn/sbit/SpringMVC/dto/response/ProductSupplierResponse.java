@@ -15,6 +15,6 @@ public class ProductSupplierResponse {
     private Long id;
     private ProductResponse productResponse;
     private SupplierResponse supplierResponse;
-    private Double purchasePrice;
+    private int purchasePrice;
 
 }

@@ -12,6 +12,7 @@ import java.time.LocalDate;
 @Table(name = "purchase_invoice_detail")
 @Getter
 @Setter
+@AllArgsConstructor
 public class PurchaseInvoiceDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,27 +39,17 @@ public class PurchaseInvoiceDetail {
     ProductSupplier productSupplier;
 
     @Column(name = "quantity")
-    Long quantity;
+    int quantity;
 
     @Column(name = "purchase_price")
-    Double purchasePrice;
+    int purchasePrice;
 
     @Column(name = "total_price")
-    Double totalPrice;
-
-    @Column(name = "debt")
-    Double debt;
+    int totalPrice;
 
 
-    public PurchaseInvoiceDetail(Long id, PurchaseInvoice purchaseInvoice, ProductSupplier productSupplier, Long quantity, Double purchasePrice, LocalDate importDate,Double debt) {
-        this.id = id;
-        this.purchaseInvoice = purchaseInvoice;
-        this.productSupplier = productSupplier;
-        this.quantity = quantity;
-        this.purchasePrice = productSupplier.getPurchasePrice(); // Lấy giá từ Product khi khởi tạo
-        this.totalPrice = quantity * purchasePrice; // Tính tổng tiền
-        this.debt=debt;
-    }
+
+
 
 
 

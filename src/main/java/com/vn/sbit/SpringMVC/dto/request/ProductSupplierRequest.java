@@ -14,6 +14,6 @@ public class ProductSupplierRequest {
     private Long id;
     private Long productId;
     private Long supplierId;
-    private Double purchasePrice;
+    private int purchasePrice;
 
 }

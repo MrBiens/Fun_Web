@@ -11,10 +11,10 @@ public class PurchaseDetailCSV {
     private Long id;
     private Long purchaseInvoiceId; // ID của purchaseInvoice
     private Long productSupplierId; // Tên của productSupplier
-    private Long quantity;
-    private Double purchasePrice;
-    private Double totalPrice;
-    private Double debt;
+    private int quantity;
+    private int purchasePrice;
+    private int totalPrice;
+
 
     public PurchaseDetailCSV(PurchaseDetailResponse response) {
         this.id = response.getId();
@@ -23,6 +23,5 @@ public class PurchaseDetailCSV {
         this.quantity = response.getQuantity();
         this.purchasePrice = response.getPurchasePrice();
         this.totalPrice = response.getTotalPrice();
-        this.debt = response.getDebt();
     }
 }

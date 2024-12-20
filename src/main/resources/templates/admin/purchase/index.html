@@ -61,9 +61,7 @@
                             <td th:text="${purchase.supplier.id}"></td>
                             <td th:text="${purchase.supplier.supplierName}"></td>
                             <td th:text="${purchase.importDate}"></td>
-
-                            <!--                                <td th:text="${totalAmount}"></td>-->
-                            <td>Tổng tiền</td>
+                            <td th:text="${purchase.totalAmount}"></td>
                             <td>
                                 <a th:href="@{/admin/purchase/edit/{id}(id=${purchase.id}) }" class="btn btn-success">Edit</a>
                                 <a th:href="@{/admin/purchase/delete/{id}(id=${purchase.id}) }" onclick="return confirm('Bạn có chắc chắn muốn xóa')" class="btn btn-success">Delete</a>

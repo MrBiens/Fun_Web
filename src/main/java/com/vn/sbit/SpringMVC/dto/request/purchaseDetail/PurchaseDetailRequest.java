@@ -11,6 +11,6 @@ import lombok.experimental.FieldDefaults;
 public class PurchaseDetailRequest {
     Long purchaseInvoiceId;
     Long productSupplierId;
-    Long quantity;
-    Double purchasePrice;
+    int quantity;
+    int purchasePrice;
 }
