@@ -42,6 +42,4 @@ public class SaleInvoiceDetail {
     @Column(name = "total_price",length = 12)
     int totalPrice;
 
-
-
 }
