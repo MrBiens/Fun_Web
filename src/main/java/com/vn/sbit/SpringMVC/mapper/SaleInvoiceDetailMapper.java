@@ -11,7 +11,7 @@ import org.mapstruct.MappingTarget;
 public interface SaleInvoiceDetailMapper {
     @Mapping(target = "quantity",source = "quantity")
     @Mapping(target = "price",source = "price")
-    @Mapping(target = "totalPrice",source = "totalPrice")
+    @Mapping(target = "totalPrice",ignore = true)
     @Mapping(target = "saleInvoice",ignore = true)
     @Mapping(target = "product",ignore = true)
     SaleInvoiceDetail toSaleInvoiceDetail(SaleInvoiceDetailRequest request);
@@ -20,7 +20,7 @@ public interface SaleInvoiceDetailMapper {
 
     @Mapping(target = "quantity",source = "quantity")
     @Mapping(target = "price",source = "price")
-    @Mapping(target = "totalPrice",source = "totalPrice")
+    @Mapping(target = "totalPrice",ignore = true)
     @Mapping(target = "saleInvoice",ignore = true)
     @Mapping(target = "product",ignore = true)
     void updateSaleInvoiceDetail (@MappingTarget SaleInvoiceDetail saleInvoiceDetail,SaleInvoiceDetailRequest request);

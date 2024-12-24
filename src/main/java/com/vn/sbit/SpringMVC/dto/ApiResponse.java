@@ -5,11 +5,10 @@ import lombok.experimental.FieldDefaults;
 
 @Getter
 @Setter
-@NoArgsConstructor //constructor không tham số
-@AllArgsConstructor // constructor có tham số
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
-// bắt buộc phải có AllArgsConstuctor ( builder có thể dùng tham số tùy chọn mà không phải tạo constructor tương ứng)
-@FieldDefaults(level = AccessLevel.PRIVATE) // thay cho Access Modifier - private,(tùy theo level) ;
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class ApiResponse <T>{
     int code=1000;
     String message;

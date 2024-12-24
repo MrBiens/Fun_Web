@@ -9,5 +9,5 @@ import java.util.List;
 public interface SaleInvoiceDetailService extends CRUDService<SaleInvoiceDetailRequest, SaleInvoiceDetail, SaleInvoiceDetailResponse>{
     List<SaleInvoiceDetailResponse> findBySaleInvoiceId(Long SaleInvoiceId);
     void updateSaleInvoiceDetail(Long id,SaleInvoiceDetailRequest request);
-    SaleInvoiceDetailResponse findSaleInvoiceDetailById(Long id);
+    SaleInvoiceDetailResponse findSaleInvoiceDetailBySaleId(Long id);
 }

@@ -26,12 +26,7 @@ public class PurchaseInvoice {
 
     @Column(name = "import_date")
     LocalDate importDate;
-    @ManyToOne(cascade = {
-            CascadeType.DETACH,
-            CascadeType.PERSIST,
-            CascadeType.MERGE,
-            CascadeType.REFRESH
-    })
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "supplier_id")
     Supplier supplier;
 

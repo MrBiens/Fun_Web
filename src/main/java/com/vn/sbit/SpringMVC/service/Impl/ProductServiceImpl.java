@@ -2,6 +2,8 @@ package com.vn.sbit.SpringMVC.service.Impl;
 
 import com.vn.sbit.SpringMVC.entity.ProductSupplier;
 import com.vn.sbit.SpringMVC.entity.Supplier;
+import com.vn.sbit.SpringMVC.exception.AppException;
+import com.vn.sbit.SpringMVC.exception.ErrorCode;
 import com.vn.sbit.SpringMVC.repository.CategoryRepository;
 import com.vn.sbit.SpringMVC.repository.ProductRepository;
 import com.vn.sbit.SpringMVC.dto.request.ProductRequest;
@@ -90,7 +92,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product findById(Long id) {
-        return productRepository.findById(id).orElseThrow(() -> new RuntimeException("Product not found"));
+        return productRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.PRODUCT_NOT_FOUND));
     }
 
     @Override

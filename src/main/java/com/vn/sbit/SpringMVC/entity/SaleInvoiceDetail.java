@@ -1,13 +1,10 @@
 package com.vn.sbit.SpringMVC.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.Min;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.math.BigDecimal;
 
 @Table(name = "sale_invoice_detail")
 @AllArgsConstructor
@@ -15,6 +12,7 @@ import java.math.BigDecimal;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @Entity
+@Setter
 public class SaleInvoiceDetail {
     @Id
     @Column(name = "id")
