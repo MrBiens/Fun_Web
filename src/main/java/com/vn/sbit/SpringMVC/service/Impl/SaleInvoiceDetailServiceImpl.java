@@ -16,56 +16,53 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
+/*
+ * List<SaleInvoiceDetailResponse> findBySaleInvoiceId: trả về 1 list các chi tiết hóa đơn bằng mã hóa đơn
+ * */
 @Service
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE,makeFinal = true)
 public class SaleInvoiceDetailServiceImpl implements SaleInvoiceDetailService {
     SaleInvoiceDetailBusinessService saleInvoiceDetailBusinessService;
-    SaleInvoiceDetailRepository saleInvoiceDetailRepository;
     SaleInvoiceDetailMapper saleInvoiceDetailMapper;
-    SaleInvoiceRepository saleInvoiceRepository;
-    ProductRepository productRepository;
 
+    // no
     @Override
     public List<SaleInvoiceDetailResponse> getAll() {
-        return saleInvoiceDetailRepository.findAll().stream().map(saleInvoiceDetailMapper::toSaleInvoiceDetailResponse).toList();
+        return null;
     }
 
     @Override
     public List<SaleInvoiceDetailResponse> findBySaleInvoiceId(Long saleInvoiceId) {
-        return saleInvoiceDetailRepository.findSaleInvoiceDetailBySaleInvoiceId(saleInvoiceId).stream().map(saleInvoiceDetailMapper::toSaleInvoiceDetailResponse).toList();
+        return saleInvoiceDetailBusinessService.findListSaleInvoiceDetailById(saleInvoiceId)
+                .stream().map(saleInvoiceDetailMapper::toSaleInvoiceDetailResponse).toList();
     }
 
-
     @Override
-    public SaleInvoiceDetailResponse findSaleInvoiceDetailById(Long id) {
+    public SaleInvoiceDetailResponse findSaleInvoiceDetailBySaleId(Long id) {
         return saleInvoiceDetailMapper.toSaleInvoiceDetailResponse(saleInvoiceDetailBusinessService.findSaleInvoiceDetailById(id));
     }
 
-    @Transactional
     @Override
-    public SaleInvoiceDetailResponse create(SaleInvoiceDetailRequest s) {
-        return null;
+    public SaleInvoiceDetailResponse create(SaleInvoiceDetailRequest request) {
+        return saleInvoiceDetailMapper.toSaleInvoiceDetailResponse(saleInvoiceDetailBusinessService.createSaleInvoiceDetail(request));
     }
 
 
 
-    @Transactional
     @Override
     public void updateSaleInvoiceDetail(Long id, SaleInvoiceDetailRequest request) {
-
+        saleInvoiceDetailBusinessService.updateSaleInvoiceDetail(id,request);
     }
 
 
-    @Transactional
     @Override
     public void deleteById(Long id) {
-
+        saleInvoiceDetailBusinessService.deleteSaleInvoiceDetail(id);
     }
 
 
-
+    //no usage
     @Override
     public SaleInvoiceDetailResponse updateById(Long id, SaleInvoiceDetail saleInvoiceDetail) {
         return null;

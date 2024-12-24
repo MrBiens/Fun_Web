@@ -5,6 +5,8 @@ import com.vn.sbit.SpringMVC.dto.response.SaleInvoiceResponse;
 import com.vn.sbit.SpringMVC.entity.Customer;
 import com.vn.sbit.SpringMVC.entity.Employee;
 import com.vn.sbit.SpringMVC.entity.SaleInvoice;
+import com.vn.sbit.SpringMVC.exception.AppException;
+import com.vn.sbit.SpringMVC.exception.ErrorCode;
 import com.vn.sbit.SpringMVC.mapper.SaleInvoiceMapper;
 import com.vn.sbit.SpringMVC.repository.CustomerRepository;
 import com.vn.sbit.SpringMVC.repository.EmployeeRepository;
@@ -48,7 +50,13 @@ public class SaleInvoiceServiceImpl implements SaleInvoiceService {
     @Override
     public SaleInvoiceResponse findById(Long id) {
         return saleInvoiceRepository.findById(id)
-                .map(saleInvoiceMapper::toSaleInvoiceResponse).orElseThrow(() -> new EntityNotFoundException("SaleInvoice not found with id: " + id));
+                .map(saleInvoiceMapper::toSaleInvoiceResponse).orElseThrow(() -> new AppException(ErrorCode.SALE_INVOICE_NOT_FOUND));
+    }
+
+    @Override
+    public SaleInvoice findSaleInvoiceById(Long id) {
+        return saleInvoiceRepository.findById(id)
+                .orElseThrow(() -> new AppException(ErrorCode.SALE_INVOICE_NOT_FOUND));
     }
 
 
