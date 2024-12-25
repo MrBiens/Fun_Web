@@ -3,6 +3,7 @@ package com.vn.sbit.SpringMVC.service.business;
 import com.vn.sbit.SpringMVC.dto.request.SaleInvoiceDetailRequest;
 import com.vn.sbit.SpringMVC.dto.response.SaleInvoiceDetailResponse;
 import com.vn.sbit.SpringMVC.entity.Product;
+import com.vn.sbit.SpringMVC.entity.PurchaseInvoiceDetail;
 import com.vn.sbit.SpringMVC.entity.SaleInvoice;
 import com.vn.sbit.SpringMVC.entity.SaleInvoiceDetail;
 import com.vn.sbit.SpringMVC.exception.ErrorCode;
@@ -38,6 +39,16 @@ public class SaleInvoiceDetailBusinessService {
     public SaleInvoiceDetail findSaleInvoiceDetailById(Long id) {
         return saleInvoiceDetailRepository.findById(id)
                 .orElseThrow(() -> new AppException(ErrorCode.SALE_INVOICE_DETAIL_NOT_FOUND));
+    }
+
+    public int calculateTotalAmountByInvoiceId(Long saleInvoiceId){
+        List<SaleInvoiceDetail> details=saleInvoiceDetailRepository.findSaleInvoiceDetailBySaleInvoiceId(saleInvoiceId);
+        return details.stream().mapToInt(SaleInvoiceDetail::getTotalPrice).sum();
+    }
+
+    public int calculateTotalQuantityByInvoiceId(Long saleInvoiceId){
+        List<SaleInvoiceDetail> details=saleInvoiceDetailRepository.findSaleInvoiceDetailBySaleInvoiceId(saleInvoiceId);
+        return details.stream().mapToInt(SaleInvoiceDetail::getQuantity).sum();
     }
 
     @Transactional

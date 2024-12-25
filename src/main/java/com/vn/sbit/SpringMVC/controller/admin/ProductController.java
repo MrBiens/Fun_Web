@@ -1,5 +1,6 @@
 package com.vn.sbit.SpringMVC.controller.admin;
 
+import com.vn.sbit.SpringMVC.dto.LabelValue;
 import com.vn.sbit.SpringMVC.dto.request.ProductRequest;
 import com.vn.sbit.SpringMVC.dto.response.ProductResponse;
 import com.vn.sbit.SpringMVC.dto.response.SupplierResponse;
@@ -11,21 +12,25 @@ import com.vn.sbit.SpringMVC.service.CategoryService;
 import com.vn.sbit.SpringMVC.service.ProductService;
 import com.vn.sbit.SpringMVC.service.StorageService;
 import com.vn.sbit.SpringMVC.service.SupplierService;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
-
+import java.util.stream.Collectors;
 @RequestMapping("/admin/product")
 @Controller
+@Slf4j
 public class ProductController {
-    private static final Logger log = LoggerFactory.getLogger(ProductController.class);
     private final ProductService productService;
     private final CategoryService categoryService;
     private final StorageService storageService;
@@ -85,6 +90,27 @@ public class ProductController {
             return "admin/product/add";
         }
     }
+
+    @GetMapping("/autocomplete")
+    @ResponseBody
+    public List<LabelValue> searchProduct(@RequestParam(value = "term", required = false, defaultValue = "") String term) {
+        List<LabelValue> allProductNameAndId= new ArrayList<LabelValue>();
+
+        List<Product> products = productService.findAllByProductNameIgnoreCase(term);
+
+        for(Product product : products){
+            LabelValue labelValue = LabelValue.builder()
+                    .label(product.getProductName())
+                    .value(product.getId())
+                    .build();
+            allProductNameAndId.add(labelValue);
+        }
+        log.info("List allProductNameAndId autocomplete {}",allProductNameAndId);
+        return allProductNameAndId;
+    }
+
+
+
     @GetMapping("/edit/{id}")
     public String update(@PathVariable("id") Long id,Model model){
         Product product=productService.findById(id);

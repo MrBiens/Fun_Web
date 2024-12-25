@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org">
-<head th:replace="admin/fragments/head :: head"></head> <!-- head :: head  not header-->
+<head th:replace="admin/fragments/head :: head">
+    <script th:src="@{/assets/js/search.js}"></script>
+</head> <!-- head :: head  not header-->
 <body class="hold-transition skin-blue sidebar-mini">
 <!-- Site wrapper -->
 <div class="wrapper">
@@ -35,25 +37,30 @@
                     <h3 class="box-title">Quick Example</h3>
                 </div>
 
-                <form role="form"  method="post" th:action="@{/admin/purchase-detail/edit}" th:object="${request}" >
-                    <input type="hidden" name="purchaseDetailId" th:value="${purchaseDetailId}" />
-                    <!-- Name dung trong @RequestParam  th:field="*{category}"    th:field="*{image}" -->
+                <form role="form"  method="post" th:action="@{/admin/sale-detail/edit}" th:object="${request}" >
+
                     <div class="box-body">
-                        <input type="hidden" th:field="*{purchaseInvoiceId}"  />
+                        <input type="hidden" th:field="*{saleInvoiceId}"  />
 
                         <div class="form-group">
-                            <div class="form-group" data-select2-id="13">
-                                <label>Product</label>
-                                <select class="form-control select 2 select2-hidden-accessible" th:field="*{productSupplierId}" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                                    <option th:each="productSupplier: ${list_productSupplier}" th:value="${productSupplier.id}"  th:text="${productSupplier.product.productName}"> </option>
-                                </select>
-                            </div>
+                            <label for="productName">Product Name</label>
+                            <input type="text" id="productName" class="form-control" placeholder="Search product">
                         </div>
+
+                        <!-- Input ẩn để lưu id của sản phẩm -->
+                        <input type="hidden" th:field="*{productId}">
+
 
                         <div class="form-group">
                             <label >Quantity</label>
                             <input type="number" th:field="*{quantity}" class="form-control"  placeholder="Quantity">
                         </div>
+
+                        <div class="form-group">
+                            <label >Price</label>
+                            <input type="number" th:field="*{price}" class="form-control"  placeholder="Price">
+                        </div>
+
 
 
                     </div>
@@ -77,9 +84,10 @@
 
 <!-- jQuery 3 -->
 <div th:replace="admin/fragments/script :: script"></div>
-<script th:src="@{/assets/ckeditor/ckeditor.js}"></script>
-<script>
-    CKEDITOR.replace( 'editor1' );
-</script>
+<!--<script th:src="@{/assets/ckeditor/ckeditor.js}"></script>-->
+<!--<script>-->
+<!--    CKEDITOR.replace( 'editor1' );-->
+<!--</script>-->
+
 </body>
 </html>

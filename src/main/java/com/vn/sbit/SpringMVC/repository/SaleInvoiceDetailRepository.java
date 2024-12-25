@@ -11,10 +11,11 @@ import java.util.List;
 
 @Repository
 public interface SaleInvoiceDetailRepository extends JpaRepository<SaleInvoiceDetail,Long> {
-    @Query("SELECT sd FROM SaleInvoiceDetail sd where sd.saleInvoice.id =: saleInvoiceId")
+    @Query("SELECT sd FROM SaleInvoiceDetail sd where sd.saleInvoice.id = :saleInvoiceId") // :phai lien voi param
     List<SaleInvoiceDetail> findSaleInvoiceDetailBySaleInvoiceId(@Param("saleInvoiceId")Long saleInvoiceId);
 
 //    @Query("SELECT pd FROM PurchaseInvoiceDetail pd WHERE pd.purchaseInvoice.id = :purchaseInvoiceId")
 //    List<PurchaseInvoiceDetail> findPurchaseDetailsByPurchaseId(@Param("purchaseInvoiceId") Long purchaseInvoiceId);
+
 }
 

@@ -4,9 +4,6 @@ import com.vn.sbit.SpringMVC.dto.request.SaleInvoiceDetailRequest;
 import com.vn.sbit.SpringMVC.dto.response.SaleInvoiceDetailResponse;
 import com.vn.sbit.SpringMVC.entity.SaleInvoiceDetail;
 import com.vn.sbit.SpringMVC.mapper.SaleInvoiceDetailMapper;
-import com.vn.sbit.SpringMVC.repository.ProductRepository;
-import com.vn.sbit.SpringMVC.repository.SaleInvoiceDetailRepository;
-import com.vn.sbit.SpringMVC.repository.SaleInvoiceRepository;
 import com.vn.sbit.SpringMVC.service.SaleInvoiceDetailService;
 import com.vn.sbit.SpringMVC.service.business.SaleInvoiceDetailBusinessService;
 import lombok.AccessLevel;
@@ -39,8 +36,18 @@ public class SaleInvoiceDetailServiceImpl implements SaleInvoiceDetailService {
     }
 
     @Override
-    public SaleInvoiceDetailResponse findSaleInvoiceDetailBySaleId(Long id) {
+    public SaleInvoiceDetailResponse findSaleInvoiceDetailById(Long id) {
         return saleInvoiceDetailMapper.toSaleInvoiceDetailResponse(saleInvoiceDetailBusinessService.findSaleInvoiceDetailById(id));
+    }
+
+    @Override
+    public int calculateTotalAmountByInvoiceId(Long saleInvoiceId) {
+        return saleInvoiceDetailBusinessService.calculateTotalAmountByInvoiceId(saleInvoiceId);
+    }
+
+    @Override
+    public int calculateTotalQuantityByInvoiceId(Long saleInvoiceId) {
+        return saleInvoiceDetailBusinessService.calculateTotalQuantityByInvoiceId(saleInvoiceId);
     }
 
     @Override

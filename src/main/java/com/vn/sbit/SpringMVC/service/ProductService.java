@@ -15,7 +15,7 @@ public interface ProductService {
     ProductResponse createProduct(ProductRequest request);
     ProductResponse createProductAndSupplier(ProductRequest request, Supplier supplier, ProductSupplier productSupplier);
 
-    Product findByProductName(String name);
+    List<Product> findAllByProductNameIgnoreCase(String name);
     Product findById(Long id);
     void updateProduct(Long id,ProductRequest request);
     void deleteProduct(Long id);
