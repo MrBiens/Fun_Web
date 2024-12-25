@@ -8,6 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
 public class ProductResponse{
     private Long id;
 
@@ -20,4 +21,7 @@ public class ProductResponse{
     private Category category;
 
 
+
+    public ProductResponse(Long id, String productName) {
+    }
 }

@@ -22,7 +22,7 @@ public class SaleInvoiceDetail {
     @ManyToOne(cascade = {
             CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH
     })
-    @JoinColumn(name ="saleInvoice_id")
+    @JoinColumn(name ="sale_invoice_id")
     SaleInvoice saleInvoice;
 
     @ManyToOne(cascade = {

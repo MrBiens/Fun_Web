@@ -84,9 +84,10 @@ public class ProductServiceImpl implements ProductService {
         return productMapper.toProductResponse(product);
     }
 
+    // sp find autocomplete - saleInvoiceDetail
     @Override
-    public Product findByProductName(String name) {
-        return null;
+    public List<Product> findAllByProductNameIgnoreCase(String productName) {
+        return  productRepository.findAllByProductNameIgnoreCase(productName);
     }
 
 

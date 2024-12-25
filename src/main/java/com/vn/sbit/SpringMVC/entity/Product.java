@@ -13,6 +13,7 @@ import java.util.List;
 @Entity
 @Table(name = "products")
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@ToString
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
