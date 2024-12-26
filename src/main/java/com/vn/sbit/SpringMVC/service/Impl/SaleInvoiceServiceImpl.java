@@ -59,6 +59,13 @@ public class SaleInvoiceServiceImpl implements SaleInvoiceService {
                 .orElseThrow(() -> new AppException(ErrorCode.SALE_INVOICE_NOT_FOUND));
     }
 
+    @Override
+    public void updateTotalAmount(Long id,int totalAmount) {
+        SaleInvoice saleInvoice = findSaleInvoiceById(id);
+        saleInvoice.setTotalAmount(totalAmount);
+        saleInvoiceRepository.save(saleInvoice);
+    }
+
 
     @Override
     public List<SaleInvoiceResponse> getAll() {

@@ -51,10 +51,22 @@ public class SaleInvoiceDetailBusinessService {
         return details.stream().mapToInt(SaleInvoiceDetail::getQuantity).sum();
     }
 
+    private void validateProductQuantity(int requestedQuantity, Product product) {
+        if (product.getQuantity() <= 0 || product.getQuantity() < requestedQuantity) {
+            throw new AppException(ErrorCode.PRODUCT_NOT_QUANTITY);
+        }
+    }
+
+
     @Transactional
     public SaleInvoiceDetail createSaleInvoiceDetail(SaleInvoiceDetailRequest request){
         Product product = productService.findById(request.getProductId());
+
+        validateProductQuantity(request.getQuantity(), product);
+
+
         SaleInvoice saleInvoice = saleInvoiceService.findSaleInvoiceById(request.getSaleInvoiceId());
+
 
         SaleInvoiceDetail saleInvoiceDetail = saleInvoiceDetailMapper.toSaleInvoiceDetail(request);
 
@@ -62,20 +74,45 @@ public class SaleInvoiceDetailBusinessService {
         saleInvoiceDetail.setSaleInvoice(saleInvoice);
         saleInvoiceDetail.setTotalPrice(request.getQuantity()* request.getPrice());
 
-        return saleInvoiceDetailRepository.save(saleInvoiceDetail);
+        saleInvoiceDetailRepository.save(saleInvoiceDetail);
+
+        productService.updateQuantity(saleInvoiceDetail.getProduct().getId(),product.getQuantity() - request.getQuantity());
+
+        saleInvoiceService.updateTotalAmount(saleInvoiceDetail.getSaleInvoice().getId(), calculateTotalAmountByInvoiceId(saleInvoiceDetail.getSaleInvoice().getId()));
+
+        return saleInvoiceDetail;
     }
 
     @Transactional
     public void updateSaleInvoiceDetail(Long id,SaleInvoiceDetailRequest request){
         SaleInvoiceDetail saleInvoiceDetail = findSaleInvoiceDetailById(id);
+        int currentSaleDetailQuantity=saleInvoiceDetail.getQuantity();
+
+        Long productId = saleInvoiceDetail.getProduct().getId();
 
         saleInvoiceDetailMapper.updateSaleInvoiceDetail(saleInvoiceDetail,request);
 
-        if(!Objects.equals(request.getProductId(), saleInvoiceDetail.getProduct().getId())){
-            Product product = productService.findById(request.getProductId());
-            saleInvoiceDetail.setProduct(product);
+        int currentProductQuantity=0;
 
+        if(!Objects.equals(request.getProductId(), saleInvoiceDetail.getProduct().getId())){
+            Product oldProduct = productService.findById(productId);
+            productService.updateQuantity(oldProduct.getId(), oldProduct.getQuantity() + currentSaleDetailQuantity);
+
+
+            Product newProduct = productService.findById(request.getProductId());
+            validateProductQuantity(request.getQuantity(), newProduct);
+            saleInvoiceDetail.setProduct(newProduct);
+            currentProductQuantity=newProduct.getQuantity()-request.getQuantity();
+
+        }else{
+            if(currentSaleDetailQuantity != request.getQuantity()){
+                Product product = productService.findById(productId);
+                currentProductQuantity = product.getQuantity()+currentSaleDetailQuantity-request.getQuantity();
+                productService.updateQuantity(product.getId(),currentProductQuantity);
+
+            }
         }
+
         if(!Objects.equals(request.getSaleInvoiceId(),saleInvoiceDetail.getSaleInvoice().getId())){
             SaleInvoice saleInvoice = saleInvoiceService.findSaleInvoiceById(request.getSaleInvoiceId());
             saleInvoiceDetail.setSaleInvoice(saleInvoice);
@@ -85,15 +122,35 @@ public class SaleInvoiceDetailBusinessService {
         if(saleInvoiceDetail.getTotalPrice() != totalPriceRequest){
             saleInvoiceDetail.setTotalPrice(totalPriceRequest);
         }
-
         saleInvoiceDetailRepository.save(saleInvoiceDetail);
+
+        productService.updateQuantity(saleInvoiceDetail.getProduct().getId(),currentProductQuantity);
+
+        saleInvoiceService.updateTotalAmount(saleInvoiceDetail.getSaleInvoice().getId(), calculateTotalAmountByInvoiceId(saleInvoiceDetail.getSaleInvoice().getId()));
+
     }
 
     @Transactional
     public void deleteSaleInvoiceDetail(Long id){
-        if(saleInvoiceDetailRepository.existsById(id)){
-            saleInvoiceDetailRepository.deleteById(id);
-        }
+        SaleInvoiceDetail saleInvoiceDetail = findSaleInvoiceDetailById(id);
+
+        Long productId = saleInvoiceDetail.getProduct().getId();
+        Product product = productService.findById(productId);
+        int newTotalQuantity=saleInvoiceDetail.getQuantity();
+
+
+        SaleInvoice saleInvoice = saleInvoiceDetail.getSaleInvoice();
+
+        // Xóa SaleInvoiceDetail
+        saleInvoiceDetailRepository.delete(saleInvoiceDetail);
+
+        // Tính lại totalAmount cho SaleInvoice
+        int newTotalAmount = calculateTotalAmountByInvoiceId(saleInvoice.getId());
+
+        productService.updateQuantity(product.getId(),product.getQuantity()+newTotalQuantity);
+
+        // Cập nhật totalAmount cho SaleInvoice
+        saleInvoiceService.updateTotalAmount(saleInvoice.getId(), newTotalAmount);
     }
 
 

@@ -13,8 +13,7 @@ import java.util.List;
 public interface ProductService {
     List<ProductResponse> getAll();
     ProductResponse createProduct(ProductRequest request);
-    ProductResponse createProductAndSupplier(ProductRequest request, Supplier supplier, ProductSupplier productSupplier);
-
+    void updateQuantity(Long id,int quantity);
     List<Product> findAllByProductNameIgnoreCase(String name);
     Product findById(Long id);
     void updateProduct(Long id,ProductRequest request);

@@ -60,29 +60,13 @@ public class ProductServiceImpl implements ProductService {
 
     }
 
-    @Transactional
     @Override
-    public ProductResponse createProductAndSupplier(ProductRequest request, Supplier supplier,ProductSupplier productSupplier) {
-        if (!categoryRepository.existsById(request.getCategoryId())) {
-            throw new RuntimeException("Category Not found");
-        }
-        if (productRepository.existsByProductName(request.getProductName())) {
-            throw new RuntimeException("Product exists");
-        }
-        Category category;
-        category = categoryRepository.findById(request.getCategoryId()).orElseThrow();
-
-        Product product = productMapper.toProduct(request);
-        product.setCategory(category);
-
-        productSupplier.setProduct(product);
-        productSupplier.setSupplier(supplier);
-
+    public void updateQuantity(Long id, int quantity) {
+        Product product = findById(id);
+        product.setQuantity(quantity);
         productRepository.save(product);
-        productSupplierRepository.save(productSupplier);
-
-        return productMapper.toProductResponse(product);
     }
+
 
     // sp find autocomplete - saleInvoiceDetail
     @Override
