@@ -4,6 +4,7 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <!-- Site wrapper -->
@@ -40,6 +41,7 @@
                 </div>
 
                 <form role="form" method="post" th:action="@{/admin/sale-detail/edit}" th:object="${request}" >
+                    <input type="hidden" name="saleDetailId" th:value="${saleDetailId}" />
 
                     <div class="box-body">
                         <input type="hidden" th:field="*{saleInvoiceId}"  />
@@ -52,12 +54,12 @@
 
                         <div class="form-group">
                             <label>Quantity</label>
-                            <input type="number" th:field="*{quantity}" class="form-control" placeholder="Quantity">
+                            <input type="number" th:field="*{quantity}" th:value="${request.quantity}" class="form-control" placeholder="Quantity">
                         </div>
 
                         <div class="form-group">
                             <label>Price</label>
-                            <input type="number" th:field="*{price}" class="form-control" placeholder="Price">
+                            <input type="number" th:field="*{price}" th:value="${request.price}" class="form-control" placeholder="Price">
                         </div>
 
                         <!-- Trường ẩn để lưu ID sản phẩm -->
@@ -85,42 +87,45 @@
 <!-- jQuery 3 -->
 <div th:replace="admin/fragments/script :: script"></div>
 
-<script>
-    const apiBaseUrl = '/admin/product';
+<!--<script>-->
+<!--    const apiBaseUrl = '/admin/product';-->
 
-    function search_product() {
-        let keySearch = document.getElementById("productName").value;
-        if (keySearch.length >= 2) {
-            $.ajax({
-                url: apiBaseUrl + "/autocomplete?term=" + keySearch,
-                method: 'GET',
-                success: function(result) {
-                    let productList = $("#productList");
-                    productList.empty();  // Clear previous results
-                    if (result.length > 0) {
-                        productList.show();
-                        result.forEach(item => {
-                            productList.append(`<li class="dropdown-item" onclick="selectProduct('${item.label}', ${item.value})">${item.label}</li>`);
-                        });
-                    } else {
-                        productList.hide();
-                    }
-                },
-                error: function(error) {
-                    console.log("Error:", error);
-                }
-            });
-        } else {
-            $("#productList").hide();
-        }
-    }
+<!--    function search_product() {-->
+<!--        let keySearch = document.getElementById("productName").value;-->
+<!--        if (keySearch.length >= 2) {-->
+<!--            $.ajax({-->
+<!--                url: apiBaseUrl + "/autocomplete?term=" + keySearch,-->
+<!--                method: 'GET',-->
+<!--                success: function(result) {-->
+<!--                    let productList = $("#productList");-->
+<!--                    productList.empty();  // Clear previous results-->
+<!--                    if (result.length > 0) {-->
+<!--                        productList.show();-->
+<!--                        result.forEach(item => {-->
+<!--                            productList.append(`<li class="dropdown-item" onclick="selectProduct('${item.label}', ${item.value})">${item.label}</li>`);-->
+<!--                        });-->
+<!--                    } else {-->
+<!--                        productList.hide();-->
+<!--                    }-->
+<!--                },-->
+<!--                error: function(error) {-->
+<!--                    console.log("Error:", error);-->
+<!--                }-->
+<!--            });-->
+<!--        } else {-->
+<!--            $("#productList").hide();-->
+<!--        }-->
+<!--    }-->
 
-    function selectProduct(label, value) {
-        $("#productName").val(label);
-        $("#productId").val(value);
-        $("#productList").hide();  // Hide the dropdown after selecting
-    }
-</script>
+<!--    function selectProduct(label, value) {-->
+<!--        $("#productName").val(label);-->
+<!--        $("#productId").val(value);-->
+<!--        $("#productList").hide();  // Hide the dropdown after selecting-->
+<!--    }-->
+<!--</script>-->
+
+
+<script th:src="@{/assets/js/search-product.js}"></script>
 
 </body>
 </html>

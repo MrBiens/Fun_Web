@@ -1,9 +1,8 @@
-<script>
-    const apiBaseUrl = '/admin/product';
+const apiBaseUrl = '/admin/product';
 
     function search_product() {
         let keySearch = document.getElementById("productName").value;
-        if (keySearch.length >= 2) {
+        if (keySearch.length >= 5) {
             $.ajax({
                 url: apiBaseUrl + "/autocomplete?term=" + keySearch,
                 method: 'GET',
@@ -33,4 +32,3 @@
         $("#productId").val(value);
         $("#productList").hide();  // Hide the dropdown after selecting
     }
-</script>

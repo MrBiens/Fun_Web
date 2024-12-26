@@ -67,6 +67,8 @@ public class SaleInvoiceDetailController {
     public String update(@PathVariable("id")Long id,Model model){
         SaleInvoiceDetailResponse saleInvoiceDetail = saleInvoiceDetailService.findSaleInvoiceDetailById(id);
 
+        model.addAttribute("saleDetailId",id);
+
         SaleInvoiceDetailRequest request = SaleInvoiceDetailRequest.builder()
                 .quantity(saleInvoiceDetail.getQuantity())
                 .price(saleInvoiceDetail.getPrice())
@@ -74,10 +76,18 @@ public class SaleInvoiceDetailController {
         model.addAttribute("request",request);
         return "admin/saleDetail/edit";
     }
+
     @PostMapping("/edit")
-    public String edit(){
+    public String edit(@Valid @ModelAttribute("request")SaleInvoiceDetailRequest request,@RequestParam("saleDetailId") Long id, RedirectAttributes redirectAttributes){
+        saleInvoiceDetailService.updateSaleInvoiceDetail(id,request);
+        redirectAttributes.addAttribute("saleId",id);
+        return "redirect:/admin/sale-detail/index/{saleId}";
+    }
 
-
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable Long id,RedirectAttributes redirectAttributes){
+        saleInvoiceDetailService.deleteById(id);
+        redirectAttributes.addAttribute("saleId",id);
         return "redirect:/admin/sale-detail/index/{saleId}";
     }
 

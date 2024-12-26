@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org">
-<head th:replace="admin/fragments/head :: head"></head> <!-- head :: head  not header-->
+<head th:replace="admin/fragments/head :: head">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+</head> <!-- head :: head  not header-->
 <body class="hold-transition skin-blue sidebar-mini">
 <!-- Site wrapper -->
 <div class="wrapper">
@@ -39,14 +43,12 @@
                     <div class="box-body">
                         <div class="form-group">
                             <div class="form-group" data-select2-id="13">
-                                <label>Product Id</label>
-                                <select class="form-control" th:field="*{productId}">
-                                    <option th:each="product: ${product_list}"
-                                            th:value="${product.id}"
-                                            th:text="${product.productName}">
-                                    </option>
-                                </select>
+                                    <label for="productName">Product Name</label>
+                                    <input type="text" id="productName" name="productName" class="form-control" placeholder="Search product" autocomplete="off" oninput="search_product()">
+                                    <ul id="productList" class="dropdown-menu" style="display: none; position: absolute;"></ul>
+                                <input id="productId" name="productId" type="hidden" th:field="*{productId}"  />
                             </div>
+
 
                             <div class="form-group">
                                 <label>Purchase Price</label>
@@ -86,9 +88,11 @@
 
 <!-- jQuery 3 -->
 <div th:replace="admin/fragments/script :: script"></div>
-<script th:src="@{/assets/ckeditor/ckeditor.js}"></script>
-<script>
-    CKEDITOR.replace( 'editor1' );
-</script>
+<!--<script th:src="@{/assets/ckeditor/ckeditor.js}"></script>-->
+<!--<script>-->
+<!--    CKEDITOR.replace( 'editor1' );-->
+<!--</script>-->
+<script th:src="@{/assets/js/search-product.js}"></script>
+
 </body>
 </html>

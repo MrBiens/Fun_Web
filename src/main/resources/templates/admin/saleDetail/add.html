@@ -4,6 +4,29 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <style>
+        #productList {
+            display: none; /* Mặc định ẩn danh sách */
+            position: absolute; /* Đảm bảo rằng danh sách có thể di chuyển tự do */
+            background-color: white; /* Màu nền của danh sách */
+            border: 1px solid #ccc; /* Đường viền xung quanh danh sách */
+            width: 100%; /* Đảm bảo danh sách có chiều rộng bằng với ô input */
+            max-height: 200px; /* Giới hạn chiều cao để tránh kéo dài quá nhiều */
+            overflow-y: auto; /* Cho phép cuộn nếu quá nhiều kết quả */
+            z-index: 9999; /* Đảm bảo danh sách hiện ra trên các phần tử khác */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Tạo bóng cho danh sách */
+        }
+
+        #productList li {
+            padding: 8px 12px; /* Khoảng cách giữa các mục */
+            cursor: pointer; /* Hiển thị con trỏ khi hover vào mục */
+        }
+
+        #productList li:hover {
+            background-color: #f0f0f0; /* Màu nền khi hover vào mục */
+        }
+
+    </style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <!-- Site wrapper -->
@@ -86,6 +109,7 @@
 <div th:replace="admin/fragments/script :: script"></div>
 
 
+<script th:src="@{/assets/js/search-product.js}"></script>
 
 </body>
 </html>
