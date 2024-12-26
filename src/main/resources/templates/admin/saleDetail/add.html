@@ -1,8 +1,33 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org">
 <head th:replace="admin/fragments/head :: head">
-    <script th:src="@{/assets/js/search.js}"></script>
-</head> <!-- head :: head  not header-->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <style>
+        #productList {
+            display: none; /* Mặc định ẩn danh sách */
+            position: absolute; /* Đảm bảo rằng danh sách có thể di chuyển tự do */
+            background-color: white; /* Màu nền của danh sách */
+            border: 1px solid #ccc; /* Đường viền xung quanh danh sách */
+            width: 100%; /* Đảm bảo danh sách có chiều rộng bằng với ô input */
+            max-height: 200px; /* Giới hạn chiều cao để tránh kéo dài quá nhiều */
+            overflow-y: auto; /* Cho phép cuộn nếu quá nhiều kết quả */
+            z-index: 9999; /* Đảm bảo danh sách hiện ra trên các phần tử khác */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Tạo bóng cho danh sách */
+        }
+
+        #productList li {
+            padding: 8px 12px; /* Khoảng cách giữa các mục */
+            cursor: pointer; /* Hiển thị con trỏ khi hover vào mục */
+        }
+
+        #productList li:hover {
+            background-color: #f0f0f0; /* Màu nền khi hover vào mục */
+        }
+
+    </style>
+</head>
 <body class="hold-transition skin-blue sidebar-mini">
 <!-- Site wrapper -->
 <div class="wrapper">
@@ -37,34 +62,29 @@
                     <h3 class="box-title">Quick Example</h3>
                 </div>
 
-                <form role="form"  method="post" th:action="@{/admin/sale-detail/add}" th:object="${request}" >
+                <form role="form" method="post" th:action="@{/admin/sale-detail/add}" th:object="${request}" >
 
                     <div class="box-body">
                         <input type="hidden" th:field="*{saleInvoiceId}"  />
 
-
-
                         <div class="form-group">
                             <label for="productName">Product Name</label>
-                            <input type="text" id="productName" name="productName" class="form-control" placeholder="Search product">
-                        </div>
-
-
-
-                        <div class="form-group">
-                            <label >Quantity</label>
-                            <input type="number" th:field="*{quantity}" class="form-control"  placeholder="Quantity">
+                            <input type="text" id="productName" name="productName" class="form-control" placeholder="Search product" autocomplete="off" oninput="search_product()">
+                            <ul id="productList" class="dropdown-menu" style="display: none; position: absolute;"></ul>
                         </div>
 
                         <div class="form-group">
-                            <label >Price</label>
-                            <input type="number" th:field="*{price}" class="form-control"  placeholder="Price">
+                            <label>Quantity</label>
+                            <input type="number" th:field="*{quantity}" class="form-control" placeholder="Quantity">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Price</label>
+                            <input type="number" th:field="*{price}" class="form-control" placeholder="Price">
                         </div>
 
                         <!-- Trường ẩn để lưu ID sản phẩm -->
-                        <input id="productId" name="productId" type="hidden"  th:field="*{productId}"  />
-
-
+                        <input id="productId" name="productId" type="hidden" th:field="*{productId}"  />
 
                     </div>
 
@@ -87,10 +107,9 @@
 
 <!-- jQuery 3 -->
 <div th:replace="admin/fragments/script :: script"></div>
-<!--<script th:src="@{/assets/ckeditor/ckeditor.js}"></script>-->
-<!--<script>-->
-<!--    CKEDITOR.replace( 'editor1' );-->
-<!--</script>-->
+
+
+<script th:src="@{/assets/js/search-product.js}"></script>
 
 </body>
 </html>
