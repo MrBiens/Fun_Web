@@ -45,12 +45,12 @@
                             <tbody>
                             <tr>
                                 <th style="width: 10px">STT</th>
-                                <th>SaleInvoice Name</th>
                                 <th>Product Id</th>
                                 <th>Product Name</th>
                                 <th>Quantity</th>
-                                <th>Product Price</th>
-                                <th>TotalPrice</th>
+                                <th>Sale Price</th>
+
+
                                 <th>Action</th>
                             </tr>
 
@@ -58,12 +58,11 @@
 
                             <tr th:each="saleDetail,stat: ${list}" >
                                 <td th:text="${stat.count}"></td>
-                                <td th:text="${saleDetail.SaleInvoice.SaleInvoiceName}"></td>
-                                <td th:text="${saleDetail.productSupplier.product.id}"></td>
-                                <td th:text="${saleDetail.productSupplier.product.productName}"></td>
+                                <td th:text="${saleDetail.productResponse.id}"></td>
+                                <td th:text="${saleDetail.productResponse.productName}"></td>
                                 <td th:text="${saleDetail.quantity}"></td>
-                                <td th:text="${saleDetail.productSupplier.SalePrice}"></td>
-                                <td th:text="${saleDetail.totalPrice}"></td>
+                                <td th:text="${saleDetail.price}"></td>
+
                                 <td>
                                     <a th:href="@{/admin/sale-detail/edit/{id}(id=${saleDetail.id}) }" class="btn btn-success">Edit</a>
                                     <a th:href="@{/admin/sale-detail/delete/{id}(id=${saleDetail.id}) }" onclick="return confirm('Bạn có chắc chắn muốn xóa')" class="btn btn-success">Delete</a>

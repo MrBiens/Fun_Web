@@ -16,7 +16,7 @@ public interface SaleInvoiceDetailMapper {
     @Mapping(target = "product",ignore = true)
     SaleInvoiceDetail toSaleInvoiceDetail(SaleInvoiceDetailRequest request);
 
-    @Mapping(target = "saleInvoiceDetailId",source = "id")
+    @Mapping(target = "id",source = "id")
     @Mapping(target = "saleInvoiceResponse",source = "saleInvoice")
     @Mapping(target = "productResponse",source = "product")
     @Mapping(target = "price",source = "price")

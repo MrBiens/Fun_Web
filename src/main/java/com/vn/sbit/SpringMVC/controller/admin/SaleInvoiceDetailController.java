@@ -30,6 +30,7 @@ public class SaleInvoiceDetailController {
         List<SaleInvoiceDetailResponse> list=saleInvoiceDetailService.findBySaleInvoiceId(saleInvoiceId);
         model.addAttribute("list",list);
 
+
         model.addAttribute("saleInvoiceId",saleInvoiceId);
 
         int totalAmount = saleInvoiceDetailService.calculateTotalAmountByInvoiceId(saleInvoiceId);

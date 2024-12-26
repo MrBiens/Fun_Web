@@ -11,7 +11,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class SaleInvoiceDetailResponse {
-    Long saleInvoiceDetailId;
+    Long id;
 
     SaleInvoiceResponse saleInvoiceResponse;
 
