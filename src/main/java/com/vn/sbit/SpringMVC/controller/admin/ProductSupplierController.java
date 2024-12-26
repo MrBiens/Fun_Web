@@ -1,23 +1,17 @@
 package com.vn.sbit.SpringMVC.controller.admin;
 
-import com.vn.sbit.SpringMVC.dto.request.ProductRequest;
 import com.vn.sbit.SpringMVC.dto.request.ProductSupplierRequest;
 import com.vn.sbit.SpringMVC.dto.response.ProductResponse;
 import com.vn.sbit.SpringMVC.dto.response.ProductSupplierResponse;
 import com.vn.sbit.SpringMVC.dto.response.SupplierResponse;
-import com.vn.sbit.SpringMVC.entity.Category;
-import com.vn.sbit.SpringMVC.entity.Product;
 import com.vn.sbit.SpringMVC.entity.ProductSupplier;
 import com.vn.sbit.SpringMVC.service.*;
-import com.vn.sbit.SpringMVC.service.Impl.ProductSupplierServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 

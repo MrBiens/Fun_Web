@@ -8,4 +8,5 @@ public interface SaleInvoiceService extends CRUDService<SaleInvoiceRequest, Sale
     void updateSaleInvoice(Long id,SaleInvoiceRequest request);
     SaleInvoiceResponse findById(Long id);
     SaleInvoice findSaleInvoiceById(Long id);
+    void updateTotalAmount(Long id,int totalAmount);
 }

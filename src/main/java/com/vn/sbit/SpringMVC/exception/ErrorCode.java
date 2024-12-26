@@ -18,6 +18,8 @@ public enum ErrorCode {
     SALE_INVOICE_NOT_FOUND(2001, "Sale Invoice not found with the given id", HttpStatus.BAD_REQUEST),
 
     PRODUCT_NOT_FOUND(3001,"Product not found with the given id",HttpStatus.BAD_REQUEST),
+    PRODUCT_NOT_QUANTITY(3002,"Invalid product quantity ",HttpStatus.BAD_REQUEST),
+
 
 
     ;
