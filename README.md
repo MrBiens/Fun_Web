@@ -1,1 +1,1 @@
-ecommerce funweb spring boot - thymeleaf
+warehouse funweb - spring mvc, spring boot
